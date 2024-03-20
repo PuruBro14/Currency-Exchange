@@ -1,0 +1,37 @@
+.menu-icon {
+    display: none;
+  }
+@media (max-width: 600px) {
+    .menu-icon {
+      display: block;
+      cursor: pointer;
+      margin-left: 75%;
+      margin-top:5%;
+    }
+  
+    .nav-elements {
+      position: absolute;
+      right: 0;
+      top: 60px;
+      background-color: #fef7e5;
+      width: 0px;
+      height: calc(100vh - 60px);
+      transition: all 0.3s ease-in;
+      overflow: hidden;
+    }
+}
+
+.navdiv{
+  background-color: #10122b !important;
+  color:#fff !important;
+  
+  
+  height:70px;
+  padding:10px;
+}
+
+
+
+Nav.Item Link{
+  text-decoration: none !important;
+}
