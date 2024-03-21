@@ -1,17 +1,20 @@
 import React from "react";
 import { Navbar, Nav, Button, ButtonToolbar } from "rsuite";
 import { Outlet, Link } from "react-router-dom";
-import "./assets/css/navbar.css";
+import "../Navbar/assets/css/Navbar.css";
 import "rsuite/dist/rsuite.min.css";
+import { useSelector } from "react-redux";
+import ProfileDropDown from "../ProfileDropDown";
 export default function Navbars() {
   const [showNavbar, setShowNavbar] = React.useState(false);
-
+    const {token} = useSelector( (state) => state.auth );
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
   };
   return (
     <>
       <Navbar className="navdiv">
+        <div>
         <Navbar.Brand href="#">
           <img
             className="logo"
@@ -55,6 +58,11 @@ export default function Navbars() {
           </Nav.Menu>
           <Nav.Item>Contact Us</Nav.Item>
         </Nav>
+        </div>
+
+        <div className="right-navbar">
+        {
+          token===null && 
         <Nav pullRight className={`nav-elements  ${showNavbar && "active"}`}>
           <Nav.Item>
             <Link to="login">
@@ -62,13 +70,21 @@ export default function Navbars() {
             </Link>
           </Nav.Item>
           <Nav.Item>
+            <Link to="/signup">
             <Button appearance="default">Sign Up</Button>
+            </Link>
           </Nav.Item>
           <Nav.Menu title="US">
             <Nav.Item>English</Nav.Item>
             <Nav.Item>Hindi</Nav.Item>
           </Nav.Menu>
         </Nav>
+}
+{
+  token!=null && 
+  <ProfileDropDown/>
+}
+</div>
       </Navbar>
     </>
   );

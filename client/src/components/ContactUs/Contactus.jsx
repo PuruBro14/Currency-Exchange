@@ -15,7 +15,7 @@ export default function Contactus() {
               <Row className="contact_inner">
                 <Col md={2}></Col>
                 <Col md={10} className="contacthead">
-                  <h3>Contatc Us</h3>
+                  <h3>Contact Us</h3>
                   <p>
                     Feel Free to contact us any time. We will get back to you as
                     soon as we can!.

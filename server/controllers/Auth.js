@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const OTP = require("../models/Otp");
+// const OTP = require("../models/Otp");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
 const mailSender = require("../utils/mailSender");
@@ -11,37 +11,21 @@ exports.signup = async (req, res) => {
   try {
     // Destructure fields from the request body
     const {
-      firstName,
-      lastName,
+      username,
       email,
       password,
-      confirmPassword,
-      accountType,
-      contactNumber,
-      otp,
     } = req.body;
     // Check if All Details are there or not
     if (
-      !firstName ||
-      !lastName ||
+      !username ||
       !email ||
-      !password ||
-      !confirmPassword ||
-      !otp
+      !password
     ) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
       });
-    }
-    // Check if password and confirm password match
-    if (password !== confirmPassword) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Password and Confirm Password do not match. Please try again.",
-      });
-    }
+    }   
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -53,21 +37,21 @@ exports.signup = async (req, res) => {
     }
 
     // Find the most recent OTP for the email
-    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log('otp',otp,response);
-    if (response.length === 0) {
-      // OTP not found for the email
-      return res.status(400).json({
-        success: false,
-        message: "The OTP is not valid",
-      });
-    } else if (otp !== response[0].otp) {
-      // Invalid OTP
-      return res.status(400).json({
-        success: false,
-        message: "The OTP is not valid",
-      });
-    }
+    // const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    // console.log('otp',otp,response);
+    // if (response.length === 0) {
+    //   // OTP not found for the email
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "The OTP is not valid",
+    //   });
+    // } else if (otp !== response[0].otp) {
+    //   // Invalid OTP
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "The OTP is not valid",
+    //   });
+    // }
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -80,14 +64,11 @@ exports.signup = async (req, res) => {
       contactNumber: null,
     });
     const user = await User.create({
-      firstName,
-      lastName,
+      username,
       email,
-      contactNumber,
       password: hashedPassword,
-      accountType: accountType,
       additionalDetails: profileDetails._id,
-      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      image: `https://api.dicebear.com/5.x/initials/svg?seed=${username}`,
     });
 
     return res.status(200).json({
@@ -175,121 +156,121 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.sendotp = async (req, res) => {
-  try {
-    const { email } = req.body;
+// exports.sendotp = async (req, res) => {
+//   try {
+//     const { email } = req.body;
 
-    // Check if user is already present
-    // Find user with provided email
-    const checkUserPresent = await User.findOne({ email });
-    // to be used in case of signup
+//     // Check if user is already present
+//     // Find user with provided email
+//     const checkUserPresent = await User.findOne({ email });
+//     // to be used in case of signup
 
-    // If user found with provided email
-    if (checkUserPresent) {
-      // Return 401 Unauthorized status code with error message
-      return res.status(401).json({
-        success: false,
-        message: `User is Already Registered`,
-      });
-    }
+//     // If user found with provided email
+//     if (checkUserPresent) {
+//       // Return 401 Unauthorized status code with error message
+//       return res.status(401).json({
+//         success: false,
+//         message: `User is Already Registered`,
+//       });
+//     }
 
-    var otp = otpGenerator.generate(6, {
-      upperCaseAlphabets: false,
-      lowerCaseAlphabets: false,
-      specialChars: false,
-    });
-    const result = await OTP.findOne({ otp: otp });
-    console.log("Result is Generate OTP Func");
-    console.log("OTP", otp);
-    console.log("Result", result);
-    while (result) {
-      otp = otpGenerator.generate(6, {
-        upperCaseAlphabets: false,
-      });
-    }
-    const otpPayload = { email, otp };
-    const otpBody = await OTP.create(otpPayload);
-    console.log("OTP Body", otpBody);
-    console.log("yaha tak to aaya hai bhai5");
-    res.status(200).json({
-      success: true,
-      message: `OTP Sent Successfully`,
-      otp,
-    });
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).json({ success: false, error: error.message });
-  }
-};
+//     var otp = otpGenerator.generate(6, {
+//       upperCaseAlphabets: false,
+//       lowerCaseAlphabets: false,
+//       specialChars: false,
+//     });
+//     const result = await OTP.findOne({ otp: otp });
+//     console.log("Result is Generate OTP Func");
+//     console.log("OTP", otp);
+//     console.log("Result", result);
+//     while (result) {
+//       otp = otpGenerator.generate(6, {
+//         upperCaseAlphabets: false,
+//       });
+//     }
+//     const otpPayload = { email, otp };
+//     const otpBody = await OTP.create(otpPayload);
+//     console.log("OTP Body", otpBody);
+//     console.log("yaha tak to aaya hai bhai5");
+//     res.status(200).json({
+//       success: true,
+//       message: `OTP Sent Successfully`,
+//       otp,
+//     });
+//   } catch (error) {
+//     console.log(error.message);
+//     return res.status(500).json({ success: false, error: error.message });
+//   }
+// };
 
-exports.changePassword = async (req, res) => {
-  try {
-    // Get user data from req.user
-    const userDetails = await User.findById(req.user.id);
+// exports.changePassword = async (req, res) => {
+//   try {
+//     // Get user data from req.user
+//     const userDetails = await User.findById(req.user.id);
 
-    // Get old password, new password, and confirm new password from req.body
-    const { oldPassword, newPassword, confirmNewPassword } = req.body;
+//     // Get old password, new password, and confirm new password from req.body
+//     const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
-    // Validate old password
-    const isPasswordMatch = await bcrypt.compare(
-      oldPassword,
-      userDetails.password
-    );
-    if (!isPasswordMatch) {
-      // If old password does not match, return a 401 (Unauthorized) error
-      return res
-        .status(401)
-        .json({ success: false, message: "The password is incorrect" });
-    }
+//     // Validate old password
+//     const isPasswordMatch = await bcrypt.compare(
+//       oldPassword,
+//       userDetails.password
+//     );
+//     if (!isPasswordMatch) {
+//       // If old password does not match, return a 401 (Unauthorized) error
+//       return res
+//         .status(401)
+//         .json({ success: false, message: "The password is incorrect" });
+//     }
 
-    // Match new password and confirm new password
-    if (newPassword !== confirmNewPassword) {
-      // If new password and confirm new password do not match, return a 400 (Bad Request) error
-      return res.status(400).json({
-        success: false,
-        message: "The password and confirm password does not match",
-      });
-    }
+//     // Match new password and confirm new password
+//     if (newPassword !== confirmNewPassword) {
+//       // If new password and confirm new password do not match, return a 400 (Bad Request) error
+//       return res.status(400).json({
+//         success: false,
+//         message: "The password and confirm password does not match",
+//       });
+//     }
 
-    // Update password
-    const encryptedPassword = await bcrypt.hash(newPassword, 10);
-    const updatedUserDetails = await User.findByIdAndUpdate(
-      req.user.id,
-      { password: encryptedPassword },
-      { new: true }
-    );
+//     // Update password
+//     const encryptedPassword = await bcrypt.hash(newPassword, 10);
+//     const updatedUserDetails = await User.findByIdAndUpdate(
+//       req.user.id,
+//       { password: encryptedPassword },
+//       { new: true }
+//     );
 
-    // Send notification email
-    try {
-      const emailResponse = await mailSender(
-        updatedUserDetails.email,
-        passwordUpdated(
-          updatedUserDetails.email,
-          `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
-        )
-      );
-      console.log("Email sent successfully:", emailResponse.response);
-    } catch (error) {
-      // If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
-      console.error("Error occurred while sending email:", error);
-      return res.status(500).json({
-        success: false,
-        message: "Error occurred while sending email",
-        error: error.message,
-      });
-    }
+//     // Send notification email
+//     try {
+//       const emailResponse = await mailSender(
+//         updatedUserDetails.email,
+//         passwordUpdated(
+//           updatedUserDetails.email,
+//           `Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+//         )
+//       );
+//       console.log("Email sent successfully:", emailResponse.response);
+//     } catch (error) {
+//       // If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
+//       console.error("Error occurred while sending email:", error);
+//       return res.status(500).json({
+//         success: false,
+//         message: "Error occurred while sending email",
+//         error: error.message,
+//       });
+//     }
 
-    // Return success response
-    return res
-      .status(200)
-      .json({ success: true, message: "Password updated successfully" });
-  } catch (error) {
-    // If there's an error updating the password, log the error and return a 500 (Internal Server Error) error
-    console.error("Error occurred while updating password:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Error occurred while updating password",
-      error: error.message,
-    });
-  }
-};
+//     // Return success response
+//     return res
+//       .status(200)
+//       .json({ success: true, message: "Password updated successfully" });
+//   } catch (error) {
+//     // If there's an error updating the password, log the error and return a 500 (Internal Server Error) error
+//     console.error("Error occurred while updating password:", error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Error occurred while updating password",
+//       error: error.message,
+//     });
+//   }
+// };

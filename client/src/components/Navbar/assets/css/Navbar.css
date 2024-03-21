@@ -24,10 +24,16 @@
 .navdiv{
   background-color: #10122b !important;
   color:#fff !important;
-  
-  
   height:70px;
   padding:10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.right-navbar{
+  position: absolute;
+  right:80px;
 }
 
 
