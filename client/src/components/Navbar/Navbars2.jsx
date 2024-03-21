@@ -1,12 +1,15 @@
 import React from "react";
 import { Navbar, Nav, Button, ButtonToolbar } from "rsuite";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import "../Navbar/assets/css/Navbar.css";
 import "rsuite/dist/rsuite.min.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProfileDropDown from "../ProfileDropDown";
-export default function Navbars() {
+import { logout } from "../../services/operations/authAPI";
+export default function Navbars2() {
   const [showNavbar, setShowNavbar] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
     const {token} = useSelector( (state) => state.auth );
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
@@ -84,6 +87,11 @@ export default function Navbars() {
   token!=null && 
   <ProfileDropDown/>
 }
+{
+                            token!==null&&(
+                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={dispatch(logout(navigate))}>Logout</button>
+                            )
+                        }
 </div>
       </Navbar>
     </>

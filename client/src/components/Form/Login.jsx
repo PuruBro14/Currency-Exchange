@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Grid, Row, Col } from "rsuite";
-import "./assets/css/Login.css";
-import { useDispatch } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
-import { setLogin } from "../../services/operations/authAPI";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { FaArrowRight } from "react-icons/fa";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { setSignUpData } from "../../utils/authSlice";
+import { useDispatch } from "react-redux";
+import { sendSignUp, setLogin } from "../../services/operations/authAPI";
 
-export default function Login() {
-  const [istoggle, setIstoggle] = useState(0);
+const Login = () => {
+  const[showPassword,setShowPassword]=useState(false);
     const navigate = useNavigate()
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
@@ -26,107 +28,91 @@ export default function Login() {
     const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(setLogin(email, password, navigate))
+    
+    setFormData({
+      email: "",
+      password: "",
+    });
   }
 
   return (
-    <>
-      <div className="mainlogindiv">
-        <Grid fluid>
-          <Row>
-            <Col md={12} className="loginImg">
-              <h1>Login</h1>
-            </Col>
-            <Col md={12}>
-              <div className="mainlogincontener">
-                <Grid fluid>
-                  <Row className="indicater">
-                    <Col
-                      md={12}
-                      className={istoggle === 0 ? "tabs activeBtn" : "tabs"}
-                      onClick={() => {
-                        setIstoggle(0);
-                      }}
-                    >
-                      Login
-                    </Col>
-                    <Col
-                      md={12}
-                      className={istoggle === 1 ? "tabs activeBtn" : "tabs"}
-                      onClick={() => {
-                        setIstoggle(1);
-                      }}
-                    >
-                      Sign Up
-                    </Col>
-                  </Row>
-                </Grid>
-                {istoggle === 0 ? (
-                  <form className="login-form-part" onSubmit={handleOnSubmit}>
-                    <div className="login-content">
-                      <div className="login-title">
-                        <h3>LOGIN</h3>
-                        <div className="underline-title"></div>
-                      </div>
-                    </div>
-                    <div className="login_form">
-                      <div className="input-container">
-                        <input type="email" name="email" id="email" 
-                         value={email}
-                         onChange={handleOnChange}
-                        />
-                        <label htmlFor="username">Email</label>
-                      </div>
+    <div className="bg-richblack-900 h-[100vh] w-full">
+      <div className="lg:h-[150px]"></div>
+      <div className="w-11/12 mx-auto justify-center flex">
+        <div className="flex flex-col w-[80%] mt-6 lg:mt-0">
+          <div className="w-8/12">
+            <div className="text-4xl font-semibold text-richblack-300 mt-6 lg:mt-0">
+              Login Here
+            </div>
 
-                      <div className="input-container">
-                        <input type="password" name="password" id="password" 
-                         value={password}
-                         onChange={handleOnChange}
-                        />
-                        <label htmlFor="email">Password</label>
-                      </div>
-                    </div>
+            {/* form  */}
+            <form onSubmit={(e) => handleOnSubmit(e)}>
+              <div className="flex flex-col gap-5 mt-7">
 
-                    <a href="#">
-                      <p className="forgot-pass">Forgot password?</p>
-                    </a>
-                    <button className="submit-btn" type="submit" name="submit">
-                      Login
-                    </button>
-                  </form>
-                ) : (
-                    <div className="Register_form_part">
-                      <div className="login-content">
-                        <div className="login-title">
-                          <h3>Sign Up</h3>
-                          <div className="underline-title"></div>
-                        </div>
-                      </div>
-                      <div className="login_form">
-                        <div className="input-container">
-                          <input type="text" id="username" required />
-                          <label htmlFor="username">Username</label>
-                        </div>
+                <div className="flex flex-col relative">
+                  <label
+                    className="text-richblack-5"
+                    onChange={(e) => handleFormData()}
+                  >
+                    Email address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="Enter email address"
+                    className="relative mt-3 p-3 rounded-lg bg-richblack-800 text-white"
+                    name="email"
+                    value={email}
+                    onChange={(e) => handleOnChange(e)}
+                    required
+                  />
+                </div>
 
-                        <div className="input-container">
-                          <input type="email" id="email" required />
-                          <label htmlFor="email">Email</label>
-                        </div>
-                        <div className="input-container">
-                          <input type="password" id="pass" required />
-                          <label htmlFor="password">Password</label>
-                        </div>
-                      </div>
+                <div></div>
 
-                      <button className="submit-btn" type="submit" name="submit">
-                        Sign Up
-                      </button>
-                    </div>
-                )}
+                <div className="flex flex-row items-center gap-5">
+                  <div className="flex flex-col relative  w-full">
+                    <label className="text-richblack-5">Create Password</label>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter password"
+                      className="mt-3 p-3 rounded-lg bg-richblack-800 text-white"
+                      name="password"
+                      value={password}
+                      onChange={(e) => handleOnChange(e)}
+                      required
+                    />
+                    {showPassword && (
+                      <AiFillEye
+                        className="bg-white absolute right-7 top-[40px]"
+                        size={30}
+                        onClick={() => setShowPassword(false)}
+                      />
+                    )}
+                    {!showPassword && (
+                      <AiFillEyeInvisible
+                        className="bg-white absolute right-7 top-[40px]"
+                        size={30}
+                        onClick={() => setShowPassword(true)}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-7">
+                  <button
+                    type="submit"
+                    className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900 w-full"
+                  >
+                    Login
+                  </button>
+                </div>
               </div>
-            </Col>
-          </Row>
-        </Grid>
+            </form>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
-}
+                    }
+
+export default Login;

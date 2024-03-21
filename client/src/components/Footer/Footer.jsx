@@ -7,7 +7,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import "./assets/css/footer.css";
-export default function Footer() {
+export default function Footer2() {
   return (
     <div>
       <footer className="site-footer">

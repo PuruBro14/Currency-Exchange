@@ -63,10 +63,21 @@ export const setLogin = (email, password, navigate) => {
 
       navigate("/");
     } catch (err) {
-      console.log("LOGIN API ERROR............", error);
+      console.log("LOGIN API ERROR............", err);
       toast.error("Login Failed");
     }
     dispatch(setLoading(false));
     toast.dismiss(toastId);
   };
 };
+
+export const logout=(navigate)=>{
+  return (dispatch)=>{
+     dispatch(setLoading(false));
+      dispatch(setToken(null))
+      dispatch(setUser(null))
+      localStorage.removeItem("token");
+      localStorage.removeItem("user")
+      navigate("/");
+  }
+}
