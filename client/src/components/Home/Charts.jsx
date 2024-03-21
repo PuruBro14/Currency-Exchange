@@ -43,7 +43,7 @@ export default function Charts() {
   return (
     <>
       <h1>
-        Chart data={data} options={options}
+        Hello Jee
       </h1>
       {/* <Bar data={data} options={options} />; */}
     </>

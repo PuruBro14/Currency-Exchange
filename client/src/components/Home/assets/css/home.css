@@ -1,20 +1,29 @@
 .homemoneytranfer{
-   background-image: url("https://media.istockphoto.com/id/1257153929/photo/indian-rupee-sign-with-stock-market-graph-background.jpg?s=2048x2048&w=is&k=20&c=nPhr-XHh9lmZ5CEKil1rqX7JFspsMPfoDS8cwmtecUY=");
+   /* background-image: url("https://media.istockphoto.com/id/1257153929/photo/indian-rupee-sign-with-stock-market-graph-background.jpg?s=2048x2048&w=is&k=20&c=nPhr-XHh9lmZ5CEKil1rqX7JFspsMPfoDS8cwmtecUY="); */
     background-size: cover;
     position: relative;
-    width:100%;
-    background-repeat: no-repeat;
-    background-size: 100% 100% !important;
+    height: 100vh;
 }
+
+.home-banner-img{
+  width: 100%;
+  transform: scale(101%);
+}
+
 
 .moneytrans{
   text-align: left;
   color:#fff;
-  margin-top: 20%;
-  margin-left: 10%;
+  /* position: absolute; */
+  /* top:50%; */
   
 }
 
+.show-grid{
+  position: absolute;
+  top:20%;
+  left:10%;
+}
 
 
 .sendmoneyform{
@@ -344,9 +353,7 @@ button:hover {
   
 
   .slider-container{
-    margin-top: 40%;
-
-   
+    margin-top: 20%;
   }
 
 
@@ -474,7 +481,7 @@ button:hover {
 
 .mainconverter{
   position:absolute;
-  margin-top: -10%;
+  margin-top: -12%;
   
   width:100%;
   

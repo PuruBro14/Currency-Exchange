@@ -32,6 +32,7 @@ import Send from "./Send";
 import Alerts from "./Alerts";
 import Charts from "./Charts";
 import HowTransferMoney from "../HowTransferMoney/HowTransferMoney";
+import HeaderBanner from './assets/images/HeaderBanner.png'
 
 export default function Home() {
   const [activeMenu, setActiveMenu] = useState(1);
@@ -44,6 +45,7 @@ export default function Home() {
     <>
       <div className="homemoneytranfer">
         <Grid fluid>
+          <img src={HeaderBanner} alt="Header Background" className="home-banner-img"/>
           <Row className="show-grid">
             <Col xs={24} md={12}>
               <h1 className="moneytrans">
