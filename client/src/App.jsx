@@ -21,6 +21,8 @@ import Home2 from "./components/HomePage/Home2";
 import Footer from "./components/Footer";
 import Footer2 from "./components/Footer/Footer";
 import Navbars2 from "./components/Navbar/Navbars2";
+import OpenRoute from "./components/Auth/OpenRoute";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 function App() {
   return (
     <>
@@ -31,9 +33,19 @@ function App() {
         </Affix>
 
         <Routes>
-          <Route path="/" element={<Home2 />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/" element={
+            //<ProtectedRoute>
+            <Home2/>
+            //</ProtectedRoute>
+          }>
+              
+            </Route>
+          <Route path="/signup" element={
+          <OpenRoute>
+          <Signup />
+          </OpenRoute>
+          }></Route>
+          <Route path="/login" element={ <OpenRoute><Login /></OpenRoute>}></Route>
           <Route path="sendmoneyabroad" element={<SendMoneyAbroad />}></Route>
           <Route
             path="prepaidtravelcard"

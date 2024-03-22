@@ -7,7 +7,7 @@ import { setSignUpData } from "../../utils/authSlice";
 import { useDispatch } from "react-redux";
 import { sendSignUp, setLogin } from "../../services/operations/authAPI";
 
-const Login = () => {
+const Login = ({passedFromSignup}) => {
   const[showPassword,setShowPassword]=useState(false);
     const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -36,9 +36,9 @@ const Login = () => {
   }
 
   return (
-    <div className="bg-richblack-900 h-[100vh] w-full">
-      <div className="lg:h-[150px]"></div>
-      <div className="w-11/12 mx-auto justify-center flex">
+    <div className="bg-richblack-900 pb-52 h-calc w-full">
+      <div className={`${!passedFromSignup?'lg:h-[150px]':''}`}></div>
+      <div className={`${!passedFromSignup?'w-11/12 mx-auto justify-center flex':'mt-8'}`}>
         <div className="flex flex-col w-[80%] mt-6 lg:mt-0">
           <div className="w-8/12">
             <div className="text-4xl font-semibold text-richblack-300 mt-6 lg:mt-0">

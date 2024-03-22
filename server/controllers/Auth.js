@@ -12,12 +12,17 @@ exports.signup = async (req, res) => {
     // Destructure fields from the request body
     const {
       username,
+      firstName,
+      lastName,
+      contactNo,
       email,
       password,
     } = req.body;
     // Check if All Details are there or not
     if (
       !username ||
+      !firstName || 
+      !lastName ||
       !email ||
       !password
     ) {

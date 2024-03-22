@@ -6,7 +6,8 @@ import { setUser } from "../../utils/profileSlice";
 
 const { SIGNUP_API, LOGIN_API } = endpoints;
 
-export const sendSignUp = (username, email, password, navigate) => {
+export const sendSignUp = (username,firstName,lastName, email, password, navigate) => {
+  console.log(username,firstName);
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -14,6 +15,8 @@ export const sendSignUp = (username, email, password, navigate) => {
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
         username,
+        firstName,
+        lastName,
         email,
         password,
       });
@@ -26,12 +29,13 @@ export const sendSignUp = (username, email, password, navigate) => {
 
       toast.success("Signup successful");
       navigate("/login");
+    toast.dismiss(toastId);
     } catch (err) {
       toast.error("Error while signup");
-      navigate("/signup");
+    navigate("/signup");
+    toast.dismiss(toastId);
     }
     dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
 };
 
