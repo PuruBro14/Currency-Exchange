@@ -31,6 +31,13 @@ const SignupForm = () => {
     e.preventDefault();
     const{userName,firstName,lastName,email,password}=formData
 
+    if(!userName || !firstName || !lastName || !email || password){
+      setError("All fields are required")
+    } 
+
+    console.log(usernName.length);
+
+
     if (!email) {
       setError((prevState) => ({ ...prevState, email: "Email is required" }));
       return;
@@ -48,13 +55,13 @@ const SignupForm = () => {
 
     dispatch(sendSignUp(userName,firstName,lastName,email,password,navigate));
 
-    // setFormData({
-    //   userName: "",
-    //   firstName:"",
-    //   lastName:"",
-    //   email: "",
-    //   password: "",
-    // });
+    setFormData({
+      userName: "",
+      firstName:"",
+      lastName:"",
+      email: "",
+      password: "",
+    });
   };
   return (
     <div>
@@ -87,7 +94,7 @@ const SignupForm = () => {
                     className="text-richblack-5"
                     onChange={(e) => handleFormData()}
                   >
-                    First Name
+                    First Name <sup className="text-pink-200">*</sup>
                   </label>
                   <input
                     type="text"
@@ -105,7 +112,7 @@ const SignupForm = () => {
                     className="text-richblack-5"
                     onChange={(e) => handleFormData()}
                   >
-                    Last Name
+                    Last Name <sup className="text-pink-200">*</sup>
                   </label>
                   <input
                     type="text"
@@ -123,7 +130,7 @@ const SignupForm = () => {
                     className="text-richblack-5"
                     onChange={(e) => handleFormData()}
                   >
-                    Email address
+                    Email address <sup className="text-pink-200">*</sup>
                   </label>
                   <input
                     type="email"
@@ -140,7 +147,7 @@ const SignupForm = () => {
 
                 <div className="flex flex-row items-center gap-5">
                   <div className="flex flex-col relative  w-full">
-                    <label className="text-richblack-5">Create Password</label>
+                    <label className="text-richblack-5">Create Password <sup className="text-pink-200">*</sup></label>
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter Your password"

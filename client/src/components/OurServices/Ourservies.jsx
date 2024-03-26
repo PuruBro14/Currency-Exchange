@@ -7,7 +7,7 @@ export default function Ourservies() {
       <div className="ourservies">
         <h1 className="ourserhead">Our Services</h1>
 
-        <div className="services-grid" data-aos="fade-up">
+        <div className="flex flex-col md:flex-row" data-aos="fade-up">
           <div className="service service1">
             <img
               src="https://webv2cmsprod.aws.moneygram.com/WEB/release24.01/MGO/US/SENDONLINE/EN/Omnichannel%20-%20Online,0.svg"
@@ -54,7 +54,7 @@ export default function Ourservies() {
             </Link>
           </div>
         </div>
-        <div className="services-grid" data-aos="fade-up">
+        <div className="flex flex-col md:flex-row" data-aos="fade-up">
           <div className="service service1">
             <img
               src="https://webv2cmsprod.aws.moneygram.com/WEB/release24.01/MGO/US/SENDONLINE/EN/Omnichannel%20-%20Online,0.svg"

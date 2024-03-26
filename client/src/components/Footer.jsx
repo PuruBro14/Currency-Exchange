@@ -77,7 +77,7 @@ const Footer = () => {
 
       <div className="flex w-[80%] flex-row items-center justify-between  text-richblack-400 mx-auto  pb-14 text-sm">
         <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
-          <div className="flex flex-row w-full justify-between">
+          <div className="flex flex-col md:flex-row w-full justify-between">
           
           <div className="text-center">Copyright © 2017 All Rights Reserved by remiwire.</div>
             <ul className="flex flex-row text-white gap-8">

@@ -114,16 +114,7 @@
   .service .cta {
     align-self: flex-end;
   }
-  
-  @media all and (max-width:900px) {
-    .services-grid {
-      display: -webkit-box;
-      display: flex;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-      flex-direction: column;
-    }
-  }
+
 
   /* SMA */
 

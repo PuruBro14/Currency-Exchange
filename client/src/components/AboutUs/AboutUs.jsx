@@ -14,12 +14,10 @@ export default function AboutUs() {
       <div className="about-us-container">
         <div className="about-us-content">
           <Grid>
-            <Row>
-              <Col md={1}></Col>
-              <Col md={7}>
-                <h2>About Us</h2>
-              </Col>
-              <Col md={15} className="aboutuspara">
+            <div>
+              <h1 className="text-4xl font-semibold">About Us</h1>
+              <div className="flex flex-col md:flex-row mt-5">
+                <div>
                 <p>
                   Welcome to Remiwire Money Exchange, your trusted partner in
                   currency exchange services. With years of experience in the
@@ -44,15 +42,16 @@ export default function AboutUs() {
                   requirements and experience peace of mind with every
                   transaction.
                 </p>
+                </div>
                 <div className="socialicons">
                   <FaFacebookF style={{ fontSize: 30, margin: 10 }} />
                   <FaInstagramSquare style={{ fontSize: 30, margin: 10 }} />
                   <FaTwitter style={{ fontSize: 30, margin: 10 }} />
                   <FaLinkedin style={{ fontSize: 30, margin: 10 }} />
                 </div>
-              </Col>
+              </div>
               <Col md={1}></Col>
-            </Row>
+            </div>
           </Grid>
         </div>
       </div>

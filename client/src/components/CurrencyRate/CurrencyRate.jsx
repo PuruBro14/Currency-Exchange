@@ -171,3 +171,116 @@ export default function CurrencyRate() {
     </div>
   );
 }
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+export const ContentSlider = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
+
+  return (
+    <div className='py-12 w-10/12 mx-auto'>
+        <Slider {...settings}>
+      <div>
+        <div>
+          <img
+            src="https://www.remitx.com/remitx-images/flags/NZD.png"
+            alt=""
+            title="flags"
+            width="30"
+            height="30"
+          />
+          <h6>NZD</h6>
+        </div>
+        <div className='flex flex-row'>
+          <p>
+            Remiwire Rate : <b>51.37</b>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <img
+            src="https://www.remitx.com/remitx-images/flags/NZD.png"
+            alt=""
+            title="flags"
+            width="30"
+            height="30"
+          />
+          <h6>NZD</h6>
+        </div>
+        <div className='flex flex-row'>
+          <p>
+            Remiwire Rate : <b>51.38</b>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <img
+            src="https://www.remitx.com/remitx-images/flags/NZD.png"
+            alt=""
+            title="flags"
+            width="30"
+            height="30"
+          />
+          <h6>NZD</h6>
+        </div>
+        <div className='flex flex-row'>
+          <p>
+            Remiwire Rate : <b>51.39</b>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <img
+            src="https://www.remitx.com/remitx-images/flags/NZD.png"
+            alt=""
+            title="flags"
+            width="30"
+            height="30"
+          />
+          <h6>NZD</h6>
+        </div>
+        <div className='flex flex-row'>
+          <p>
+            Remiwire Rate : <b>51.40</b>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <img
+            src="https://www.remitx.com/remitx-images/flags/NZD.png"
+            alt=""
+            title="flags"
+            width="30"
+            height="30"
+          />
+          <h6>NZD</h6>
+        </div>
+        <div className='flex flex-row'>
+          <p>
+            Remiwire Rate : <b>51.41</b>
+          </p>
+        </div>
+      </div>
+
+    </Slider>
+</div>
+  );
+};
+

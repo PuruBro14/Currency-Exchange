@@ -1,12 +1,10 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
 import Home from "./components/HomePage/Home";
 
 import Login from "./components/Form/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Affix } from "rsuite";
 import SendMoneyAbroad from "./components/OurServices/SendMoneyAbroad";
 import PrepaidTravelCard from "./components/OurServices/PrepaidTravelCard";
 import ForexCurrency from "./components/OurServices/ForexCurrency";
@@ -25,15 +23,21 @@ import OpenRoute from "./components/Auth/OpenRoute";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 function App() {
   return (
-    <>
+    <div className="overflow-x-hidden">
     <Provider store={store}>
       <BrowserRouter>
-        <Affix>
           <Navbar />
-        </Affix>
 
         <Routes>
           <Route path="/" element={
+            //<ProtectedRoute>
+            <Home/>
+            //</ProtectedRoute>
+          }>
+              
+            </Route>
+
+             <Route path="/home2" element={
             //<ProtectedRoute>
             <Home2/>
             //</ProtectedRoute>
@@ -65,7 +69,7 @@ function App() {
         <Footer />
       </BrowserRouter>
       </Provider>
-    </>
+    </div>
   );
 }
 

@@ -355,17 +355,6 @@ button:hover {
 
 
 
-
-
-@media (max-width:420px) {
-  .item {
-    width: 350px;
-
-  }
-}
-
-
-
 .fcnextlogo {
   font-size: xx-large;
   margin-top: 6%;

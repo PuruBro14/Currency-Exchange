@@ -21,7 +21,7 @@ const SignUp = () => {
 
 
   return (
-    <div className="bg-richblack-900 h-[100vh]">
+    <div className="bg-richblack-900 pt-5 lg:pt-0">
       <div className="lg:h-[100px]"></div>
       <div className="w-11/12 mx-auto justify-center flex flex-row">
         {/* first div  */}

@@ -43,7 +43,7 @@ const Navbar = () => {
         <div className="flex flex-row items-center gap-5">
         <Link to="/">
           <img
-            className="logo"
+            className="w-[30px] h-[30px]"
             src="https://algotest-kappa.vercel.app/assets/stock-yvKJ_oEB.png"
           />
         </Link>
