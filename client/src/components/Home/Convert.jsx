@@ -85,6 +85,11 @@ export default function Convert() {
     // Call the function immediately after defining it
   }, [convertFormValue.from]); // Include convertFormValue in the dependency array
 
+  const convertBookHandler = () =>{
+    alert("ds")
+    console.log(convertFormValue)
+  }
+
   return (
     <div>
       <Row>
@@ -92,7 +97,7 @@ export default function Convert() {
         <Col md={22}>
           <div className="inputsect">
             <div>
-              <h5>Amount</h5>
+              <h5>Amounssst</h5>
               <input
                 onChange={(e) => {
                   setConvertFormValue({
@@ -175,7 +180,7 @@ export default function Convert() {
           <h3>{totalAmount}</h3>
 
           <center>
-            <Button appearance="primary">BOOK THIS ORDER</Button>
+            <Button type="button" appearance="primary" onClick={convertBookHandler}>BOOK THIS ORDER</Button>
           </center>
         </Col>
         <Col md={1}></Col>
