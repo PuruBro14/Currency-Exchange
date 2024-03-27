@@ -21,12 +21,13 @@ import Footer2 from "./components/Footer/Footer";
 import Navbars2 from "./components/Navbar/Navbars2";
 import OpenRoute from "./components/Auth/OpenRoute";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import Header from "./components/Header";
 function App() {
   return (
     <div className="overflow-x-hidden">
     <Provider store={store}>
       <BrowserRouter>
-          <Navbar />
+          <Header />
 
         <Routes>
           <Route path="/" element={

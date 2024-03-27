@@ -54,8 +54,9 @@ export const TestimonialsSlider = () => {
   };
 
   return (
-    <div className="py-12 w-10/12 mx-auto">
+    <div className="py-8 w-10/12 mx-auto ">
       <Slider {...settings}>
+        
         <div>
           <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
@@ -123,6 +124,7 @@ export const TestimonialsSlider = () => {
             <p className="author">- John Doe</p>
           </div>
         </div>
+
         <div>
           <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
@@ -139,6 +141,7 @@ export const TestimonialsSlider = () => {
             <p className="author">- John Doe</p>
           </div>
         </div>
+
       </Slider>
     </div>
   );

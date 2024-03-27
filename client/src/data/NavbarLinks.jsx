@@ -3,13 +3,9 @@ export const NavbarLinks = [
     title: "Home",
     path: "/",
   },
-    {
-    title: "Home2",
-    path: "/home2",
-  },
   {
     title: "Send Money",
-    // path: '/catalog',
+    path: '/sendmoney',
   },
   {
     title: "Track + Recieve",

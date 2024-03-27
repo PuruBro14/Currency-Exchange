@@ -141,36 +141,6 @@ export default function Convert() {
       <Row className="tablerow">
         <Col md={1}></Col>
         <Col md={22}>
-          {/* <table style={{ display: "none" }}>
-            <tr className="tablehead">
-              <th>Currency</th>
-              <th>Product</th>
-              <th>Forex Amount</th>
-              <th>INR Amount</th>
-              <th>Action</th>
-            </tr>
-            <tr className="tablebody">
-              <td>Euro</td>
-              <td>Currency</td>
-              <td>Note 10</td>
-              <td>913.00</td>
-              <td>Edit/Delete</td>
-            </tr>
-            <tr className="tablebody">
-              <td>Euro</td>
-              <td>Currency</td>
-              <td>Note 10</td>
-              <td>913.00</td>
-              <td>Edit/Delete</td>
-            </tr>
-            <tr className="tablebody">
-              <td>Euro</td>
-              <td>Currency</td>
-              <td>Note 10</td>
-              <td>913.00</td>
-              <td>Edit/Delete</td>
-            </tr>
-          </table> */}
           <h5 style={{ marginTop: 20 }}>Total Amount</h5>
           <h3>{totalAmount}</h3>
 

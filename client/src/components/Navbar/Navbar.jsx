@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NavbarLinks } from "../../data/NavbarLinks";
 import { useLocation, matchPath } from "react-router-dom";
-import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { IoIosArrowDropdownCircle, IoMdClose } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileDropDown from "../ProfileDropDown";
 import { logout } from "../../services/operations/authAPI";
+import { RxHamburgerMenu } from "react-icons/rx";
+
 const subLinksData=[{
     title:'Send Money Abroad',
     link:'sendmoneyabroad'
@@ -28,7 +30,7 @@ const subLinksData=[{
 }]
 
 const Navbar = () => {
- const [showNavbar, setShowNavbar] = React.useState(false);
+ const [isOpen, setIsOpen] = React.useState(true);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate=useNavigate();
@@ -37,22 +39,63 @@ const Navbar = () => {
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
+
+  const toggleNavbar=()=>{
+    setIsOpen(!isOpen)
+  }
+
+  const closeNavbar = () => {
+    if (window.innerWidth <= 768) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsOpen(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-row flex-wrap h-20 items-center border-b  border-b-richblack-700 bg-[#10122B] w-full">
-      <div className="flex flex-row w-11/12 mx-auto items-center justify-between ">
-        <div className="flex flex-row items-center gap-5">
-        <Link to="/">
-          <img
-            className="w-[30px] h-[30px]"
-            src="https://algotest-kappa.vercel.app/assets/stock-yvKJ_oEB.png"
-          />
-        </Link>
+    <div className="flex flex-row md:h-20 flex-wrap items-center border-b  border-b-richblack-700 w-full">
+
+      <div className=" w-11/12 mx-auto items-center justify-between ">
+
+         <div className="md:hidden basis-full mt-5 md:mt-0">
+                <button onClick={toggleNavbar}>
+                  {
+                    isOpen?(
+                  <IoMdClose 
+                          size={30} 
+                          color="white" 
+                         />
+
+                    ):(
+                      <RxHamburgerMenu 
+                        size={30} 
+                        color="white" 
+                        />
+                    )
+                  }
+                </button>
+              </div>
+
+
+        <div className={`${isOpen?'flex':'hidden'} flex-col md:flex-row  justify-between w-full`}>
+
+        <div className="overflow-hidden flex flex-row items-center gap-5">
 
         <nav>
-          <ul className="flex flex-row gap-5 text-white">
+          <ul className="flex md:flex-row flex-col gap-5 text-white">
             {NavbarLinks?.map((ele, index) => {
               return (
-                <li className="" key={index}>
+                <li  key={index} onClick={closeNavbar}>
                   {ele?.title == "Services" ? (
                     <div>
                       <div className="relative flex flex-row gap-2 items-center group">
@@ -85,20 +128,21 @@ const Navbar = () => {
           </ul>
            
         </nav>
+
         </div>
 
-        <div className='flex flex-row gap-x-4 items-center'>
+        <div className='flex flex-row my-7 gap-x-4 items-center'>
                         {
                             token===null && (
                                 <Link to="/login">
-                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md'>Log in</button>
+                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={()=>setIsOpen(false)}>Log in</button>
                                 </Link>
                             )
                         }
                         {
                             token===null && (
                                 <Link to="/signup">
-                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md'>Sign up</button>
+                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={()=>setIsOpen(false)}>Sign up</button>
                                 </Link>
                             )
                         }
@@ -113,8 +157,11 @@ const Navbar = () => {
                             )
                         }
 
-              </div>
+        </div>
 
+        </div>
+
+       
       </div>
     </div>
   );
