@@ -1,0 +1,13 @@
+Convert
+
+Data []
+mail -user
+mail-service provider mail
+success-collect 
+reject-failed mail 
+
+1.convertFormValue contain all key value input pairs
+2.getCurrencyValue api call to get all results corresponding to form value 
+3.to get totalResult = to value data * amount writed in convertFormValue amount
+4.currencyInput sending from and to as props and convertFormValue on selecting
+appending values in it

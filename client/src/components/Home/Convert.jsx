@@ -82,11 +82,9 @@ export default function Convert() {
       }
     };
     getCurrencyValue();
-    // Call the function immediately after defining it
-  }, [convertFormValue.from]); // Include convertFormValue in the dependency array
+  }, [convertFormValue.from]);
 
   const convertBookHandler = () =>{
-    alert("ds")
     console.log(convertFormValue)
   }
 
@@ -96,95 +94,16 @@ export default function Convert() {
         <Col md={1}></Col>
         <Col md={22}>
           <div className="inputsect">
-            <div>
-              <h5>Amounssst</h5>
-              <input
-                onChange={(e) => {
-                  setConvertFormValue({
-                    ...convertFormValue,
-                    amount: e.target.value,
-                  });
-                }}
-                className="amountinput"
-                style={{ width: 324 }}
-                placeholder="Amount"
-                value={convertFormValue.amount}
-              />
-            </div>
-            <div>
-              <h5>From</h5>
-
-              <CurrencyInput
-                convertFormValue={convertFormValue}
-                setConvertFormValue={setConvertFormValue}
-                currentType="from"
-              />
-            </div>
-            <div>
-              <h5>To</h5>
-              <CurrencyInput
-                convertFormValue={convertFormValue}
-                setConvertFormValue={setConvertFormValue}
-                currentType="to"
-              />
-            </div>
-            <div>
-              <h5>Current Rate</h5>
-              <input placeholder="Rate" className="amountinput" />
-            </div>
+            
+            
+           
+            
           </div>
         </Col>
         <Col md={1}></Col>
       </Row>
-      <Row style={{ marginTop: "20px" }}>
-        <Col md={9}></Col>
-        <Col md={10}></Col>
-        <Col md={5}>
-          <Button appearance="primary">Add More</Button>&nbsp;
-        </Col>
-      </Row>
-      <Row className="tablerow">
-        <Col md={1}></Col>
-        <Col md={22}>
-          {/* <table style={{ display: "none" }}>
-            <tr className="tablehead">
-              <th>Currency</th>
-              <th>Product</th>
-              <th>Forex Amount</th>
-              <th>INR Amount</th>
-              <th>Action</th>
-            </tr>
-            <tr className="tablebody">
-              <td>Euro</td>
-              <td>Currency</td>
-              <td>Note 10</td>
-              <td>913.00</td>
-              <td>Edit/Delete</td>
-            </tr>
-            <tr className="tablebody">
-              <td>Euro</td>
-              <td>Currency</td>
-              <td>Note 10</td>
-              <td>913.00</td>
-              <td>Edit/Delete</td>
-            </tr>
-            <tr className="tablebody">
-              <td>Euro</td>
-              <td>Currency</td>
-              <td>Note 10</td>
-              <td>913.00</td>
-              <td>Edit/Delete</td>
-            </tr>
-          </table> */}
-          <h5 style={{ marginTop: 20 }}>Total Amount</h5>
-          <h3>{totalAmount}</h3>
-
-          <center>
-            <Button type="button" appearance="primary" onClick={convertBookHandler}>BOOK THIS ORDER</Button>
-          </center>
-        </Col>
-        <Col md={1}></Col>
-      </Row>
+     
+     
     </div>
   );
 }

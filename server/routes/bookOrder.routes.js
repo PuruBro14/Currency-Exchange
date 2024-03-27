@@ -3,13 +3,13 @@ const bookRoute = express.Router();
 const bookOrderController = require("../controllers/bookController");
 const SecureAuth = require("../middleware/jwtVerify");
 
-bookRoute.post("/createOrder",SecureAuth,bookOrderController.createBookOrders);
-bookRoute.get("/fetchAllBookOrders",SecureAuth, bookOrderController.getAllOrders);
+bookRoute.post("/createOrder",bookOrderController.createBookOrders);
+bookRoute.get("/fetchAllBookOrders", bookOrderController.getAllOrders);
 bookRoute.get(
-  "/fetchBookOrderById/:id",SecureAuth,
+  "/fetchBookOrderById/:id",
   bookOrderController.getOrderDetailsById
 );
-bookRoute.put("/updateBookOrders/:id",SecureAuth, bookOrderController.updateOrderDetails);
+bookRoute.put("/updateBookOrders/:id", bookOrderController.updateOrderDetails);
 bookRoute.delete(
   "/deleteOrderById/:id",
   SecureAuth,

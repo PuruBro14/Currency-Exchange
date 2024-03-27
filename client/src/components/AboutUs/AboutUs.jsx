@@ -10,10 +10,10 @@ import {
 import "./assets/css/Aboutus.css";
 export default function AboutUs() {
   return (
-    <div>
-      <div className="about-us-container">
-        <div className="about-us-content">
-          <Grid>
+    <div className="w-9/12 mx-auto">
+      <div>
+        <div >
+          <div>
             <div>
               <h1 className="text-4xl font-semibold">About Us</h1>
               <div className="flex flex-col md:flex-row mt-5">
@@ -43,16 +43,15 @@ export default function AboutUs() {
                   transaction.
                 </p>
                 </div>
-                <div className="socialicons">
-                  <FaFacebookF style={{ fontSize: 30, margin: 10 }} />
-                  <FaInstagramSquare style={{ fontSize: 30, margin: 10 }} />
-                  <FaTwitter style={{ fontSize: 30, margin: 10 }} />
-                  <FaLinkedin style={{ fontSize: 30, margin: 10 }} />
+                
+                <div>
+
+                  <img src="" alt="about-us"/>
                 </div>
+
               </div>
-              <Col md={1}></Col>
             </div>
-          </Grid>
+          </div>
         </div>
       </div>
     </div>

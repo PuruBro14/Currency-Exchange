@@ -19,48 +19,33 @@ export default function Convert() {
     amount: "",
     from: "",
     to: "",
-    currentRate: "",
     fromImg: "",
     toImg: "",
+    currentRate: "",
   });
-  const [allCurrencyData, setAllCurrencyData] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentCurrValue, setCurrentCurrValue] = useState();
-
-  const getCurrencyList = (searchString) => {
-    const filteredArrayCurrency = countryCurrencyList.filter((currency) => {
-      return (
-        currency.label.toLowerCase().includes(searchString.toLowerCase()) ||
-        currency.value.toLowerCase().includes(searchString.toLowerCase())
-      );
-    });
-
-    setCountryCurrency(filteredArrayCurrency);
-  };
-
-  const showCurrencyList = () => {
-    setShowList(true);
-  };
-
-  const hideCurrencyList = () => {
-    // setShowList(false);
-  };
+  const[totalEntries,setTotalEntries]=useState([]);
 
   useEffect(() => {
+    if(convertFormValue.to!==''){
     const getToCurrValue = () => {
       const dashIndex = convertFormValue.to.indexOf("-");
-
       const toCurrency = convertFormValue.to.substring(0, dashIndex).trim();
       if (currentCurrValue !== undefined) {
+        console.log(currentCurrValue);
         const currentCurrency = currentCurrValue[toCurrency];
         const convertTo = convertFormValue?.amount;
         const totalValueAmt = parseInt(convertTo) * currentCurrency;
-
+        sum+=totalValueAmt
         setTotalAmount(totalValueAmt);
       }
-    };
+    }
     getToCurrValue();
+    };
   }, [convertFormValue.to]);
+
+
   useEffect(() => {
     const getCurrencyValue = async () => {
       try {
@@ -74,7 +59,6 @@ export default function Convert() {
             "https://v6.exchangerate-api.com/v6/1902e21487d17680cb9fc088/latest/" +
               fromCurrency
           );
-
           setCurrentCurrValue(response?.data?.conversion_rates);
         }
       } catch (error) {
@@ -82,15 +66,31 @@ export default function Convert() {
       }
     };
     getCurrencyValue();
-    // Call the function immediately after defining it
-  }, [convertFormValue.from]); // Include convertFormValue in the dependency array
+  }, [convertFormValue.from]);
+
+  const handleAddMore=()=>{
+    if(convertFormValue.amount!=='' || convertFormValue.from!=='' || convertFormValue.to!=='' || convertFormValue.currentRate!=='' || convertFormValue.fromImg!=='' || convertFormValue.toImg!==''){
+    setTotalEntries([...totalEntries,{...convertFormValue}])
+    setConvertFormValue({
+      amount: "",
+    from: "",
+    to: "",
+    fromImg: "",
+    toImg: "",
+    currentRate: "",
+    })
+  }
+  }
+
+  const bookOrder=()=>{
+    alert("Order placed")
+  }
 
   return (
-    <div>
-      <Row>
-        <Col md={1}></Col>
-        <Col md={22}>
-          <div className="inputsect">
+    <div className="w-11/12 mx-auto">
+      <div>
+       
+          <div className="flex flex-row justify-around">
             <div>
               <h5>Amount</h5>
               <input
@@ -101,7 +101,6 @@ export default function Convert() {
                   });
                 }}
                 className="amountinput"
-                style={{ width: 324 }}
                 placeholder="Amount"
                 value={convertFormValue.amount}
               />
@@ -125,27 +124,68 @@ export default function Convert() {
             </div>
             <div>
               <h5>Current Rate</h5>
-              <input placeholder="Rate" className="amountinput" />
+              <input placeholder="Rate" className="amountinput" 
+               onChange={(e) => {
+                  setConvertFormValue({
+                    ...convertFormValue,
+                    currentRate: e.target.value,
+                  });
+                }}
+              />
             </div>
           </div>
-        </Col>
-        <Col md={1}></Col>
-      </Row>
-      <Row style={{ marginTop: "20px" }}>
-        <Col md={9}></Col>
-        <Col md={10}></Col>
-        <Col md={5}>
-          <Button appearance="primary">Add More</Button>&nbsp;
-        </Col>
-      </Row>
+      </div>
+
+      <div>
+      {
+        totalEntries?.map((ele,index)=>(
+          <div>
+            <table className="mt-8">
+
+              <tr>
+              {
+                Object.keys(ele).map((key,index)=>{
+                   if(key!=='fromImg'){  
+                    if(key!=='toImg'){
+                  return <th key={key}>{key}</th>
+                    }
+                   }
+                   return null;
+                })
+              }
+              </tr>
+
+              <tr>
+                 {
+                Object.values(ele).map((key,index)=>{
+                 if(index!==3){
+                  if(index!==4){
+                  return <th key={key}>{key}</th>
+                 }
+                }
+                })
+              }
+              </tr>
+            </table>
+          </div>
+        ))
+      }
+      </div>
+
+
+      {
+      <div style={{ marginTop: "20px" }}>
+          <Button className="w-full text-4xl" onClick={handleAddMore}>Add More</Button>&nbsp;
+      </div>
+}
       <Row className="tablerow">
         <Col md={1}></Col>
         <Col md={22}>
           <h5 style={{ marginTop: 20 }}>Total Amount</h5>
-          <h3>{totalAmount}</h3>
+          <h3>{totalAmount || 0}</h3>
 
           <center>
-            <Button appearance="primary">BOOK THIS ORDER</Button>
+            <Button appearance="primary" onClick={bookOrder}>BOOK THIS ORDER</Button>
           </center>
         </Col>
         <Col md={1}></Col>

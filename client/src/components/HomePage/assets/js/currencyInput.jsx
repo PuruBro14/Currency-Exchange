@@ -110,7 +110,6 @@ export default function CurrencyInput({
                       <span>
                         <img src={val.img} />
                       </span>
-                      &nbsp;
                       {val.label}
                     </li>
                   </div>
