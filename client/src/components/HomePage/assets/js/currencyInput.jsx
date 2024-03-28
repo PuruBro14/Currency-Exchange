@@ -99,8 +99,8 @@ export default function CurrencyInput({
           <ul className="ulNotType">
             {countryCurrencyT?.map((val, index) => {
               return (
-                <>
-                  <div key={val}>
+                <div key={index}>
+                  <div>
                     <li
                       onClick={() => {
                         setValueFrom(val.label, val.img);
@@ -113,7 +113,7 @@ export default function CurrencyInput({
                       {val.label}
                     </li>
                   </div>
-                </>
+                </div>
               );
             })}
           </ul>

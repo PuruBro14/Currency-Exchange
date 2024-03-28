@@ -11,3 +11,17 @@ reject-failed mail
 3.to get totalResult = to value data * amount writed in convertFormValue amount
 4.currencyInput sending from and to as props and convertFormValue on selecting
 appending values in it
+
+100-amount 
+from-usd
+to-INR 
+current rate-83 1 USD par 1 INR ka rate(FROM/TO)
+sum=8300
+
++
+
+100-amount 
+from-INR
+to-Riyadh dollar
+current rate- 1 INR par 1 Riyadh dollar ka rate(FROM/TO)
+sum=8300+100=8400

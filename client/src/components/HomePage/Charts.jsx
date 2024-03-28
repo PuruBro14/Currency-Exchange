@@ -1,51 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
-export default function Charts() {
-  const data = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
+const CurrencyGraph = () => {
+  const [exchangeRates, setExchangeRates] = useState({});
 
+  useEffect(() => {
+    const fetchExchangeRates = async () => {
+      try {
+        const response = await axios.get(
+          "https://v6.exchangerate-api.com/v6/1902e21487d17680cb9fc088/latest/INR"
+        );
+        setExchangeRates(response.data.conversion_rates);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchExchangeRates();
+  }, []);
+
+  console.log(exchangeRates);
+
+  // Render chart based on exchangeRates data
   return (
-    <>
-      <h1>
-        Hello Jee
-      </h1>
-      {/* <Bar data={data} options={options} />; */}
-    </>
+    <div className="h-[500px] w-8/12 mx-auto relative bottom-5">
+      <h1>Live Currency Exchange Rates</h1>
+      <Line
+        data={{
+          labels: Object.keys(exchangeRates),
+          datasets: [
+            {
+              label: "Currency Rates",
+              data: Object.values(exchangeRates),
+              fill: false,
+              borderColor: "rgb(75, 192, 192)",
+              tension: 0.1,
+            },
+          ],
+        }}
+      />
+    </div>
   );
-}
+};
+
+export default CurrencyGraph;

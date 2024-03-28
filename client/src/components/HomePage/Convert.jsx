@@ -37,14 +37,15 @@ export default function Convert() {
         const currentCurrency = currentCurrValue[toCurrency];
         const convertTo = convertFormValue?.amount;
         const totalValueAmt = parseInt(convertTo) * currentCurrency;
-        sum+=totalValueAmt
-        setTotalAmount(totalValueAmt);
+        setTotalAmount((prev)=>prev+totalValueAmt);
       }
     }
     getToCurrValue();
-    };
-  }, [convertFormValue.to]);
+    currRateValue();
+  };
+}, [convertFormValue.to]);
 
+console.log(totalAmount);
 
   useEffect(() => {
     const getCurrencyValue = async () => {
@@ -53,7 +54,6 @@ export default function Convert() {
         const fromCurrency = convertFormValue.from
           .substring(0, dashIndex)
           .trim();
-
         if (fromCurrency !== "") {
           const response = await axios.get(
             "https://v6.exchangerate-api.com/v6/1902e21487d17680cb9fc088/latest/" +
@@ -80,6 +80,15 @@ export default function Convert() {
     currentRate: "",
     })
   }
+  }
+
+  const currRateValue=()=>{
+    const dashToIndex = convertFormValue?.to.indexOf("-");
+    const dashtoCurrency = convertFormValue?.to.substring(0, dashToIndex).trim();
+    const toValue=currentCurrValue[dashtoCurrency]
+
+    setConvertFormValue({...convertFormValue,currentRate:toValue})
+
   }
 
   const bookOrder=()=>{
@@ -125,12 +134,7 @@ export default function Convert() {
             <div>
               <h5>Current Rate</h5>
               <input placeholder="Rate" className="amountinput" 
-               onChange={(e) => {
-                  setConvertFormValue({
-                    ...convertFormValue,
-                    currentRate: e.target.value,
-                  });
-                }}
+               value={convertFormValue?.currentRate}
               />
             </div>
           </div>
@@ -139,7 +143,7 @@ export default function Convert() {
       <div>
       {
         totalEntries?.map((ele,index)=>(
-          <div>
+          <div key={index}>
             <table className="mt-8">
 
               <tr>
@@ -147,7 +151,7 @@ export default function Convert() {
                 Object.keys(ele).map((key,index)=>{
                    if(key!=='fromImg'){  
                     if(key!=='toImg'){
-                  return <th key={key}>{key}</th>
+                  return <th key={index}>{key}</th>
                     }
                    }
                    return null;
@@ -160,7 +164,7 @@ export default function Convert() {
                 Object.values(ele).map((key,index)=>{
                  if(index!==3){
                   if(index!==4){
-                  return <th key={key}>{key}</th>
+                  return <th key={index}>{key}</th>
                  }
                 }
                 })
