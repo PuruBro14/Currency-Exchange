@@ -1,10 +1,13 @@
 import { toast } from "react-hot-toast";
 import { setLoading, setToken } from "../../utils/authSlice";
 import { apiConnector } from "./apiconnector";
-import { endpoints } from "../apis";
+import { bookOrderEndpoints, endpoints } from "../apis";
 import { setUser } from "../../utils/profileSlice";
 
 const { SIGNUP_API, LOGIN_API } = endpoints;
+
+const { CREATE_ORDER } = bookOrderEndpoints;
+
 
 export const sendSignUp = (username,firstName,lastName, email, password, navigate) => {
   console.log(username,firstName);
@@ -83,5 +86,29 @@ export const logout=(navigate)=>{
       localStorage.removeItem("token");
       localStorage.removeItem("user")
       navigate("/");
+  }
+}
+
+export const setConvert=(totalEntries)=>{
+  const destructeredArray=totalEntries?.map(({amount,from,to,currentRate})=>({amount,from,to,currentRate}))
+  return async(dispatch)=>{
+    const toastId=toast.loading("Loading...");
+    dispatch(setLoading(true))
+    try{
+      const response = await apiConnector("POST", CREATE_ORDER, {
+        currencyData: destructeredArray,
+      });
+
+      if(!response.data.success){
+        throw new Error(response?.data?.message)
+      }
+
+      toast.success("Order Placed")
+    }catch(err){
+      console.log("Conversion ERROR..........",err);
+      toast.error("Error while book this order")
+    }
+    dispatch(setLoading(false))
+    toast.dismiss(toastId)
   }
 }

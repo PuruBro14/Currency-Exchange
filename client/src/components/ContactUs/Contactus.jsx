@@ -21,14 +21,14 @@ export default function Contactus() {
   console.log(formData);
   return (
     <>
-      <div className="bg-[#F9F9F9] mt-5">
-          <div className="relative w-10/12 mx-auto shadow-2xl mb-7">
+      <div>
+          <div className="relative w-10/12 mx-auto shadow-xl my-7 p-10">
             {/* 1st section  */}
             <div className="flex flex-col gap-5 py-8 px-10 md:px-28">
               <h1 className="text-3xl text-left">Contact Us</h1>
               <p className="text-[15px]">Feel Free to contact us any time. We will get back to you as soon as we can!.</p>
 
-              <form className="flex flex-col gap-2 w-full md:w-[50%]">
+              <form className="flex flex-col gap-2 w-full md:w-[60%] leading-8">
                 <div>
                 <input type="text" 
                 name="name"

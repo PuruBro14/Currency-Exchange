@@ -7,7 +7,7 @@ import Location, { HomeLocation } from '../Location/Location';
 import WhyRemiwire from '../WhyRemiwire/WhyRemiwire';
 import Ourservies from '../OurServices/Ourservies';
 import AboutUs from '../AboutUs/AboutUs';
-import { TestimonialsSlider } from '../Testimonials/Testimonials';
+import TestimonialsSlider from '../Testimonials/Testimonials';
 import HowTransferMoney from '../HowTransferMoney/HowTransferMoney';
 import {
   Grid,

@@ -7,17 +7,20 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 
-import "./assets/css/Aboutus.css";
+import AboutUsImage from "../HomePage/assets/images/AboutUs.jpg"
 export default function AboutUs() {
   return (
     <div className="w-9/12 mx-auto">
       <div>
         <div >
           <div>
-            <div>
+
+            <div className="flex flex-col md:flex-row items-center gap-5">
+
+              <div>
               <h1 className="text-4xl font-semibold">About Us</h1>
               <div className="flex flex-col md:flex-row mt-5">
-                <div>
+                <div className="text-richblack-600 text-justify">
                 <p>
                   Welcome to Remiwire Money Exchange, your trusted partner in
                   currency exchange services. With years of experience in the
@@ -43,13 +46,15 @@ export default function AboutUs() {
                   transaction.
                 </p>
                 </div>
+                </div>
+              </div>
+
                 
                 <div>
 
-                  <img src="" alt="about-us"/>
+                  <img src={AboutUsImage}/>
                 </div>
 
-              </div>
             </div>
           </div>
         </div>

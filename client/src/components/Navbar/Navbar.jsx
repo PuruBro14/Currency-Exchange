@@ -67,7 +67,7 @@ const Navbar = () => {
 
       <div className=" w-11/12 mx-auto items-center justify-between ">
 
-         <div className="md:hidden basis-full mt-5 md:mt-0">
+         <div className="md:hidden  mt-5 md:mt-0">
                 <button onClick={toggleNavbar}>
                   {
                     isOpen?(
@@ -89,7 +89,7 @@ const Navbar = () => {
 
         <div className={`${isOpen?'flex':'hidden'} flex-col md:flex-row  justify-between w-full`}>
 
-        <div className="overflow-hidden flex flex-row items-center gap-5">
+        <div className="flex flex-row items-center gap-5">
 
         <nav>
           <ul className="flex md:flex-row flex-col gap-5 text-white">
@@ -101,11 +101,12 @@ const Navbar = () => {
                       <div className="relative flex flex-row gap-2 items-center group">
                         <p>{ele?.title}</p>
                         <IoIosArrowDropdownCircle />
-                        <div className='invisible absolute left-[50%] top-[50%] -translate-x-[50%] translate-y-[20%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px]'>
+                        <div className='z-20 invisible absolute left-[50%] top-[50%] -translate-x-[50%] translate-y-[20%] flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px]'>
                           <div className="absolute left-[50%] translate-x-[80%] -translate-y-[45%] top-0 h-6 w-6 -45 rounded rotate-45 bg-richblack-5"></div>
                           {subLinksData?.map((ele, index) => {
+                            {console.log('ele',ele)}
                             return (
-                              <Link to={ele?.link} key={index} className="z-20">
+                              <Link to={ele?.link} key={index}>
                                 <p>{ele?.title}</p>
                               </Link>
                             );

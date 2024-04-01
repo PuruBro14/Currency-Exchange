@@ -18,7 +18,7 @@ exports.createBookOrders =async (req, res) => {
           amount: data.amount,
           from: data.from,
           to: data.to,
-          currentRate: data.currencyRate
+          currentRate: data.currentRate
         });
       }));
     }

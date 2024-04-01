@@ -13,8 +13,11 @@ import {
   Button,
   SelectPicker,
 } from "rsuite";
-
+import {useDispatch} from 'react-redux';
+import { setConvert } from "../../services/operations/authAPI";
+import { bookOrderEndpoints } from "../../services/apis";
 export default function Convert() {
+  const { GET_ORDERS,DELETE_ORDERS } = bookOrderEndpoints;
   const [convertFormValue, setConvertFormValue] = useState({
     amount: "",
     from: "",
@@ -26,6 +29,8 @@ export default function Convert() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentCurrValue, setCurrentCurrValue] = useState();
   const[totalEntries,setTotalEntries]=useState([]);
+  const dispatch=useDispatch();
+  const[disabled,setDisabled]=useState(true);
 
   useEffect(() => {
     if(convertFormValue.to!==''){
@@ -33,11 +38,9 @@ export default function Convert() {
       const dashIndex = convertFormValue.to.indexOf("-");
       const toCurrency = convertFormValue.to.substring(0, dashIndex).trim();
       if (currentCurrValue !== undefined) {
-        console.log(currentCurrValue);
         const currentCurrency = currentCurrValue[toCurrency];
         const convertTo = convertFormValue?.amount;
         const totalValueAmt = parseInt(convertTo) * currentCurrency;
-        setTotalAmount((prev)=>prev+totalValueAmt);
       }
     }
     getToCurrValue();
@@ -45,7 +48,6 @@ export default function Convert() {
   };
 }, [convertFormValue.to]);
 
-console.log(totalAmount);
 
   useEffect(() => {
     const getCurrencyValue = async () => {
@@ -70,6 +72,9 @@ console.log(totalAmount);
 
   const handleAddMore=()=>{
     if(convertFormValue.amount!=='' || convertFormValue.from!=='' || convertFormValue.to!=='' || convertFormValue.currentRate!=='' || convertFormValue.fromImg!=='' || convertFormValue.toImg!==''){
+      const convertTo=parseFloat(convertFormValue.amount);
+      const totalValueAmt=convertTo*parseFloat(convertFormValue.currentRate);
+      setTotalAmount((prev)=>prev+totalValueAmt)
     setTotalEntries([...totalEntries,{...convertFormValue}])
     setConvertFormValue({
       amount: "",
@@ -79,6 +84,7 @@ console.log(totalAmount);
     toImg: "",
     currentRate: "",
     })
+    setDisabled(false);
   }
   }
 
@@ -91,9 +97,41 @@ console.log(totalAmount);
 
   }
 
-  const bookOrder=()=>{
-    alert("Order placed")
+  const bookOrder=(e)=>{
+    e.preventDefault();
+    if(totalEntries.length==0){
+      return;
+    }
+    dispatch(setConvert(totalEntries))
   }
+
+  const fetchTableData=async()=>{
+    const response=await axios.get(GET_ORDERS);
+    setTotalEntries(response?.data?.data)
+  }
+
+  useEffect(()=>{
+    fetchTableData();
+  },[])
+
+  const filterArray=(ele,i)=>{
+   const itemId=ele?._id;
+
+   if(!itemId){
+    console.log("Item ID not found");
+    return;
+   }
+
+   const response=axios.delete(DELETE_ORDERS/itemId).then((response)=>{
+    console.log('Item deleted successfully')
+    const filteredArr=totalEntries.filter((item,index)=>i!==index)
+    setTotalEntries(filteredArr)
+   }).catch((err)=>{
+    console.error("Error while deleting the item",err)
+   })
+  }
+
+  console.log('totalEntries',totalEntries);
 
   return (
     <div className="w-11/12 mx-auto">
@@ -140,56 +178,67 @@ console.log(totalAmount);
           </div>
       </div>
 
+      {totalEntries?.length>0 &&
       <div>
-      {
-        totalEntries?.map((ele,index)=>(
-          <div key={index}>
-            <table className="mt-8">
-
-              <tr>
+        <table className="mt-8">
+          <thead>
+            <tr>
               {
-                Object.keys(ele).map((key,index)=>{
+                totalEntries?.length>0 && Object.keys(totalEntries[0]).map((key,index)=>{
                    if(key!=='fromImg'){  
                     if(key!=='toImg'){
+                      if(key!=='_id'){
+                        if(key!=='__v'){
                   return <th key={index}>{key}</th>
                     }
                    }
+                  }
+                }
                    return null;
                 })
               }
-              </tr>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              totalEntries?.length>0 && totalEntries?.map((ele,index)=>(
+                <tr key={index}>
+                  {Object?.keys(ele).map((key,index)=>(
+                    key!=='fromImg' && key!=='toImg' && key!=='_id' && key!=='__v' && key!=='ja' && (
+                      <td key={index}>{ele[key]}</td>
+                    )
+                   ))}
+                
 
-              <tr>
-                 {
-                Object.values(ele).map((key,index)=>{
-                 if(index!==3){
-                  if(index!==4){
-                  return <th key={index}>{key}</th>
-                 }
-                }
-                })
-              }
-              </tr>
-            </table>
-          </div>
-        ))
-      }
+            <td>
+              <div className="w-8 flex flex-row gap-5">
+                <button>Edit</button>
+                <button onClick={()=>filterArray(ele,index)}>Delete</button>
+              </div>
+            </td>
+            </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
+      }
 
 
       {
-      <div style={{ marginTop: "20px" }}>
-          <Button className="w-full text-4xl" onClick={handleAddMore}>Add More</Button>&nbsp;
+      <div className="mt-14 flex justify-center">
+          <button className="w-fit text-4xl px-[24px] py-[6px] bg-richblack-800 text-white rounded hover:bg-richblue-500 transition-all duration-200" onClick={handleAddMore}>Add</button>&nbsp;
       </div>
 }
       <Row className="tablerow">
         <Col md={1}></Col>
         <Col md={22}>
           <h5 style={{ marginTop: 20 }}>Total Amount</h5>
-          <h3>{totalAmount || 0}</h3>
+          <h3>{totalAmount.toFixed(2) || 0}</h3>
 
           <center>
-            <Button appearance="primary" onClick={bookOrder}>BOOK THIS ORDER</Button>
+            <Button appearance="primary" onClick={bookOrder} disabled={disabled}>BOOK THIS ORDER</Button>
           </center>
         </Col>
         <Col md={1}></Col>

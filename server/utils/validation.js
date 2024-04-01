@@ -4,7 +4,7 @@ const ordervalidation = joi.object({
   amount: joi.number().required(),
   from: joi.string().required(),
   to: joi.string().required(),
-  currencyRate: joi.number().required(),
+  currentRate: joi.number().required(),
 });
 
 const bookValidation = joi.object().keys({
