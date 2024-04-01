@@ -67,7 +67,7 @@ const Navbar = () => {
 
       <div className=" w-11/12 mx-auto items-center justify-between ">
 
-         <div className="md:hidden  mt-5 md:mt-0">
+         {/* <div className=" mt-5 md:mt-0">
                 <button onClick={toggleNavbar}>
                   {
                     isOpen?(
@@ -84,12 +84,12 @@ const Navbar = () => {
                     )
                   }
                 </button>
-              </div>
+              </div> */}
 
 
-        <div className={`${isOpen?'flex':'hidden'} flex-col md:flex-row  justify-between w-full`}>
+        {/* <div className={`${isOpen?'flex':'hidden'} flex-col md:flex-row  justify-between w-full`}> */}
 
-        <div className="flex flex-row items-center gap-5">
+        <div className="flex flex-row  justify-between items-center gap-5">
 
         <nav>
           <ul className="flex md:flex-row flex-col gap-5 text-white">
@@ -130,7 +130,6 @@ const Navbar = () => {
            
         </nav>
 
-        </div>
 
         <div className='flex flex-row my-7 gap-x-4 items-center'>
                         {
@@ -162,9 +161,12 @@ const Navbar = () => {
 
         </div>
 
+
+        </div>
+
        
       </div>
-    </div>
+    // </div>
   );
 };
 
