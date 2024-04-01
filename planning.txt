@@ -26,9 +26,13 @@ to-Riyadh dollar
 current rate- 1 INR par 1 Riyadh dollar ka rate(FROM/TO)
 sum=8300+100=8400
 
-services dropdown-fixed
-about us image -fixed
-total sum frontend se-fixed 
-outside the upper div-fixed 
-header missing in signup/login 
-testimonial margin 
+add validations 
+edit 
+delete
+
+why you choorse remiwire layout
+our services layout 
+about image or make text large
+testimonials image make little large
+how to transfer make image 60% height remaining content
+Contact us margin 

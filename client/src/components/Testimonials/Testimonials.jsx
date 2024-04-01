@@ -40,12 +40,10 @@ export default function TestimonialsSlider() {
     ],
   };
   return (
-    <div className="mt-20">
+    <div className="mt-20 w-11/12 max-w-maxContent mx-auto">
       <div>
-        <Grid fluid>
           <Row>
-            <Col md={2}></Col>
-            <Col md={20}>
+            <div md={20}>
               <Slider {...settings}>
                 <div>
                   <div className="item">
@@ -53,7 +51,7 @@ export default function TestimonialsSlider() {
                       <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
             alt="John Doe"
-            className="w-30 h-30"
+            className="w-50 h-50"
           />
                       
                     </div>
@@ -69,7 +67,7 @@ export default function TestimonialsSlider() {
                       <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
             alt="John Doe"
-            className="w-30 h-30"
+            className="w-50 h-50"
           />
                       
                     </div>
@@ -85,7 +83,7 @@ export default function TestimonialsSlider() {
                       <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
             alt="John Doe"
-            className="w-30 h-30"
+            className="w-50 h-50"
           />
                       
                     </div>
@@ -101,7 +99,7 @@ export default function TestimonialsSlider() {
                       <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
             alt="John Doe"
-            className="w-30 h-30"
+            className="w-50 h-50"
           />
                       
                     </div>
@@ -117,7 +115,7 @@ export default function TestimonialsSlider() {
                       <img
             src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
             alt="John Doe"
-            className="w-30 h-30"
+            className="w-50 h-50"
           />
                       
                     </div>
@@ -146,32 +144,9 @@ export default function TestimonialsSlider() {
                 </div>
 
               </Slider>
-            </Col>
-            <Col md={2}></Col>
+            </div>
           </Row>
-        </Grid>
       </div>
     </div>
   );
 }
-
-
-
-
-
-{/* <div className='mx-5'>
-          <img
-            src="https://media.istockphoto.com/id/1294339577/photo/young-beautiful-woman.jpg?s=2048x2048&w=is&k=20&c=uNhM1pcoZ8d_CUWpz9EZNyp_lztV-p_NOp9nFrpgSI4="
-            alt="John Doe"
-            className="testimonial-image"
-          />
-
-          <div className="testimonial-content">
-            <p className="quote">
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              aliquet libero eget magna malesuada, sit amet consectetur mi
-              hendrerit."
-            </p>
-            <p className="author">- John Doe</p>
-          </div>
-        </div> */}

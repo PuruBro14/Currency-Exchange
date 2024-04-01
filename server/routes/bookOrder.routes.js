@@ -12,7 +12,6 @@ bookRoute.get(
 bookRoute.put("/updateBookOrders/:id", bookOrderController.updateOrderDetails);
 bookRoute.delete(
   "/deleteOrderById/:id",
-  SecureAuth,
   bookOrderController.deleteOrderDetails
 );
 

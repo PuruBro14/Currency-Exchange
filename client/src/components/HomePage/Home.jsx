@@ -119,6 +119,7 @@ const Home = () => {
         </div>
 
         <div>
+          <div className='lg:h-[60px]'></div>
           <HowTransferMoney/>
         </div>
 

@@ -98,6 +98,7 @@ export default function CurrencyInput({
         <>
           <ul className="ulNotType">
             {countryCurrencyT?.map((val, index) => {
+              console.log('val',val);
               return (
                 <div key={index}>
                   <div>

@@ -10,7 +10,7 @@ import {
 import AboutUsImage from "../HomePage/assets/images/AboutUs.jpg"
 export default function AboutUs() {
   return (
-    <div className="w-9/12 mx-auto">
+    <div className="w-11/12 max-w-maxContent mx-auto">
       <div>
         <div >
           <div className="mt-8">
@@ -20,7 +20,7 @@ export default function AboutUs() {
               <div className="w-[60%]">
               <h1 className="text-4xl font-semibold">About Us</h1>
               <div className="flex flex-col md:flex-row mt-5">
-                <div className="text-richblack-600 text-justify">
+                <div className="text-richblack-600 text-justify leading-8">
                 <p>
                   Welcome to Remiwire Money Exchange, your trusted partner in
                   currency exchange services. With years of experience in the

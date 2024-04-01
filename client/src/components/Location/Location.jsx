@@ -59,9 +59,9 @@ export const HomeLocation = () => {
 
 
   return (
-    <div className="bg-[#10122B] w-11/12 mx-auto rounded-md">
+    <div className="bg-[#10122B] w-11/12 max-w-maxContent mx-auto rounded-md">
       <div className="flex flex-col items-center">
-        <h1 className="text-5xl p-5 text-white">Near Location</h1>
+        <h1 className="text-5xl p-5 text-white">Our Presence</h1>
 
         <div className="flex flex-row items-center gap-5">
 
@@ -71,7 +71,6 @@ export const HomeLocation = () => {
           value={currentLocation}
           onChange={(e)=>setCurrentLocation(e.target.value)}
           />
-          <CiSearch className="absolute right-2 bottom-0 bg-[#10122B] h-full aspect-square" size={24}/>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-5">

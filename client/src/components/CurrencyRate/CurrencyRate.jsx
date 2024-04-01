@@ -187,7 +187,7 @@ export const ContentSlider = () => {
   };
 
   return (
-    <div className='py-12 w-10/12 mx-auto'>
+    <div className='py-12 w-10/12 max-w-maxContent mx-auto'>
         <Slider {...settings}>
       <div>
         <div>

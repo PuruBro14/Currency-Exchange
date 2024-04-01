@@ -16,6 +16,7 @@ import {
 import {useDispatch} from 'react-redux';
 import { setConvert } from "../../services/operations/authAPI";
 import { bookOrderEndpoints } from "../../services/apis";
+import NavItem from "rsuite/esm/Nav/NavItem";
 export default function Convert() {
   const { GET_ORDERS,DELETE_ORDERS } = bookOrderEndpoints;
   const [convertFormValue, setConvertFormValue] = useState({
@@ -31,6 +32,8 @@ export default function Convert() {
   const[totalEntries,setTotalEntries]=useState([]);
   const dispatch=useDispatch();
   const[disabled,setDisabled]=useState(true);
+  const[editState,setEditState]=useState(false);
+  const[editIndex,setEditIndex]=useState();
 
   useEffect(() => {
     if(convertFormValue.to!==''){
@@ -70,7 +73,12 @@ export default function Convert() {
     getCurrencyValue();
   }, [convertFormValue.from]);
 
-  const handleAddMore=()=>{
+  const handleAddMore=(e)=>{
+    e.preventDefault();
+    if(convertFormValue.amount ==='' || convertFormValue.from==='' || convertFormValue.to===''){
+      alert("All fields are required")
+      return;
+    }
     if(convertFormValue.amount!=='' || convertFormValue.from!=='' || convertFormValue.to!=='' || convertFormValue.currentRate!=='' || convertFormValue.fromImg!=='' || convertFormValue.toImg!==''){
       const convertTo=parseFloat(convertFormValue.amount);
       const totalValueAmt=convertTo*parseFloat(convertFormValue.currentRate);
@@ -114,27 +122,57 @@ export default function Convert() {
     fetchTableData();
   },[])
 
-  const filterArray=(ele,i)=>{
-   const itemId=ele?._id;
+  const filterArray=(e,ele,i)=>{
+    e.preventDefault();
 
-   if(!itemId){
-    console.log("Item ID not found");
-    return;
-   }
-
-   const response=axios.delete(DELETE_ORDERS/itemId).then((response)=>{
-    console.log('Item deleted successfully')
     const filteredArr=totalEntries.filter((item,index)=>i!==index)
     setTotalEntries(filteredArr)
+
+    if(!ele?.id){
+      return;
+    }
+
+   const url=`${DELETE_ORDERS}/${ele?.id}`
+
+   const response=axios.delete(url).then((res)=>{
+    console.log(res)
    }).catch((err)=>{
     console.error("Error while deleting the item",err)
    })
   }
 
+  const editArray=(e,ele,index)=>{
+    e.preventDefault();
+    setEditState(true);
+    setEditIndex(index)
+    setConvertFormValue({...convertFormValue,amount:ele?.amount,from:ele?.from,to:ele?.to})
+  }
+
+  console.log('convetFormValue',convertFormValue);
+
+  const editHandler=(e)=>{
+    e.preventDefault();
+    if(convertFormValue.amount ==='' || convertFormValue.from==='' || convertFormValue.to===''){
+      alert("All fields are required")
+      return;
+    }
+  const updatedEntries=[...totalEntries];
+    const updatedValues={amount:convertFormValue.amount,form:convertFormValue.from,to:convertFormValue.to,currRateValue:convertFormValue.currentRate}
+    updatedEntries[editIndex]=updatedValues;
+    setTotalEntries(updatedEntries)
+    setEditState(false);
+    setConvertFormValue({
+      amount:'',
+      from:'',
+      to:'',
+      currentRate:''
+    })
+  }
+
   console.log('totalEntries',totalEntries);
 
   return (
-    <div className="w-11/12 mx-auto">
+    <form className="w-11/12 mx-auto">
       <div>
        
           <div className="flex flex-row justify-around">
@@ -150,6 +188,7 @@ export default function Convert() {
                 className="amountinput"
                 placeholder="Amount"
                 value={convertFormValue.amount}
+                
               />
             </div>
             <div>
@@ -171,7 +210,7 @@ export default function Convert() {
             </div>
             <div>
               <h5>Current Rate</h5>
-              <input placeholder="Rate" className="amountinput" 
+              <input placeholder="Rate" className="amountinput cursor-not-allowed bg-[#EBEBE4]" 
                value={convertFormValue?.currentRate}
               />
             </div>
@@ -205,7 +244,7 @@ export default function Convert() {
               totalEntries?.length>0 && totalEntries?.map((ele,index)=>(
                 <tr key={index}>
                   {Object?.keys(ele).map((key,index)=>(
-                    key!=='fromImg' && key!=='toImg' && key!=='_id' && key!=='__v' && key!=='ja' && (
+                    key!=='fromImg' && key!=='toImg' && key!=='_id' && key!=='__v' && (
                       <td key={index}>{ele[key]}</td>
                     )
                    ))}
@@ -213,8 +252,8 @@ export default function Convert() {
 
             <td>
               <div className="w-8 flex flex-row gap-5">
-                <button>Edit</button>
-                <button onClick={()=>filterArray(ele,index)}>Delete</button>
+                <button onClick={(e)=>editArray(e,ele,index)}>Edit</button>
+                <button onClick={(e)=>filterArray(e,ele,index)}>Delete</button>
               </div>
             </td>
             </tr>
@@ -228,10 +267,10 @@ export default function Convert() {
 
       {
       <div className="mt-14 flex justify-center">
-          <button className="w-fit text-4xl px-[24px] py-[6px] bg-richblack-800 text-white rounded hover:bg-richblue-500 transition-all duration-200" onClick={handleAddMore}>Add</button>&nbsp;
+          <button className="w-fit text-4xl px-[24px] py-[6px] bg-richblack-800 text-white rounded hover:bg-richblue-500 transition-all duration-200" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</button>&nbsp;
       </div>
 }
-      <Row className="tablerow">
+      <div className="tablerow">
         <Col md={1}></Col>
         <Col md={22}>
           <h5 style={{ marginTop: 20 }}>Total Amount</h5>
@@ -242,7 +281,7 @@ export default function Convert() {
           </center>
         </Col>
         <Col md={1}></Col>
-      </Row>
-    </div>
+      </div>
+    </form>
   );
 }
