@@ -80,7 +80,7 @@
       left: 100%;
     }
     #timeline .demo-card:nth-child(odd) .head::before {
-      left: 491.5px;
+      left: 535.5px;
     }
     #timeline .demo-card:nth-child(even) {
       margin-left: 45px;
