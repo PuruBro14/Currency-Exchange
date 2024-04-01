@@ -49,25 +49,25 @@ const Home = () => {
     <div className='relative w-screen'>
 
       {/* image one  */}
-        <div className='relative h-fit'>
+        <div className='relative h-[1700px] md:h-[1200px]'>
 
-            <img src={HeaderBanner} alt="home-banner" className='w-full'/>
+            <img src={HeaderBanner} alt="home-banner" className='w-full h-[600px] md:h-[900px]'/>
             <div className='absolute top-[20%] left-[5%] text-white' >
               <h1 className='text-xl md:text-4xl w-[50%]'>Trusted Global Currency Converter & Money Transfers</h1>
               <p className='mt-4 w-[90%]'>Best source for currency conversion, sending money online and tracking exchange rates</p>
             </div>
 
            
-        <div className="absolute md:w-11/12 md:mx-auto  md:top-[66%] md:left-[5%] border">
-            <div className="bg-white shadow-[0_0_20px_0] shadow-[#F0F0F0]">
-              <div className='flex flex-row justify-center'>
+        <div className="w-full absolute  md:w-11/12 md:mx-auto  md:top-[60%] md:left-[5%]">
+            <div className="bg-white shadow-[0_0_20px_0] shadow-[#F0F0F0] object-cover">
+              <div className='flex flex-col md:flex-row justify-center'>
                 {
                   homeServices?.map((ele,index)=>{
                     return(
                         <div key={index}
                   md={6}
                   className={
-                    `${activeMenu === ele?.id ? "convertdiv active" : "convertdiv"} w-[25%]`
+                    `${activeMenu === ele?.id ? "convertdiv active" : "convertdiv"} md:text-center relative pl-3 md:pl-0 w-[100%] md:w-[25%]`
                   }
                   onClick={() => handleButtonClick(ele?.id)}
                 >
@@ -92,8 +92,7 @@ const Home = () => {
 
 
         </div>
-        <div className='h-[200px] lg:h-0'></div>
-        <div className='mt-48'>
+        <div className='mt-12'>
         <ContentSlider/>
         </div>
 

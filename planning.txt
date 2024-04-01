@@ -30,9 +30,5 @@ add validations
 edit 
 delete
 
-why you choorse remiwire layout
-our services layout 
-about image or make text large
-testimonials image make little large
-how to transfer make image 60% height remaining content
-Contact us margin 
+yet to fix 
+phone convert

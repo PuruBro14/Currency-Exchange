@@ -172,12 +172,12 @@ export default function Convert() {
   console.log('totalEntries',totalEntries);
 
   return (
-    <form className="w-11/12 mx-auto">
+    <form className="md:w-11/12 mx-auto">
       <div>
        
-          <div className="flex flex-row justify-around items-center mt-7">
+          <div className="flex flex-col md:flex-row justify-around items-center mt-4">
             <div>
-              <h5>Amount</h5>
+              <h5 className="ml-2 my-3">Amount</h5>
               <input
                 onChange={(e) => {
                   setConvertFormValue({
@@ -192,7 +192,7 @@ export default function Convert() {
               />
             </div>
             <div>
-              <h5>From</h5>
+              <h5 className="ml-2 my-3">From</h5>
 
               <CurrencyInput
                 convertFormValue={convertFormValue}
@@ -201,7 +201,7 @@ export default function Convert() {
               />
             </div>
             <div>
-              <h5>To</h5>
+              <h5 className="ml-2 my-3">To</h5>
               <CurrencyInput
                 convertFormValue={convertFormValue}
                 setConvertFormValue={setConvertFormValue}
@@ -209,13 +209,13 @@ export default function Convert() {
               />
             </div>
             <div>
-              <h5>Current Rate</h5>
+              <h5 className="ml-2 my-3">Current Rate</h5>
               <input placeholder="Rate" className="amountinput cursor-not-allowed bg-[#EBEBE4]" 
                value={convertFormValue?.currentRate}
               />
             </div>
 
-          <Button appearance="primary" className="w-fit text-4xl px-[12px] bg-[#46B8E9] text-white rounded hover:bg-richblue-500 transition-all duration-200" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</Button>&nbsp;
+          <Button appearance="primary" className="w-fit text-4xl px-[12px] bg-[#46B8E9] text-white rounded hover:bg-richblue-500 transition-all duration-200 mt-7" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</Button>&nbsp;
           </div>
 
       </div>
@@ -225,21 +225,11 @@ export default function Convert() {
         <table className="mt-8">
           <thead>
             <tr>
-              {
-                totalEntries?.length>0 && Object.keys(totalEntries[0]).map((key,index)=>{
-                   if(key!=='fromImg'){  
-                    if(key!=='toImg'){
-                      if(key!=='_id'){
-                        if(key!=='__v'){
-                  return <th key={index} className="p-2">{key}</th>
-                    }
-                   }
-                  }
-                }
-                   return null;
-                })
-              }
-              <th className="p-2">Action</th>
+              <td className="p-2">Amount</td>
+              <td className="p-2">From</td>
+              <td className="p-2">To</td>
+              <td className="p-2">Current Rate</td>
+              <td className="p-2">Action</td>
             </tr>
           </thead>
           <tbody>

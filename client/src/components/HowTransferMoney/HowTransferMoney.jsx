@@ -10,7 +10,7 @@ export default function HowTransferMoney() {
       <div>
         <div className="flex flex-col md:flex-row justify-center items-center gap-5">
             <div className="cardname">
-              <img src="https://media.istockphoto.com/id/700287204/photo/female-user-passes-security-authorization-system.jpg?s=1024x1024&w=is&k=20&c=RYUYA6EZ_Wm89gPFc5mc3kdIS-d8Wa2tRE2ySweqnLQ=" className="object-cover"/>
+              <img src="https://media.istockphoto.com/id/700287204/photo/female-user-passes-security-authorization-system.jpg?s=1024x1024&w=is&k=20&c=RYUYA6EZ_Wm89gPFc5mc3kdIS-d8Wa2tRE2ySweqnLQ=" className=" object-cover"/>
               <div className="cardnameData">
               <h3 className="text-2xl font-semibold">1. Create account</h3>
               <p className="text-md mt-3">

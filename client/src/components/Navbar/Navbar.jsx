@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { NavbarLinks } from "../../data/NavbarLinks";
 import { useLocation, matchPath } from "react-router-dom";
@@ -30,7 +30,8 @@ const subLinksData=[{
 }]
 
 const Navbar = () => {
- const [isOpen, setIsOpen] = React.useState(true);
+ const [isOpen, setIsOpen] = React.useState(window.innerWidth>=768);
+ const[showHamburger,setShowHamburger]=useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate=useNavigate();
@@ -45,14 +46,15 @@ const Navbar = () => {
   }
 
   const closeNavbar = () => {
-    if (window.innerWidth <= 768) {
+    if(window.innerWidth<768){
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
     const handleResize = () => {
-      setIsOpen(window.innerWidth > 768);
+      setShowHamburger(window.innerWidth < 768);
+      setIsOpen(window.innerWidth>=768)
     };
 
     window.addEventListener("resize", handleResize);
@@ -62,12 +64,15 @@ const Navbar = () => {
     };
   }, []);
 
+  console.log('isOpen',isOpen);
+
   return (
     <div className="flex flex-row md:h-20 flex-wrap items-center border-b  border-b-richblack-700 w-full">
 
       <div className=" w-11/12 mx-auto items-center justify-between ">
 
-         {/* <div className=" mt-5 md:mt-0">
+        {showHamburger &&
+         <div className=" mt-5 md:mt-0">
                 <button onClick={toggleNavbar}>
                   {
                     isOpen?(
@@ -84,12 +89,13 @@ const Navbar = () => {
                     )
                   }
                 </button>
-              </div> */}
+              </div>
+}
 
 
-        {/* <div className={`${isOpen?'flex':'hidden'} flex-col md:flex-row  justify-between w-full`}> */}
+        <div className={`${isOpen ?'flex':'hidden'} flex-col md:flex-row  justify-between w-full`}>
 
-        <div className="flex flex-row  justify-between items-center gap-5">
+        <div className="flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-5">
 
         <nav>
           <ul className="flex md:flex-row flex-col gap-5 text-white">
@@ -135,14 +141,14 @@ const Navbar = () => {
                         {
                             token===null && (
                                 <Link to="/login">
-                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={()=>setIsOpen(false)}>Log in</button>
+                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={closeNavbar}>Log in</button>
                                 </Link>
                             )
                         }
                         {
                             token===null && (
                                 <Link to="/signup">
-                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={()=>setIsOpen(false)}>Sign up</button>
+                                <button className='border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md' onClick={closeNavbar}>Sign up</button>
                                 </Link>
                             )
                         }
@@ -166,7 +172,7 @@ const Navbar = () => {
 
        
       </div>
-    // </div>
+     </div>
   );
 };
 
