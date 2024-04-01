@@ -119,7 +119,7 @@ const Home = () => {
         </div>
 
         <div>
-          <div className='lg:h-[60px]'></div>
+          <div className='lg:h-[10px] my-14'></div>
           <HowTransferMoney/>
         </div>
 

@@ -15,10 +15,10 @@ export default function AboutUs() {
         <div >
           <div className="mt-8">
 
-            <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex flex-col justify-center md:flex-row items-center gap-8">
 
-              <div className="w-[60%]">
-              <h1 className="text-4xl font-semibold">About Us</h1>
+              <div className="md:w-[60%]">
+              <h1 className="text-4xl font-semibold text-center">About Us</h1>
               <div className="flex flex-col md:flex-row mt-5">
                 <div className="text-richblack-600 text-justify leading-8">
                 <p>
@@ -50,7 +50,7 @@ export default function AboutUs() {
               </div>
 
                 
-                <div className="w-[40%]">
+                <div className="w-[100%] md:w-[40%] flex justify-center">
 
                   <img src={AboutUsImage} className="h-[310px] w-[420px] object-cover"/>
                 </div>

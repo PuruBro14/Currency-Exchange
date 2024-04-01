@@ -175,7 +175,7 @@ export default function Convert() {
     <form className="w-11/12 mx-auto">
       <div>
        
-          <div className="flex flex-row justify-around">
+          <div className="flex flex-row justify-around items-center mt-7">
             <div>
               <h5>Amount</h5>
               <input
@@ -214,7 +214,10 @@ export default function Convert() {
                value={convertFormValue?.currentRate}
               />
             </div>
+
+          <Button appearance="primary" className="w-fit text-4xl px-[12px] bg-[#46B8E9] text-white rounded hover:bg-richblue-500 transition-all duration-200" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</Button>&nbsp;
           </div>
+
       </div>
 
       {totalEntries?.length>0 &&
@@ -228,7 +231,7 @@ export default function Convert() {
                     if(key!=='toImg'){
                       if(key!=='_id'){
                         if(key!=='__v'){
-                  return <th key={index}>{key}</th>
+                  return <th key={index} className="p-2">{key}</th>
                     }
                    }
                   }
@@ -236,7 +239,7 @@ export default function Convert() {
                    return null;
                 })
               }
-              <th>Action</th>
+              <th className="p-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -245,14 +248,14 @@ export default function Convert() {
                 <tr key={index}>
                   {Object?.keys(ele).map((key,index)=>(
                     key!=='fromImg' && key!=='toImg' && key!=='_id' && key!=='__v' && (
-                      <td key={index}>{ele[key]}</td>
+                      <td key={index} className="p-2">{ele[key]}</td>
                     )
                    ))}
                 
 
             <td>
               <div className="w-8 flex flex-row gap-5">
-                <button onClick={(e)=>editArray(e,ele,index)}>Edit</button>
+                <button onClick={(e)=>editArray(e,ele,index)} className="p-2">Edit</button>
                 <button onClick={(e)=>filterArray(e,ele,index)}>Delete</button>
               </div>
             </td>
@@ -264,12 +267,6 @@ export default function Convert() {
       </div>
       }
 
-
-      {
-      <div className="mt-14 flex justify-center">
-          <button className="w-fit text-4xl px-[24px] py-[6px] bg-richblack-800 text-white rounded hover:bg-richblue-500 transition-all duration-200" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</button>&nbsp;
-      </div>
-}
       <div className="tablerow">
         <Col md={1}></Col>
         <Col md={22}>
