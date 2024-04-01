@@ -13,11 +13,11 @@ export default function AboutUs() {
     <div className="w-9/12 mx-auto">
       <div>
         <div >
-          <div>
+          <div className="mt-8">
 
-            <div className="flex flex-col md:flex-row items-center gap-5">
+            <div className="flex flex-col md:flex-row items-center gap-8">
 
-              <div>
+              <div className="w-[60%]">
               <h1 className="text-4xl font-semibold">About Us</h1>
               <div className="flex flex-col md:flex-row mt-5">
                 <div className="text-richblack-600 text-justify">
@@ -50,9 +50,9 @@ export default function AboutUs() {
               </div>
 
                 
-                <div>
+                <div className="w-[40%]">
 
-                  <img src={AboutUsImage}/>
+                  <img src={AboutUsImage} className="h-[310px] w-[420px] object-cover"/>
                 </div>
 
             </div>

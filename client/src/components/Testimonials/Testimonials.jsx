@@ -40,7 +40,7 @@ export default function TestimonialsSlider() {
     ],
   };
   return (
-    <div className="mt-7">
+    <div className="mt-20">
       <div>
         <Grid fluid>
           <Row>
