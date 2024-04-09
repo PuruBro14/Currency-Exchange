@@ -13,12 +13,12 @@ import {
   Button,
   SelectPicker,
 } from "rsuite";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setConvert } from "../../services/operations/authAPI";
 import { bookOrderEndpoints } from "../../services/apis";
 import NavItem from "rsuite/esm/Nav/NavItem";
 export default function Convert() {
-  const { GET_ORDERS,DELETE_ORDERS } = bookOrderEndpoints;
+  const { GET_ORDERS, DELETE_ORDERS } = bookOrderEndpoints;
   const [convertFormValue, setConvertFormValue] = useState({
     amount: "",
     from: "",
@@ -29,28 +29,27 @@ export default function Convert() {
   });
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentCurrValue, setCurrentCurrValue] = useState();
-  const[totalEntries,setTotalEntries]=useState([]);
-  const dispatch=useDispatch();
-  const[disabled,setDisabled]=useState(true);
-  const[editState,setEditState]=useState(false);
-  const[editIndex,setEditIndex]=useState();
+  const [totalEntries, setTotalEntries] = useState([]);
+  const dispatch = useDispatch();
+  const [disabled, setDisabled] = useState(true);
+  const [editState, setEditState] = useState(false);
+  const [editIndex, setEditIndex] = useState();
 
   useEffect(() => {
-    if(convertFormValue.to!==''){
-    const getToCurrValue = () => {
-      const dashIndex = convertFormValue.to.indexOf("-");
-      const toCurrency = convertFormValue.to.substring(0, dashIndex).trim();
-      if (currentCurrValue !== undefined) {
-        const currentCurrency = currentCurrValue[toCurrency];
-        const convertTo = convertFormValue?.amount;
-        const totalValueAmt = parseInt(convertTo) * currentCurrency;
-      }
+    if (convertFormValue.to !== "") {
+      const getToCurrValue = () => {
+        const dashIndex = convertFormValue.to.indexOf("-");
+        const toCurrency = convertFormValue.to.substring(0, dashIndex).trim();
+        if (currentCurrValue !== undefined) {
+          const currentCurrency = currentCurrValue[toCurrency];
+          const convertTo = convertFormValue?.amount;
+          const totalValueAmt = parseInt(convertTo) * currentCurrency;
+        }
+      };
+      getToCurrValue();
+      currRateValue();
     }
-    getToCurrValue();
-    currRateValue();
-  };
-}, [convertFormValue.to]);
-
+  }, [convertFormValue.to]);
 
   useEffect(() => {
     const getCurrencyValue = async () => {
@@ -73,189 +72,235 @@ export default function Convert() {
     getCurrencyValue();
   }, [convertFormValue.from]);
 
-  const handleAddMore=(e)=>{
+  const handleAddMore = (e) => {
     e.preventDefault();
-    if(convertFormValue.amount ==='' || convertFormValue.from==='' || convertFormValue.to===''){
-      alert("All fields are required")
+    if (
+      convertFormValue.amount === "" ||
+      convertFormValue.from === "" ||
+      convertFormValue.to === ""
+    ) {
+      alert("All fields are required");
       return;
     }
-    if(convertFormValue.amount!=='' || convertFormValue.from!=='' || convertFormValue.to!=='' || convertFormValue.currentRate!=='' || convertFormValue.fromImg!=='' || convertFormValue.toImg!==''){
-      const convertTo=parseFloat(convertFormValue.amount);
-      const totalValueAmt=convertTo*parseFloat(convertFormValue.currentRate);
-      setTotalAmount((prev)=>prev+totalValueAmt)
-    setTotalEntries([...totalEntries,{...convertFormValue}])
-    setConvertFormValue({
-      amount: "",
-    from: "",
-    to: "",
-    fromImg: "",
-    toImg: "",
-    currentRate: "",
-    })
-    setDisabled(false);
-  }
-  }
+    if (
+      convertFormValue.amount !== "" ||
+      convertFormValue.from !== "" ||
+      convertFormValue.to !== "" ||
+      convertFormValue.currentRate !== "" ||
+      convertFormValue.fromImg !== "" ||
+      convertFormValue.toImg !== ""
+    ) {
+      const convertTo = parseFloat(convertFormValue.amount);
+      const totalValueAmt =
+        convertTo * parseFloat(convertFormValue.currentRate);
+      setTotalAmount((prev) => prev + totalValueAmt);
+      setTotalEntries([...totalEntries, { ...convertFormValue }]);
+      setConvertFormValue({
+        amount: "",
+        from: "",
+        to: "",
+        fromImg: "",
+        toImg: "",
+        currentRate: "",
+      });
+      setDisabled(false);
+    }
+  };
 
-  const currRateValue=()=>{
+  const currRateValue = () => {
     const dashToIndex = convertFormValue?.to.indexOf("-");
-    const dashtoCurrency = convertFormValue?.to.substring(0, dashToIndex).trim();
-    const toValue=currentCurrValue[dashtoCurrency]
+    const dashtoCurrency = convertFormValue?.to
+      .substring(0, dashToIndex)
+      .trim();
+    const toValue = currentCurrValue[dashtoCurrency];
 
-    setConvertFormValue({...convertFormValue,currentRate:toValue})
+    setConvertFormValue({ ...convertFormValue, currentRate: toValue });
+  };
 
-  }
-
-  const bookOrder=(e)=>{
+  const bookOrder = (e) => {
     e.preventDefault();
-    if(totalEntries.length==0){
+    if (totalEntries.length == 0) {
       return;
     }
-    dispatch(setConvert(totalEntries))
-  }
+    dispatch(setConvert(totalEntries));
+  };
 
-  const fetchTableData=async()=>{
-    const response=await axios.get(GET_ORDERS);
-    setTotalEntries(response?.data?.data)
-  }
+  const fetchTableData = async () => {
+    const response = await axios.get(GET_ORDERS);
+    setTotalEntries(response?.data?.data);
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchTableData();
-  },[])
+  }, []);
 
-  const filterArray=(e,ele,i)=>{
+  const filterArray = (e, ele, i) => {
     e.preventDefault();
 
-    const filteredArr=totalEntries.filter((item,index)=>i!==index)
-    setTotalEntries(filteredArr)
+    const filteredArr = totalEntries.filter((item, index) => i !== index);
+    setTotalEntries(filteredArr);
 
-    if(!ele?.id){
+    if (!ele?.id) {
       return;
     }
 
-   const url=`${DELETE_ORDERS}/${ele?.id}`
+    const url = `${DELETE_ORDERS}/${ele?.id}`;
 
-   const response=axios.delete(url).then((res)=>{
-    console.log(res)
-   }).catch((err)=>{
-    console.error("Error while deleting the item",err)
-   })
-  }
+    const response = axios
+      .delete(url)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error("Error while deleting the item", err);
+      });
+  };
 
-  const editArray=(e,ele,index)=>{
+  const editArray = (e, ele, index) => {
     e.preventDefault();
     setEditState(true);
-    setEditIndex(index)
-    setConvertFormValue({...convertFormValue,amount:ele?.amount,from:ele?.from,to:ele?.to})
-  }
+    setEditIndex(index);
+    setConvertFormValue({
+      ...convertFormValue,
+      amount: ele?.amount,
+      from: ele?.from,
+      to: ele?.to,
+    });
+  };
 
-  console.log('convetFormValue',convertFormValue);
+  console.log("convetFormValue", convertFormValue);
 
-  const editHandler=(e)=>{
+  const editHandler = (e) => {
     e.preventDefault();
-    if(convertFormValue.amount ==='' || convertFormValue.from==='' || convertFormValue.to===''){
-      alert("All fields are required")
+    if (
+      convertFormValue.amount === "" ||
+      convertFormValue.from === "" ||
+      convertFormValue.to === ""
+    ) {
+      alert("All fields are required");
       return;
     }
-  const updatedEntries=[...totalEntries];
-    const updatedValues={amount:convertFormValue.amount,form:convertFormValue.from,to:convertFormValue.to,currRateValue:convertFormValue.currentRate}
-    updatedEntries[editIndex]=updatedValues;
-    setTotalEntries(updatedEntries)
+    const updatedEntries = [...totalEntries];
+    const updatedValues = {
+      amount: convertFormValue.amount,
+      form: convertFormValue.from,
+      to: convertFormValue.to,
+      currRateValue: convertFormValue.currentRate,
+    };
+    updatedEntries[editIndex] = updatedValues;
+    setTotalEntries(updatedEntries);
     setEditState(false);
     setConvertFormValue({
-      amount:'',
-      from:'',
-      to:'',
-      currentRate:''
-    })
-  }
+      amount: "",
+      from: "",
+      to: "",
+      currentRate: "",
+    });
+  };
 
-  console.log('totalEntries',totalEntries);
+  console.log("totalEntries", totalEntries);
 
   return (
     <form className="md:w-11/12 mx-auto">
       <div>
-       
-          <div className="flex flex-col md:flex-row justify-around items-center mt-4">
-            <div>
-              <h5 className="ml-2 my-3">Amount</h5>
-              <input
-                onChange={(e) => {
-                  setConvertFormValue({
-                    ...convertFormValue,
-                    amount: e.target.value,
-                  });
-                }}
-                className="amountinput"
-                placeholder="Amount"
-                value={convertFormValue.amount}
-                
-              />
-            </div>
-            <div>
-              <h5 className="ml-2 my-3">From</h5>
-
-              <CurrencyInput
-                convertFormValue={convertFormValue}
-                setConvertFormValue={setConvertFormValue}
-                currentType="from"
-              />
-            </div>
-            <div>
-              <h5 className="ml-2 my-3">To</h5>
-              <CurrencyInput
-                convertFormValue={convertFormValue}
-                setConvertFormValue={setConvertFormValue}
-                currentType="to"
-              />
-            </div>
-            <div>
-              <h5 className="ml-2 my-3">Current Rate</h5>
-              <input placeholder="Rate" className="amountinput cursor-not-allowed bg-[#EBEBE4]" 
-               value={convertFormValue?.currentRate}
-              />
-            </div>
-
-          <Button appearance="primary" className="w-fit text-4xl px-[12px] bg-[#46B8E9] text-white rounded hover:bg-richblue-500 transition-all duration-200 mt-7" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</Button>&nbsp;
+        <div className="flex flex-col md:flex-row justify-around items-center mt-4">
+          <div>
+            <h5 className="ml-2 my-3">Amount</h5>
+            <input
+              onChange={(e) => {
+                setConvertFormValue({
+                  ...convertFormValue,
+                  amount: e.target.value,
+                });
+              }}
+              className="amountinput"
+              placeholder="Amount"
+              value={convertFormValue.amount}
+            />
           </div>
+          <div>
+            <h5 className="ml-2 my-3">From</h5>
 
+            <CurrencyInput
+              convertFormValue={convertFormValue}
+              setConvertFormValue={setConvertFormValue}
+              currentType="from"
+            />
+          </div>
+          <div>
+            <h5 className="ml-2 my-3">To</h5>
+            <CurrencyInput
+              convertFormValue={convertFormValue}
+              setConvertFormValue={setConvertFormValue}
+              currentType="to"
+            />
+          </div>
+          <div>
+            <h5 className="ml-2 my-3">Current Rate</h5>
+            <input
+              placeholder="Rate"
+              className="amountinput cursor-not-allowed bg-[#EBEBE4]"
+              value={convertFormValue?.currentRate}
+            />
+          </div>
+          <Button
+            appearance="primary"
+            className="w-fit text-2xl px-[12px] bg-[#46B8E9]  text-white rounded hover:bg-richblue-500 transition-all duration-200 mt-12"
+            onClick={editState ? editHandler : handleAddMore}
+          >
+            {editState ? "Save" : "Add"}
+          </Button>
+          &nbsp;
+        </div>
       </div>
 
-      {totalEntries?.length>0 &&
-      <div>
-        <table className="mt-8">
-          <thead>
-            <tr>
-              <td className="p-2">Amount</td>
-              <td className="p-2">From</td>
-              <td className="p-2">To</td>
-              <td className="p-2">Current Rate</td>
-              <td className="p-2">Action</td>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              totalEntries?.length>0 && totalEntries?.map((ele,index)=>(
-                <tr key={index}>
-                  {Object?.keys(ele).map((key,index)=>(
-                    key!=='fromImg' && key!=='toImg' && key!=='_id' && key!=='__v' && (
-                      <td key={index} className="p-2">{ele[key]}</td>
-                    )
-                   ))}
-                
+      {totalEntries?.length > 0 && (
+        <div>
+          <table className="mt-8">
+            <thead>
+              <tr>
+                <td className="p-2">Amount</td>
+                <td className="p-2">From</td>
+                <td className="p-2">To</td>
+                <td className="p-2">Current Rate</td>
+                <td className="p-2">Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              {totalEntries?.length > 0 &&
+                totalEntries?.map((ele, index) => (
+                  <tr key={index}>
+                    {Object?.keys(ele).map(
+                      (key, index) =>
+                        key !== "fromImg" &&
+                        key !== "toImg" &&
+                        key !== "_id" &&
+                        key !== "__v" && (
+                          <td key={index} className="p-2">
+                            {ele[key]}
+                          </td>
+                        )
+                    )}
 
-            <td>
-              <div className="w-8 flex flex-row gap-5">
-                <button onClick={(e)=>editArray(e,ele,index)} className="p-2">Edit</button>
-                <button onClick={(e)=>filterArray(e,ele,index)}>Delete</button>
-              </div>
-            </td>
-            </tr>
-              ))
-            }
-          </tbody>
-        </table>
-      </div>
-      }
+                    <td>
+                      <div className="w-8 flex flex-row gap-5">
+                        <button
+                          onClick={(e) => editArray(e, ele, index)}
+                          className="p-2"
+                        >
+                          Edit
+                        </button>
+                        <button onClick={(e) => filterArray(e, ele, index)}>
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       <div className="tablerow">
         <Col md={1}></Col>
@@ -264,7 +309,13 @@ export default function Convert() {
           <h3>{totalAmount.toFixed(2) || 0}</h3>
 
           <center>
-            <Button appearance="primary" onClick={bookOrder} disabled={disabled}>BOOK THIS ORDER</Button>
+            <Button
+              appearance="primary"
+              onClick={bookOrder}
+              disabled={disabled}
+            >
+              BOOK THIS ORDER
+            </Button>
           </center>
         </Col>
         <Col md={1}></Col>

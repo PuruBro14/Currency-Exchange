@@ -40,8 +40,8 @@ const userSchema = new mongoose.Schema(
       required: true,
       ref: "Profile",
     },
-    contactNo:{
-      type:String,
+    contactNo: {
+      type: String,
     },
     token: {
       type: String,
@@ -53,6 +53,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "address" }],
     // Add timestamps for when the document is created and last modified
   },
   { timestamps: true }

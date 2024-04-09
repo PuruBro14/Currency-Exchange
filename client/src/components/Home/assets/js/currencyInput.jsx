@@ -49,9 +49,8 @@ export default function CurrencyInput({
     <div>
       {convertFormValue?.[currentType] ? (
         <>
-          <div className="countryDiv">
+          <div className="countryDiv flex">
             <span>
-              {" "}
               <span>
                 <img
                   className="countryIcon"
@@ -60,7 +59,7 @@ export default function CurrencyInput({
               </span>
               &nbsp;
               {convertFormValue?.[currentType]}
-            </span>{" "}
+            </span>
             <span
               style={{
                 float: "right",
@@ -105,7 +104,7 @@ export default function CurrencyInput({
                       onClick={() => {
                         setValueFrom(val.label, val.img);
                       }}
-                      className="currencylist"
+                      className="currencylist flex items-center"
                     >
                       <span>
                         <img src={val.img} />

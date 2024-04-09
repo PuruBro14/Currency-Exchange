@@ -50,7 +50,7 @@ export default function CurrencyInput({
       {convertFormValue?.[currentType] ? (
         <>
           <div className="countryDiv">
-            <span>
+            <span className="flex items-center gap-2">
               {" "}
               <span>
                 <img
@@ -59,8 +59,10 @@ export default function CurrencyInput({
                 />
               </span>
               &nbsp;
-              {convertFormValue?.[currentType]}
-            </span>{" "}
+              <span className="truncate">
+                {convertFormValue?.[currentType]}
+              </span>
+            </span>
             <span
               style={{
                 float: "right",
@@ -98,7 +100,7 @@ export default function CurrencyInput({
         <>
           <ul className="ulNotType">
             {countryCurrencyT?.map((val, index) => {
-              console.log('val',val);
+              console.log("val", val);
               return (
                 <div key={index}>
                   <div>

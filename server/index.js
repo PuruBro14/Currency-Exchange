@@ -6,14 +6,14 @@ const database = require("./config/database");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const addressRouter = require("./routes/address.routes");
 
-
-dotenv.config()
+dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 database.connect();
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(
@@ -24,7 +24,8 @@ app.use(
 );
 
 app.use("/api/v1/auth", userRoutes);
-app.use("/api/v1",ordersRoutes)
+app.use("/api/v1", ordersRoutes);
+app.use("/api/v1/address", addressRouter);
 
 app.get("/", (req, res) => {
   return res.json({

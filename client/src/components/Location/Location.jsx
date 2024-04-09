@@ -55,8 +55,7 @@ import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
 export const HomeLocation = () => {
-  const[currentLocation,setCurrentLocation]=useState("");
-
+  const [currentLocation, setCurrentLocation] = useState("");
 
   return (
     <div className="bg-[#10122B] w-11/12 max-w-maxContent mx-auto rounded-md">
@@ -64,35 +63,40 @@ export const HomeLocation = () => {
         <h1 className="text-5xl p-5 text-white">Our Presence</h1>
 
         <div className="flex flex-row items-center gap-5">
-
-
-          <div className="relative w-[50%] h-[40px]">
+          {/* <div className="relative w-[50%] h-[40px]">
           <input type="text" id="search" name="search"className="w-full p-2 rounded-md" 
           value={currentLocation}
           onChange={(e)=>setCurrentLocation(e.target.value)}
           />
-          </div>
+          </div> */}
 
-          <div className="flex flex-col sm:flex-row gap-5">
-
+          <div className="flex flex-col sm:flex-row gap-20 mb-5">
             <div className="flex flex-col text-center gap-2">
-            <img src="https://www.remitx.com/remitx-images/city-images/NEW-DELHI.png" className="w-[100px] h-[100px] aspect-square rounded-full" />
-            <p className="text-white">DELHI</p>
+              <img
+                src="https://www.remitx.com/remitx-images/city-images/NEW-DELHI.png"
+                className="w-[100px] h-[100px] aspect-square rounded-full"
+              />
+              <p className="text-white">DELHI</p>
             </div>
 
             <div className="flex flex-col text-center gap-2">
-            <img src="https://www.remitx.com/remitx-images/city-images/GURUGRAM.png" className="w-[100px] h-[100px] aspect-square rounded-full"/>
-            <p className="text-white">GURUGRAM</p>
+              <img
+                src="https://www.remitx.com/remitx-images/city-images/GURUGRAM.png"
+                className="w-[100px] h-[100px] aspect-square rounded-full"
+              />
+              <p className="text-white">GURUGRAM</p>
             </div>
 
             <div className="flex flex-col text-center gap-2">
-            <img src="https://www.remitx.com/remitx-images/city-images/GURUGRAM.png" className="w-[100px] h-[100px] aspect-square rounded-full"/>
-            <p className="text-white">NOIDA</p>
+              <img
+                src="https://www.remitx.com/remitx-images/city-images/GURUGRAM.png"
+                className="w-[100px] h-[100px] aspect-square rounded-full"
+              />
+              <p className="text-white">NOIDA</p>
             </div>
-
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
