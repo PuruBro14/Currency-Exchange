@@ -5,10 +5,13 @@ export default function CurrencyInput({
   convertFormValue,
   setConvertFormValue,
   currentType,
+  currentState
 }) {
   const [countryCurrencyList, setCountryCurrencyList] = useState([]);
   const [countryCurrencyT, setCountryCurrency] = useState([]);
   const [showList, setShowList] = useState(false);
+
+  console.log('currnetState',currentState,currentType);
 
   const getCurrencyList = (searchString) => {
     const filteredArrayCurrency = countryCurrencyList.filter((currency) => {
@@ -26,7 +29,6 @@ export default function CurrencyInput({
   };
   const setValueFrom = (value, img) => {
     setShowList(false);
-
     if (currentType) {
       setConvertFormValue({
         ...convertFormValue,
@@ -42,6 +44,16 @@ export default function CurrencyInput({
   };
 
   useEffect(() => {
+    if((currentState==="Buy" && currentType ==='from')){
+      setCountryCurrency([
+  {
+    label: "INR - Indian Rupee",
+    img: "https://flagsapi.com/IN/flat/64.png", 
+    value: "INR",
+  }])
+return;
+    }
+
     setCountryCurrencyList(countryCurrency);
     setCountryCurrency(countryCurrency);
   }, []);
@@ -88,6 +100,7 @@ export default function CurrencyInput({
           <input
             className="amountinput"
             placeholder="Select Currency"
+            value={convertFormValue?.[currentType]}
             onChange={(e) => {
               getCurrencyList(e);
             }}

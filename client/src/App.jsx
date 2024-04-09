@@ -22,6 +22,7 @@ import Navbars2 from "./components/Navbar/Navbars2";
 import OpenRoute from "./components/Auth/OpenRoute";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import Header from "./components/Header";
+import Checkout from "./pages/Checkout";
 function App() {
   return (
     <div className="overflow-x-hidden">
@@ -65,6 +66,10 @@ function App() {
           <Route
             path="overseaseducationLoan"
             element={<OverseasEducationLoan />}
+          ></Route>
+          <Route
+            path="checkout"
+            element={<Checkout />}
           ></Route>
         </Routes>
         <Footer />
