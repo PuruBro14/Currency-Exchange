@@ -15,7 +15,7 @@ const Tab = ({tabData,currentState,setCurrentState,setPassedFromSignup}) => {
                 onClick={()=>{setCurrentState(tab?.tabName);setPassedFromSignup(true);}}
                 className={`${
                     currentState===tab?.tabName
-                    ?"bg-richblack-900 text-richblack-5"
+                    ?"p-3 bg-richblack-900 text-richblack-5"
                     :"bg-transparent text-richblack-200"
                 }py-0 px-5 rounded-full transition-all duration-200 p-4`}
                 >

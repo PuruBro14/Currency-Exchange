@@ -17,16 +17,16 @@ const Products = [
 const QuickLinks = ["About Us", "Home", "Contribute","Privacy Policy","Sitemap"];
 const Footer = () => {
   return (
-    <div className="bg-richblack-800">
+    <div className="bg-[#10122B]">
       <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 text-richblack-400 leading-6 mx-auto relative py-14">
         <div className="border-b w-[80%] mx-auto flex flex-col lg:flex-row pb-5 border-richblack-700">
           {/* Section 1 */}
           <div className=" flex flex-wrap flex-row justify-between pl-3 lg:pr-5 gap-3  w-full">
-            <div className="w-[50%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
+            {/* <div className="w-[50%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
               <p>Address</p>
               <p>P-701 to P-705 lorem ipsum , 7th floor, 11th tower, panchsheel primerose, vatista , Gurugram, Hariyana</p>
               <div></div>
-            </div>
+            </div> */}
 
             <div className="w-[48%] lg:w-[25%] mb-7 lg:pl-0">
               <h1 className="text-richblack-50 font-semibold text-[16px]">
