@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const addressRouter = require("./routes/address.routes");
+const contactRouter = require("./routes/contact_us.routes");
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -26,6 +27,7 @@ app.use(
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1", ordersRoutes);
 app.use("/api/v1/address", addressRouter);
+app.use("/api/v1", contactRouter);
 
 app.get("/", (req, res) => {
   return res.json({
