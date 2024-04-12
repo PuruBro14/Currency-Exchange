@@ -23,6 +23,7 @@ import OpenRoute from "./components/Auth/OpenRoute";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import Header from "./components/Header";
 import Checkout from "./pages/Checkout";
+import TrackShipment from "./pages/TrackShipment";
 function App() {
   return (
     <div className="overflow-x-hidden">
@@ -53,6 +54,10 @@ function App() {
           }></Route>
           <Route path="/login" element={ <OpenRoute><Login /></OpenRoute>}></Route>
           <Route path="sendmoneyabroad" element={<SendMoneyAbroad />}></Route>
+          <Route
+            path="/trackandrecieve"
+            element={<TrackShipment />}
+          ></Route>
           <Route
             path="prepaidtravelcard"
             element={<PrepaidTravelCard />}

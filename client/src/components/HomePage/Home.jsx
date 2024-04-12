@@ -46,19 +46,19 @@ const Home = () => {
   };
   
   return (
-    <div className='relative w-screen'>
+    <div className=' w-screen'>
 
       {/* image one  */}
-        <div className='relative h-[1700px] md:h-[1200px]'>
+        <div className='relative min-h-[1400px]'>
 
-            <img src={HeaderBanner} alt="home-banner" className='w-full h-[600px] md:h-[900px]'/>
-            <div className='absolute top-[20%] left-[5%] text-white' >
+            <img src={HeaderBanner} alt="home-banner" className='w-full'/>
+            <div className='absolute top-[10%] md:top-[20%] left-[5%] text-white' >
               <h1 className='text-xl md:text-4xl w-[50%]'>Trusted Global Currency Converter & Money Transfers</h1>
               <p className='mt-4 w-[90%]'>Best source for currency conversion, sending money online and tracking exchange rates</p>
             </div>
 
            
-        <div className="w-full absolute  md:w-11/12 md:mx-auto  md:top-[60%] md:left-[5%]">
+        <div className="w-full absolute  top-[20%] md:top-[50%] md:left-[5%] md:w-11/12 md:mx-auto  ">
             <div className="bg-white shadow-[0_0_20px_0] shadow-[#F0F0F0] object-cover">
               <div className='flex flex-col md:flex-row justify-center'>
                 {
@@ -92,7 +92,7 @@ const Home = () => {
 
 
         </div>
-        <div className='mt-48'>
+        <div >
         <ContentSlider/>
         </div>
 

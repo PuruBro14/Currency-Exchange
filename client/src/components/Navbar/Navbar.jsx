@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileDropDown from "../ProfileDropDown";
 import { logout } from "../../services/operations/authAPI";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { setScrollToComponentB } from "../../utils/scrollSlice";
 
 const subLinksData = [
   {
@@ -73,6 +74,12 @@ const Navbar = () => {
 
   console.log("isOpen", isOpen);
 
+  const handleClick=(e)=>{
+    console.log('clicked');
+    e.preventDefault();
+    dispatch(setScrollToComponentB(true));
+  }
+
   return (
     <div className="flex flex-row md:h-20 flex-wrap items-center border-b  border-b-richblack-700 w-full">
       <div className=" w-11/12 mx-auto items-center justify-between ">
@@ -124,8 +131,8 @@ const Navbar = () => {
                           </div>
                         </div>
                       ) : (
-                        <Link to={ele?.path}>
-                          <p>{ele?.title}</p>
+                        <Link to={`${ele?.title !== "Contact Us" ? ele?.path : ''}`}>
+                          <p onClick={(e)=>`${ele?.title !== "Contact Us" ? '' : handleClick(e)}`}>{ele?.title}</p>
                         </Link>
                       )}
                     </li>

@@ -8,23 +8,24 @@ const ConvertTable = ({ConvertTableEntries,editArray,filterArray}) => {
     console.log('UpdatedData','Rendered again',ConvertTableEntries);
   return (
      <div>
-        <Table className='mt-7 rounded-xl border border-[#DDDDDD] w-11/12'>
+
+        <Table className='border w-11/12 mt-7 mx-auto '>
 
             <Thead>
-                <Tr className='flex gap-x-10 rounded-t-md border-b border-[#DDDDDD] px-7 py-2'>
-                    <Th className='w-[20%] text-left text-lg font-medium uppercase text-richblack-600 border-none'>
+                <Tr className='flex  rounded-t-md border-b border-[#DDDDDD]  justify-between p-5'>
+                    <Th className='text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         Amount
                     </Th>
-                    <Th className='w-[20%] text-left text-lg font-medium uppercase text-richblack-600 border-none'>
+                    <Th className='text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         From
                     </Th>
-                    <Th className='w-[20%] text-left text-lg font-medium uppercase text-richblack-600 border-none'>
+                    <Th className='text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         To
                     </Th>
-                     <Th className=' w-[20%] text-left text-lg font-medium uppercase text-richblack-600 border-none'>
+                     <Th className=' text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         CurrentRate
                     </Th>
-                    <Th className='w-[20%] text-left text-lg font-medium uppercase text-richblack-600 border-none'>
+                    <Th className='text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         Actions
                     </Th>
                 </Tr>
@@ -34,27 +35,27 @@ const ConvertTable = ({ConvertTableEntries,editArray,filterArray}) => {
                 {
                     ConvertTableEntries?.length===0?(
                         <Tr>
-                            <Td className='py-10 tex-center text-2xl font-medium text-richblack-100'>
+                            <Td>
                                 No currencies found
                             </Td>
                         </Tr>
                     )
                     :(
                         ConvertTableEntries?.map((entry,index)=>(
-                            <Tr key={index} className='flex gap-x-10 border-b border-b-richblack-25 px-6 py-8'>
-                                <Td className='text-lg font-medium text-richblack-600 w-[20%] border-none'>
+                            <Tr key={index} className='flex  border-b border-b-richblack-25 justify-between p-5'>
+                                <Td className='text-lg font-medium text-richblack-600  border-none text-center'>
                                     {entry?.amount}
                                 </Td>
-                                <Td className='text-lg font-medium text-richblack-600 w-[20%] border-none'>
+                                <Td className='text-lg font-medium text-richblack-600  border-none text-center'>
                                     {entry?.from}
                                 </Td>
-                                <Td className='text-lg font-medium text-richblack-600 w-[20%] border-none'>
+                                <Td className='text-lg font-medium text-richblack-600  border-none '>
                                     {entry?.to}
                                 </Td>
-                                <Td className='text-lg font-medium text-richblack-600 w-[20%] border-none'>
-                                    {entry?.currentRate}
+                                <Td className='text-lg font-medium text-richblack-600  border-none'>
+                                    {entry?.currentRate.toFixed(3)}
                                 </Td>
-                                 <Td className='text-lg font-medium text-richblack-600 w-[20%] border-none flex flex-row gap-5'>
+                                 <Td className='text-lg font-medium text-richblack-600  border-none flex flex-row gap-5'>
                                     <button onClick={(e)=>editArray(e,entry,index)}>
                                         <FiEdit2 size={20} />
                                     </button>
@@ -68,6 +69,7 @@ const ConvertTable = ({ConvertTableEntries,editArray,filterArray}) => {
                 }
             </Tbody>
         </Table>
+        
       </div>
   )
 }

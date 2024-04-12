@@ -1,4 +1,8 @@
 import React from 'react'
+import LoginCheckout from '../components/Checkout/LoginCheckout'
+import DeliveryAddress from '../components/Checkout/DeliveryAddress'
+import OrderSummary from '../components/Checkout/OrderSummary'
+import PaymentOptions from '../components/Checkout/PaymentOptions'
 
 const Checkout = () => {
    const steps=[
@@ -25,6 +29,15 @@ const Checkout = () => {
       <div className='flex flex-col gap-5'>
         {/* first div  */}
         <div>
+
+          <LoginCheckout/>
+
+          <DeliveryAddress/>
+
+          <OrderSummary/>
+
+          <PaymentOptions/>
+
 
         </div>
         {/* second div  */}

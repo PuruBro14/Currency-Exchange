@@ -50,16 +50,23 @@ export default function Convert() {
   const[editIndex,setEditIndex]=useState();
   const[ConvertTableEntries,setConvertTableEntries]=useState([])
   const[currentState,setCurrentState]=useState("Buy")
+  const[currToValue,setCurrToValue]=useState(0);
 
   useEffect(() => {
     if(convertFormValue.to!=='' || convertFormValue.amount!=='' || convertFormValue.from!==''){
-    const getToCurrValue = () => {
+    const getToCurrValue = async() => {
       const dashIndex = convertFormValue.to.indexOf("-");
       const toCurrency = convertFormValue.to.substring(0, dashIndex).trim();
       if (currentCurrValue !== undefined) {
-        const currentCurrency = currentCurrValue[toCurrency];
-        const convertTo = convertFormValue?.amount;
-        const totalValueAmt = parseInt(convertTo) * currentCurrency;
+         const response = await axios.get(
+            "https://v6.exchangerate-api.com/v6/1902e21487d17680cb9fc088/latest/" +
+              toCurrency
+          );
+
+          console.log('response------>',response);
+
+          console.log('currToValue',currToValue);
+          setCurrToValue(response?.data?.conversion_rates)
       }
     }
     getToCurrValue();
@@ -91,6 +98,7 @@ export default function Convert() {
     getCurrencyValue();
   }, [convertFormValue.from]);
 
+
   const handleAddMore=(e)=>{
     e.preventDefault();
     if(convertFormValue.amount ==='' || convertFormValue.from==='' || convertFormValue.to===''){
@@ -98,15 +106,26 @@ export default function Convert() {
       return;
     }
 
+      const dashIndex = convertFormValue.to.indexOf("-");
+        const fromCurrency = convertFormValue.from
+          .substring(0, dashIndex)
+          .trim();
+
+        const convertTo=parseFloat(convertFormValue.amount);
+
+    const currentCurrency = currToValue[fromCurrency];
+    const totalValueAmt = parseInt(convertTo) * currentCurrency;
+    setTotalAmount((prev)=>prev+totalValueAmt)
+
     const existingEntryIndex=ConvertTableEntries.findIndex((entry)=>entry.from===convertFormValue.from && entry.to===convertFormValue.to)
 
     if(existingEntryIndex===-1){
 
     if(convertFormValue.amount!=='' || convertFormValue.from!=='' || convertFormValue.to!=='' || convertFormValue.currentRate!=='' || convertFormValue.fromImg!=='' || convertFormValue.toImg!==''){
-      const convertTo=parseFloat(convertFormValue.amount);
-      const totalValueAmt=convertTo*parseFloat(convertFormValue.currentRate);
-      const newAmount=parseInt(convertFormValue.amount)
-      currentState==="Buy"?setTotalAmount((prev)=>prev+newAmount):setTotalAmount((prev)=>prev-newAmount)
+
+
+
+   
     setTotalEntries([...totalEntries,{...convertFormValue}])
     setConvertTableEntries([...ConvertTableEntries,{...convertFormValue}])
     setConvertFormValue({
@@ -218,7 +237,7 @@ export default function Convert() {
     <form className="md:w-11/12 mx-auto min-h-[350px]">
       <div className="flex flex-col gap-5 mt-7">
 
-        <div className="ml-10">
+        <div className="flex justify-center md:justify-start">
             <Tab  tabData={tabData} currentState={currentState} setCurrentState={setCurrentState}/>
             </div>
             
@@ -277,8 +296,9 @@ export default function Convert() {
         <Col md={1}></Col>
         <Col md={22}>
           <h5 style={{ marginTop: 20 }}>Total Amount</h5>
-          <h3>{totalAmount.toFixed(2) || 0}</h3>
+          <h3>{totalAmount.toFixed(2) || 0} Rs</h3>
 
+          <div className={`${ConvertTableEntries?.length===0?'pointer-events-none opacity-50':''}`}>
           <Link to="/checkout">
            <div className=' cursor-pointer group  p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200
             transition-all duration-200 hover:scale-95 w-fit'>
@@ -289,6 +309,7 @@ export default function Convert() {
                 </div>
             </div>
             </Link>
+            </div>
 
         </Col>
         <Col md={1}></Col>

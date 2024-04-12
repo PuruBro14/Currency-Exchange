@@ -14,14 +14,14 @@ export default function CurrencyInput({
   console.log('currnetState',currentState,currentType);
 
   const getCurrencyList = (searchString) => {
-    const filteredArrayCurrency = countryCurrencyList.filter((currency) => {
-      return (
-        currency.label.toLowerCase().includes(searchString.toLowerCase()) ||
-        currency.value.toLowerCase().includes(searchString.toLowerCase())
-      );
-    });
+    // const filteredArrayCurrency = countryCurrencyList.filter((currency) => {
+    //   return (
+    //     currency.label.toLowerCase().includes(searchString.toLowerCase()) ||
+    //     currency.value.toLowerCase().includes(searchString.toLowerCase())
+    //   );
+    // });
 
-    setCountryCurrency(filteredArrayCurrency);
+    // setCountryCurrency(filteredArrayCurrency);
   };
 
   const showCurrencyList = () => {
@@ -44,7 +44,8 @@ export default function CurrencyInput({
   };
 
   useEffect(() => {
-    if((currentState==="Buy" && currentType ==='from')){
+    if((currentState==="Buy" && currentType ==='from') || (currentState==="Sell" && currentType==="to")){
+      console.log('mango1------------->',currentState,currentType);
       setCountryCurrency([
   {
     label: "INR - Indian Rupee",
@@ -53,10 +54,15 @@ export default function CurrencyInput({
   }])
 return;
     }
-
+    else{
+      console.log('mango',currentState);
     setCountryCurrencyList(countryCurrency);
     setCountryCurrency(countryCurrency);
-  }, []);
+    }
+
+  }, [currentState]);
+
+
   return (
     <div>
       {convertFormValue?.[currentType] ? (

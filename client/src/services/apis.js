@@ -10,3 +10,7 @@ export const bookOrderEndpoints = {
   GET_ORDERS: BASE_URL + "/fetchAllBookOrders",
   DELETE_ORDERS:BASE_URL+"/deleteOrderById"
 };
+
+// export const contactUsEndPoint={
+//   CONTACT_US_API=BASE_URL+""
+// }

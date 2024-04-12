@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Grid, Row, Col } from "rsuite";
 import { FaMobileAlt } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { FaMapLocationDot } from "react-icons/fa6";
+import { setScrollToComponentB } from "../../utils/scrollSlice";
+import {useDispatch,useSelector} from "react-redux"
 export default function Contactus() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const sectionRef=useRef(null);
+  const dispatch=useDispatch();
+    const {scrollToComponentB}=useSelector((state)=>state.scroll1)
+
+    console.log('scrollToComponentB',scrollToComponentB);
 
   const { name, email, message } = formData;
 
@@ -17,12 +24,24 @@ export default function Contactus() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
-  };
+};
+
+  useEffect(()=>{
+    if(scrollToComponentB){
+      sectionRef.current.scrollIntoView({behaviour:'smooth'})
+      dispatch(setScrollToComponentB(false))
+    }
+  })
 
   console.log(formData);
+
+  const handleSubmit=async()=>{
+
+  }
+
   return (
     <>
-      <div>
+      <div ref={sectionRef}>
         <div className="relative w-10/12 max-w-maxContent mx-auto shadow-xl my-6 p-10">
           {/* 1st section  */}
           <div className="flex flex-col gap-5 py-8 px-10 md:px-28">
@@ -32,7 +51,7 @@ export default function Contactus() {
               as we can!.
             </p>
 
-            <form className="flex flex-col gap-2 w-full md:w-[60%] leading-10">
+            <form className="flex flex-col gap-2 w-full md:w-[60%] leading-10" onSubmit={handleSubmit}>
               <div>
                 <input
                   type="text"
