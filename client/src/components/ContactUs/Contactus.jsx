@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Grid, Row, Col } from "rsuite";
 import { FaMobileAlt } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { setScrollToComponentB } from "../../utils/scrollSlice";
 import {useDispatch,useSelector} from "react-redux"
+import { apiConnector } from "../../services/operations/apiconnector"
+import { contactUsEndPoint } from "../../services/apis";
+
 export default function Contactus() {
+  const[loading,setLoading]=useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -35,8 +38,26 @@ export default function Contactus() {
 
   console.log(formData);
 
-  const handleSubmit=async()=>{
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    console.log('clicked');
+    try{
+      setLoading(true)
 
+      const res=await apiConnector(
+        "POST",
+        contactUsEndPoint.CONTACT_US_API,
+        formData
+      )
+       setFormData({
+     name: "",
+    email: "",
+    message: "",
+    })
+    }catch(error){
+      console.log(error.message);
+      setLoading(false)
+    }
   }
 
   return (
@@ -51,7 +72,7 @@ export default function Contactus() {
               as we can!.
             </p>
 
-            <form className="flex flex-col gap-2 w-full md:w-[60%] leading-10" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-2 w-full md:w-[60%] leading-10" onSubmit={(e)=>handleSubmit(e)}>
               <div>
                 <input
                   type="text"
@@ -78,19 +99,18 @@ export default function Contactus() {
 
               <div>
                 <textarea
-                  name="messsage"
+                  name="message"
                   id="message"
                   cols="3"
                   rows="1"
                   placeholder="Message"
                   className="w-full border-b outline-none"
+                  value={message}
                   onChange={formDataHandler}
                 />
               </div>
 
-              <div className="bg-[#6E15C3] text-white text-center px-[14px] py-[10px] rounded-full">
-                <button type="submit">Submit</button>
-              </div>
+                <button type="submit" className="bg-[#6E15C3] text-white text-center px-[14px] py-[10px] rounded-full cursor-pointer">Submit</button>
             </form>
           </div>
 

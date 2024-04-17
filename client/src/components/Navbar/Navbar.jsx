@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { NavbarLinks } from "../../data/NavbarLinks";
 import { useLocation, matchPath } from "react-router-dom";
 import { IoIosArrowDropdownCircle, IoMdClose } from "react-icons/io";
-import { CiSearch } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import ProfileDropDown from "../ProfileDropDown";
 import { logout } from "../../services/operations/authAPI";

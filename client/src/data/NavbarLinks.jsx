@@ -23,5 +23,8 @@ export const NavbarLinks = [
     path: "/contactus",
   },{
     title: "Services",
-  },
+  },{
+    title: "Settings",
+    path: "/settings",
+  }
 ];

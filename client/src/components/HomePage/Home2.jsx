@@ -26,7 +26,6 @@ import { InputPicker } from "rsuite";
 import Contactus from "../ContactUs/Contactus";
 import WhyRemiwire from "../WhyRemiwire/WhyRemiwire";
 import Location from "../Location/Location";
-import CurrencyRate from "../CurrencyRate/CurrencyRate";
 import Convert from "./Convert";
 import Send from "./Send";
 import Alerts from "./Alerts";
@@ -124,7 +123,7 @@ export default function Home2() {
         </Row>
       </Grid>
 
-      <CurrencyRate />
+      {/* <CurrencyRate /> */}
 
       <Location />
 

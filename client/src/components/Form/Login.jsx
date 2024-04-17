@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { FaArrowRight } from "react-icons/fa";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { setSignUpData } from "../../utils/authSlice";
 import { useDispatch } from "react-redux";
-import { sendSignUp, setLogin } from "../../services/operations/authAPI";
+import { setLogin } from "../../services/operations/authAPI";
 
 const Login = ({passedFromSignup}) => {
   const[showPassword,setShowPassword]=useState(false);
@@ -23,7 +20,7 @@ const Login = ({passedFromSignup}) => {
       ...prevData,
       [e.target.name]: e.target.value,
     }))
-  }
+  } 
 
     const handleOnSubmit = (e) => {
     e.preventDefault()

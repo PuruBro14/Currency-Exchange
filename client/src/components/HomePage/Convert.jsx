@@ -2,21 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./assets/css/home.css";
 import axios from "axios";
 import CurrencyInput from "./assets/js/currencyInput";
-
-import {
-  Grid,
-  Row,
-  Col,
-  Input,
-  InputGroup,
-  Panel,
-  Button,
-  SelectPicker,
-} from "rsuite";
 import {useDispatch} from 'react-redux';
-import { setConvert } from "../../services/operations/authAPI";
 import { bookOrderEndpoints } from "../../services/apis";
-import NavItem from "rsuite/esm/Nav/NavItem";
 import ConvertTable from "./ConvertTable";
 import { FaArrowRight } from "react-icons/fa";
 import Tab from "../common/Tab";
@@ -169,14 +156,6 @@ export default function Convert() {
 
   }
 
-  // const bookOrder=(e)=>{
-  //   e.preventDefault();
-  //   if(totalEntries.length==0){
-  //     return;
-  //   }
-  //   dispatch(setConvert(ConvertTableEntries))
-  // }
-
   const fetchTableData=async()=>{
     const response=await axios.get(GET_ORDERS);
     setTotalEntries(response?.data?.data)
@@ -283,7 +262,7 @@ export default function Convert() {
               />
             </div>
 
-          <Button appearance="primary" className="w-fit text-4xl px-10 py-[6px] rounded-full bg-richblack-800 text-white  hover:bg-richblue-500 transition-all duration-200 mt-7" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</Button>&nbsp;
+          <button  className="w-fit text-4xl px-10 py-[6px] rounded-full bg-richblack-800 text-white  hover:bg-richblue-500 transition-all duration-200 mt-7" onClick={editState?editHandler:handleAddMore}>{editState?'Save':'Add'}</button>&nbsp;
           </div>
 
       </div>
@@ -293,10 +272,9 @@ export default function Convert() {
       }
 
       <div className="tablerow">
-        <Col md={1}></Col>
-        <Col md={22}>
-          <h5 style={{ marginTop: 20 }}>Total Amount</h5>
-          <h3>{totalAmount.toFixed(2) || 0} Rs</h3>
+        <div>
+          <h5 className="mt-7 pl-5 text-center md:text-start">Total Amount</h5>
+          <h3 className="pl-5 text-center md:text-start">{totalAmount.toFixed(2) || 0} Rs</h3>
 
           <div className={`${ConvertTableEntries?.length===0?'pointer-events-none opacity-50':''}`}>
           <Link to="/checkout">
@@ -311,8 +289,7 @@ export default function Convert() {
             </Link>
             </div>
 
-        </Col>
-        <Col md={1}></Col>
+        </div>
       </div>
     </form>
   );

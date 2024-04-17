@@ -1,8 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import Home from "./components/HomePage/Home";
-
 import Login from "./components/Form/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SendMoneyAbroad from "./components/OurServices/SendMoneyAbroad";
@@ -14,16 +10,13 @@ import OverseasEducationLoan from "./components/OurServices/OverseasEducationLoa
 import Signup from "./components/pages/Signup";
 import { Provider } from "react-redux";
 import store from "./store";
-import Navbar from "./components/Navbar/Navbar";
 import Home2 from "./components/HomePage/Home2";
 import Footer from "./components/Footer";
-import Footer2 from "./components/Footer/Footer";
-import Navbars2 from "./components/Navbar/Navbars2";
 import OpenRoute from "./components/Auth/OpenRoute";
-import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import Header from "./components/Header";
 import Checkout from "./pages/Checkout";
 import TrackShipment from "./pages/TrackShipment";
+import Settings from "./pages/Settings";
 function App() {
   return (
     <div className="overflow-x-hidden">
@@ -35,14 +28,6 @@ function App() {
           <Route path="/" element={
             //<ProtectedRoute>
             <Home/>
-            //</ProtectedRoute>
-          }>
-              
-            </Route>
-
-             <Route path="/home2" element={
-            //<ProtectedRoute>
-            <Home2/>
             //</ProtectedRoute>
           }>
               
@@ -74,7 +59,13 @@ function App() {
           ></Route>
           <Route
             path="checkout"
-            element={<Checkout />}
+            element={
+            <Checkout />}
+          ></Route>
+          <Route
+            path="settings"
+            element={
+            <Settings />}
           ></Route>
         </Routes>
         <Footer />

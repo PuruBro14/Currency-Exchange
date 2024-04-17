@@ -2,18 +2,13 @@ import React, { useState } from 'react'
 import HeaderBanner from './assets/images/HeaderBanner.png'
 import "./assets/css/home.css";
 import Contactus from '../ContactUs/Contactus';
-import CurrencyRate, { ContentSlider } from '../CurrencyRate/CurrencyRate';
-import Location, { HomeLocation } from '../Location/Location';
+import  { ContentSlider } from '../CurrencyRate/CurrencyRate';
+import  { HomeLocation } from '../Location/Location';
 import WhyRemiwire from '../WhyRemiwire/WhyRemiwire';
 import Ourservies from '../OurServices/Ourservies';
 import AboutUs from '../AboutUs/AboutUs';
 import TestimonialsSlider from '../Testimonials/Testimonials';
 import HowTransferMoney from '../HowTransferMoney/HowTransferMoney';
-import {
-  Grid,
-  Row,
-  Col
-} from "rsuite";
 import Convert from './Convert';
 import Send from './Send';
 import Charts from './Charts';

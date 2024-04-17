@@ -11,6 +11,6 @@ export const bookOrderEndpoints = {
   DELETE_ORDERS:BASE_URL+"/deleteOrderById"
 };
 
-// export const contactUsEndPoint={
-//   CONTACT_US_API=BASE_URL+""
-// }
+export const contactUsEndPoint={
+  CONTACT_US_API:BASE_URL+"/contact-us"
+}

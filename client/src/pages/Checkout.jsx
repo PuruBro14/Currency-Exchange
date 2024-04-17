@@ -3,7 +3,7 @@ import LoginCheckout from '../components/Checkout/LoginCheckout'
 import DeliveryAddress from '../components/Checkout/DeliveryAddress'
 import OrderSummary from '../components/Checkout/OrderSummary'
 import PaymentOptions from '../components/Checkout/PaymentOptions'
-
+import {Link} from "react-router-dom"
 const Checkout = () => {
    const steps=[
         {
@@ -25,8 +25,9 @@ const Checkout = () => {
     ]
 
   return (
-    <div>
-      <div className='flex flex-col gap-5'>
+    <div className=' bg-[#F1F3F6]'>
+    <div className='w-11/12 mx-auto max-w-[900px]'>
+      <div className='flex flex-col gap-5 py-16 pb-48 '>
         {/* first div  */}
         <div>
 
@@ -40,28 +41,29 @@ const Checkout = () => {
 
 
         </div>
+
+        <hr className='text-[#DDDDDD]'/>
         {/* second div  */}
-        <div className='w-11/12 mx-auto flex flex-row '>
-          <div className='w-[40%] flex flex-row justify-between'>
+        <div className='w-11/12 mx-auto flex flex-row justify-between'>
+          <div className=' flex flex-row justify-between w-full'>
             <div>
-              <ul>
-                <li>Policies:</li>
-                <li>Return Policy | </li>
-                <li>Terms of use | </li>
-                <li>Security | </li>
-                <li>Infringement  </li>
+              <ul className='flex flex-row gap-x-2'>
+                <li className='text-richblack-600'>Policies:</li>
+                <li className='text-richblack-600'>Return Policy | </li>
+                <li className='text-richblack-600'>Security </li>
               </ul>
             </div>
-            <div className='flex flex-row'>
+            <div className='flex flex-row text-richblack-600 mr-10'>
               2020-2024 Remiwire.com
             </div>
           </div>
 
-          <div>
-            <p>Need help?Visit the help center or Contact Us</p>
-          </div>
+          <Link to="/">
+            <p className='text-richblack-600 tracking-wide'>Need help?Visit the help center or Contact Us</p>
+          </Link>
         </div>
       </div>
+    </div>
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import "./assets/css/Currencyrate.css";
 import { Grid, Row, Col } from "rsuite";
-import Slider from "react-slick";
 export default function CurrencyRate() {
   var settings = {
     dots: true,
@@ -174,6 +173,7 @@ export default function CurrencyRate() {
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Slider from "react-slick";
 
 export const ContentSlider = () => {
   const settings = {

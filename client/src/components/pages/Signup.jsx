@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { sendSignUp } from "../../services/operations/authAPI";
 import Tab from "../common/Tab";
 import SignupForm from "../Auth/SignupForm";
 import Login from "../Form/Login";
