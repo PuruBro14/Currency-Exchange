@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 // const OTP = require("../models/Otp");
 const jwt = require("jsonwebtoken");
@@ -10,27 +10,15 @@ require("dotenv").config();
 exports.signup = async (req, res) => {
   try {
     // Destructure fields from the request body
-    const {
-      username,
-      firstName,
-      lastName,
-      contactNo,
-      email,
-      password,
-    } = req.body;
+    const { username, firstName, lastName, contactNo, email, password } =
+      req.body;
     // Check if All Details are there or not
-    if (
-      !username ||
-      !firstName || 
-      !lastName ||
-      !email ||
-      !password
-    ) {
+    if (!username || !firstName || !lastName || !email || !password) {
       return res.status(403).send({
         success: false,
         message: "All Fields are required",
       });
-    }   
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
