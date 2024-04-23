@@ -31,7 +31,7 @@ const AddAdditionalDetails = () => {
       <form onSubmit={handleSubmit(submitProfileForm)}>
         <div className='my-5 flex flex-col gap-y-6 rounded-md border-richblack- px-12'>
           <h2 className='text-lg font-semibold text-richblack-5'>
-            Profile Information
+            Edit Information
           </h2>
           <div className='flex flex-col gap-5 lg:flex-row'>
             <div className='flex flex-col gap-2 lg:w-[48%]'>

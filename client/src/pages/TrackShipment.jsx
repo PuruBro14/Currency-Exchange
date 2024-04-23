@@ -1,37 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 const TrackShipment = () => {
-    const[trackingNumber,setTrackingNumber]=useState();
+  const [trackingNumber, setTrackingNumber] = useState();
   return (
-    <div className='flex flex-col my-7 w-1/2 border mx-auto'>
-
-        <div className='flex flex-row justify-between border-b p-5'>
-
-            <div className='flex flex-row gap-x-2'>
-                <p>Track</p>
-                <div className='flex flex-col'>
-                    <p>Track your package</p>
-                    <p>Data provided by Remiwire</p>
-                </div>
-            </div>
-
-            <div>
-                Settings
-            </div>
-
+    <div>
+      <div className="h-[40vh] flex flex-col my-7 w-full justify-center items-center mx-auto">
+        <h2 className="text-[50px]">TRACK & TRACE</h2>
+        <div className="p-3 w-1/2 flex items-center">
+          <input
+            type="text"
+            value={trackingNumber}
+            onChange={(e) => setTrackingNumber(e.target.value)}
+            placeholder="Enter your tracking number"
+            className="border my-7 p-3 w-full"
+          />
+          <button className="w-[200px] text-white h-[50px] bg-[#d40511] rounded-none hover:bg-[#d40511]">
+            Track
+          </button>
         </div>
-
-        <div className='p-3'>
-            <input type="text" value={trackingNumber} onChange={(e)=>setTrackingNumber(e.target.value)} placeholder='Enter tracking number' className='border my-7 p-3 w-full'/>
-        </div>
-
-        <div className='p-5'>
-            <p className={`border text-center text-2xl ${trackingNumber?'opacity-100':'opacity-10'}`}>Track Shipment</p>
-            <p className='mt-5'>Only your tracking number will be sent to Remiwire</p>
-        </div>
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default TrackShipment
+export default TrackShipment;

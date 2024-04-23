@@ -3,22 +3,22 @@ import { FaMobileAlt } from "react-icons/fa";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { setScrollToComponentB } from "../../utils/scrollSlice";
-import {useDispatch,useSelector} from "react-redux"
-import { apiConnector } from "../../services/operations/apiconnector"
+import { useDispatch, useSelector } from "react-redux";
+import { apiConnector } from "../../services/operations/apiconnector";
 import { contactUsEndPoint } from "../../services/apis";
 
 export default function Contactus() {
-  const[loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const sectionRef=useRef(null);
-  const dispatch=useDispatch();
-    const {scrollToComponentB}=useSelector((state)=>state.scroll1)
+  const sectionRef = useRef(null);
+  const dispatch = useDispatch();
+  const { scrollToComponentB } = useSelector((state) => state.scroll1);
 
-    console.log('scrollToComponentB',scrollToComponentB);
+  console.log("scrollToComponentB", scrollToComponentB);
 
   const { name, email, message } = formData;
 
@@ -27,52 +27,55 @@ export default function Contactus() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
-};
+  };
 
-  useEffect(()=>{
-    if(scrollToComponentB){
-      sectionRef.current.scrollIntoView({behaviour:'smooth'})
-      dispatch(setScrollToComponentB(false))
+  useEffect(() => {
+    if (scrollToComponentB) {
+      sectionRef.current.scrollIntoView({ behaviour: "smooth" });
+      dispatch(setScrollToComponentB(false));
     }
-  })
+  });
 
   console.log(formData);
 
-  const handleSubmit=async(e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('clicked');
-    try{
-      setLoading(true)
+    console.log("clicked");
+    try {
+      setLoading(true);
 
-      const res=await apiConnector(
+      const res = await apiConnector(
         "POST",
         contactUsEndPoint.CONTACT_US_API,
         formData
-      )
-       setFormData({
-     name: "",
-    email: "",
-    message: "",
-    })
-    }catch(error){
+      );
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
       console.log(error.message);
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
       <div ref={sectionRef}>
-        <div className="relative w-10/12 max-w-maxContent mx-auto shadow-xl my-6 p-10">
+        <div className="relative w-11/12 max-w-maxContent mx-auto shadow-xl my-6 p-5">
           {/* 1st section  */}
-          <div className="flex flex-col gap-5 py-8 px-10 md:px-28">
+          <div className="flex flex-col gap-5 py-8 px-10 text-sm">
             <h1 className="text-3xl text-left">Contact Us</h1>
             <p className="text-[15px]">
               Feel Free to contact us any time. We will get back to you as soon
               as we can!.
             </p>
 
-            <form className="flex flex-col gap-2 w-full md:w-[60%] leading-10" onSubmit={(e)=>handleSubmit(e)}>
+            <form
+              className="flex flex-col gap-2 w-full md:w-[60%] leading-10"
+              onSubmit={(e) => handleSubmit(e)}
+            >
               <div>
                 <input
                   type="text"
@@ -110,13 +113,18 @@ export default function Contactus() {
                 />
               </div>
 
-                <button type="submit" className="bg-[#6E15C3] text-white text-center px-[14px] py-[10px] rounded-full cursor-pointer">Submit</button>
+              <button
+                type="submit"
+                className="bg-[#d40511] text-white text-center px-[14px] py-[10px] cursor-pointer"
+              >
+                Submit
+              </button>
             </form>
           </div>
 
           {/* 2nd section  */}
 
-          <div className="hidden absolute right-0 bottom-0 bg-[#2D2D2D] rounded-lg w-[30%] p-5 h-full text-white md:flex flex-col gap-3">
+          <div className="hidden absolute right-0 bottom-0 bg-[#2D2D2D] rounded-lg w-[30%] p-5 h-full text-white md:flex flex-col gap-3 text-sm">
             <h1>Contact Info</h1>
             <div className="flex flex-row items-center gap-2">
               <FaMobileAlt size={20} />

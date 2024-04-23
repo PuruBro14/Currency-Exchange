@@ -8,25 +8,28 @@ import NRIRepatriation from "./components/OurServices/NRIRepatriation";
 import BlockedAccountPayment from "./components/OurServices/BlockedAccountPayment";
 import OverseasEducationLoan from "./components/OurServices/OverseasEducationLoan";
 import Signup from "./components/pages/Signup";
-import { Provider } from "react-redux";
-import store from "./store";
-import Home2 from "./components/HomePage/Home2";
 import Footer from "./components/Footer";
 import OpenRoute from "./components/Auth/OpenRoute";
 import Header from "./components/Header";
 import Checkout from "./pages/Checkout";
 import TrackShipment from "./pages/TrackShipment";
 import Settings from "./pages/Settings";
+import UserProfile from "./pages/UserProfile";
+import AddAdditionalDetails from "./components/core/AddAdditionalDetails";
+import UpdatePassword from "./components/core/UpdatePassword";
+import ManageDeliveryAddress from "./components/core/ManageDeliveryAddress";
+import MyProfile from "./components/core/MyProfile";
+import ManageProfileAddress from "./components/core/ManageProfileAddress";
+import Error from "./components/Error";
+import AdminHome from "./pages/Admin/AdminHome";
 function App() {
   return (
     <div className="overflow-x-hidden">
-    <Provider store={store}>
-      <BrowserRouter>
           <Header />
 
         <Routes>
           <Route path="/" element={
-            //<ProtectedRoute>
+            // <ProtectedRoute>
             <Home/>
             //</ProtectedRoute>
           }>
@@ -36,7 +39,7 @@ function App() {
           <OpenRoute>
           <Signup />
           </OpenRoute>
-          }></Route>
+          }></Route>  
           <Route path="/login" element={ <OpenRoute><Login /></OpenRoute>}></Route>
           <Route path="sendmoneyabroad" element={<SendMoneyAbroad />}></Route>
           <Route
@@ -67,10 +70,28 @@ function App() {
             element={
             <Settings />}
           ></Route>
+
+          <Route 
+          element={
+            <UserProfile/>
+          }>
+            <Route path="/userprofile/my-profile" element={<MyProfile/>}/>
+
+            <Route path="/userprofile/manage-address" element={<ManageProfileAddress/>}/>
+
+
+          <Route path="/userprofile/profile-settings" element={<UpdatePassword/>}/>
+
+           <Route path="/userprofile/edit-profile" element={<Settings/>}/>
+
+          </Route>
+
+          <Route path="/admin/*" element={<AdminHome/>}/>
+
+          <Route path="*" element={<Error/>}/>
+
         </Routes>
         <Footer />
-      </BrowserRouter>
-      </Provider>
     </div>
   );
 }

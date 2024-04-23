@@ -71,16 +71,14 @@ const Navbar = () => {
     };
   }, []);
 
-  console.log("isOpen", isOpen);
-
-  const handleClick=(e)=>{
-    console.log('clicked');
+  const handleClick = (e) => {
+    console.log("clicked");
     e.preventDefault();
     dispatch(setScrollToComponentB(true));
-  }
+  };
 
   return (
-    <div className="flex flex-row md:h-20 flex-wrap items-center border-b  border-b-richblack-700 w-full">
+    <div className="flex flex-row md:h-24 flex-wrap items-center w-full">
       <div className=" w-11/12 mx-auto items-center justify-between ">
         {showHamburger && (
           <div className=" mt-5 md:mt-0">
@@ -101,7 +99,7 @@ const Navbar = () => {
         >
           <div className="flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-5">
             <nav>
-              <ul className="flex md:flex-row flex-col gap-5 text-white">
+              <ul className="flex md:flex-row flex-col gap-5 text-black text-sm">
                 {NavbarLinks?.map((ele, index) => {
                   return (
                     <li key={index} onClick={closeNavbar}>
@@ -130,8 +128,20 @@ const Navbar = () => {
                           </div>
                         </div>
                       ) : (
-                        <Link to={`${ele?.title !== "Contact Us" ? ele?.path : ''}`}>
-                          <p onClick={(e)=>`${ele?.title !== "Contact Us" ? '' : handleClick(e)}`}>{ele?.title}</p>
+                        <Link
+                          to={`${ele?.title !== "Contact Us" ? ele?.path : ""}`}
+                        >
+                          <p
+                            onClick={(e) =>
+                              `${
+                                ele?.title !== "Contact Us"
+                                  ? ""
+                                  : handleClick(e)
+                              }`
+                            }
+                          >
+                            {ele?.title}
+                          </p>
                         </Link>
                       )}
                     </li>
@@ -140,11 +150,11 @@ const Navbar = () => {
               </ul>
             </nav>
 
-            <div className="flex flex-row my-7 gap-x-4 items-center">
+            <div className="flex flex-row my-7 gap-x-4 items-center mt-[2%]">
               {token === null && (
                 <Link to="/login">
                   <button
-                    className="border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md"
+                    className="border border-richblack-700 text-white bg-[#d40511]  px-[12px] py-[8px] text-richblack-100 rounded-md  hover:bg-[#d40511]"
                     onClick={closeNavbar}
                   >
                     Log in
@@ -154,7 +164,7 @@ const Navbar = () => {
               {token === null && (
                 <Link to="/signup">
                   <button
-                    className="border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md"
+                    className="border border-richblack-700 text-white bg-[#d40511] px-[12px] py-[8px] text-richblack-100 rounded-md hover:bg-[#d40511]"
                     onClick={closeNavbar}
                   >
                     Sign up

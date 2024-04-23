@@ -58,7 +58,7 @@ export const HomeLocation = () => {
   const [currentLocation, setCurrentLocation] = useState("");
 
   return (
-    <div className="bg-[#10122B] w-11/12 max-w-maxContent mx-auto rounded-md">
+    <div className="w-11/12 max-w-maxContent mx-auto rounded-md">
       <div className="flex flex-col items-center">
         <h1 className="text-5xl p-5 text-white">Our Presence</h1>
 

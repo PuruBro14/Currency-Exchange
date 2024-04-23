@@ -12,12 +12,18 @@ const Products = [
   "Currency Notes",
   "Guaranteed Investment",
   "Certificate",
-  "Western Union"
+  "Western Union",
 ];
-const QuickLinks = ["About Us", "Home", "Contribute","Privacy Policy","Sitemap"];
+const QuickLinks = [
+  "About Us",
+  "Home",
+  "Contribute",
+  "Privacy Policy",
+  "Sitemap",
+];
 const Footer = () => {
   return (
-    <div className="bg-[#10122B]">
+    <div className="bg-[#f2f2f2]">
       <div className="flex lg:flex-row gap-8 items-center justify-between w-11/12 text-richblack-400 leading-6 mx-auto relative py-14">
         <div className="border-b w-[80%] mx-auto flex flex-col lg:flex-row pb-5 border-richblack-700">
           {/* Section 1 */}
@@ -70,40 +76,39 @@ const Footer = () => {
               </div>
             </div>
           </div>
-
-         
         </div>
       </div>
 
       <div className="flex w-[80%] flex-row items-center justify-between  text-richblack-400 mx-auto  pb-14 text-sm">
         <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
           <div className="flex flex-col md:flex-row w-full justify-between items-center">
-          
-          <div className="text-center">Copyright © 2017 All Rights Reserved by remiwire.</div>
+            <div className="text-center">
+              Copyright © 2024 All Rights Reserved by remiwire.
+            </div>
             <ul className="flex flex-row text-white gap-8 mt-7 md:mt-0">
-                  <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
-                    <Link>
-                      <FaFacebookF className="h-5 w-5"/>
-                   </Link>
-                  </li>
-                 <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
-                    <Link className="twitter" href="#">
-                      <FaTwitter className="h-5 w-5"/>
-                   </Link>
-                  </li>
-                  <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
-                    <Link>
-                      <FaInstagramSquare className="h-5 w-5"/>
-                   </Link>
-                  </li>
-                  <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
-                    <Link>
-                      <FaLinkedin className="h-5 w-5"/>
-                   </Link>
-                  </li>
-                  </ul>
-        </div>
+              <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
+                <Link>
+                  <FaFacebookF className="h-5 w-5" />
+                </Link>
+              </li>
+              <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
+                <Link className="twitter" href="#">
+                  <FaTwitter className="h-5 w-5" />
+                </Link>
+              </li>
+              <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
+                <Link>
+                  <FaInstagramSquare className="h-5 w-5" />
+                </Link>
+              </li>
+              <li className="h-10 w-10 bg-richblack-300 rounded-full flex justify-center items-center hover:bg-richblue-500 cursor-pointer transition-all duration-200">
+                <Link>
+                  <FaLinkedin className="h-5 w-5" />
+                </Link>
+              </li>
+            </ul>
           </div>
+        </div>
       </div>
     </div>
   );

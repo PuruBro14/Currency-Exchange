@@ -1,25 +1,26 @@
 .menu-icon {
-    display: none;
-  }
+  display: none;
+}
 
-
-.navdiv{
+.navdiv {
   background-color: #10122b !important;
-  color:#fff !important;
-  height:70px;
-  padding:10px;
+  color: #fff !important;
+  height: 70px;
+  padding: 10px;
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.right-navbar{
+.right-navbar {
   position: absolute;
-  right:80px;
+  right: 80px;
 }
 
-
-
-Nav.Item Link{
+Nav.Item Link {
   text-decoration: none !important;
+}
+
+.headerBGColor {
+  background: linear-gradient(90deg, #fc0 0%, #fc0 48%, #ffe57f 70%, #fff0b2);
 }

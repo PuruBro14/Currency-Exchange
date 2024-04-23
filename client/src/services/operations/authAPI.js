@@ -85,6 +85,7 @@ export const logout=(navigate)=>{
       dispatch(setUser(null))
       localStorage.removeItem("token");
       localStorage.removeItem("user")
+      toast.success("Logged Out")
       navigate("/");
   }
 }

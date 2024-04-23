@@ -1,9 +1,9 @@
 import React from 'react'
 import LoginCheckout from '../components/Checkout/LoginCheckout'
-import DeliveryAddress from '../components/Checkout/DeliveryAddress'
 import OrderSummary from '../components/Checkout/OrderSummary'
 import PaymentOptions from '../components/Checkout/PaymentOptions'
 import {Link} from "react-router-dom"
+import ManageDeliveryAddress from '../components/core/ManageDeliveryAddress'
 const Checkout = () => {
    const steps=[
         {
@@ -33,7 +33,7 @@ const Checkout = () => {
 
           <LoginCheckout/>
 
-          <DeliveryAddress/>
+          <ManageDeliveryAddress/>
 
           <OrderSummary/>
 

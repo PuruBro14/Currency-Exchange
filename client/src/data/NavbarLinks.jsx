@@ -25,6 +25,6 @@ export const NavbarLinks = [
     title: "Services",
   },{
     title: "Settings",
-    path: "/settings",
+    path: "/userprofile/my-profile",
   }
 ];

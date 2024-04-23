@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { IoIosArrowDown } from 'react-icons/io'
 import {useDispatch,useSelector} from "react-redux"
 import { setStep } from '../../utils/bookCurrencySlice'
-const DeliveryAddress = () => {
+const ManageDeliveryAddress = () => {
   const {step}=useSelector((state)=>state.bookCurrency)
   const{user}=useSelector((state)=>state.profile)
   const dispatch=useDispatch();
@@ -26,7 +26,7 @@ const DeliveryAddress = () => {
       </div>
 
       {
-        step>=2  && showAccordionData &&
+       showAccordionData &&
 
       <div className='flex flex-col gap-y-5 p-8 shadow-md'>
 
@@ -71,4 +71,4 @@ const DeliveryAddress = () => {
   )
 }
 
-export default DeliveryAddress
+export default ManageDeliveryAddress
