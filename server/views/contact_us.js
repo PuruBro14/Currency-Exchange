@@ -1,4 +1,4 @@
-const contactUsTemplate = async (email, subject, message) => {
+const contactUsTemplate = async (name, email, subject, message) => {
   return `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -12,7 +12,7 @@ const contactUsTemplate = async (email, subject, message) => {
         <tr>
           <td style="padding: 30px;">
             <h1 style="color: #333;">Thank You for Contacting Us!</h1>
-            <p style="font-size: 16px; line-height: 1.6; color: #555;">Dear <strong>User</strong>,</p>
+            <p style="font-size: 16px; line-height: 1.6; color: #555;">Dear <strong>${name}</strong>,</p>
             <p style="font-size: 16px; line-height: 1.6; color: #555;">We received your message and we will get back to you as soon as possible.</p>
             <p style="font-size: 16px; line-height: 1.6; color: #555;">Here are the details of your inquiry:</p>
             <ul style="font-size: 16px; line-height: 1.6; color: #555;">
