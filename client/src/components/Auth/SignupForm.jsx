@@ -65,7 +65,7 @@ const SignupForm = () => {
   };
   return (
     <div>
-        <div className="w-8/12 my-6">
+        <div className="w-full md:w-8/12 my-6">
             <div className="text-4xl font-semibold text-richblack-300 mt-6 lg:mt-0">
               Welcome Back
             </div>
@@ -157,16 +157,16 @@ const SignupForm = () => {
                       onChange={(e) => handleFormData(e)}
                       required
                     />
-                    {showPassword && (
+                    {!showPassword && (
                       <AiFillEye
-                        className="bg-white absolute right-7 top-[40px]"
+                        className="bg-white absolute right-7 top-[45px]"
                         size={30}
                         onClick={() => setShowPassword(false)}
                       />
                     )}
-                    {!showPassword && (
+                    {showPassword && (
                       <AiFillEyeInvisible
-                        className="bg-white absolute right-7 top-[40px]"
+                        className="bg-white absolute right-7 top-[45px]"
                         size={30}
                         onClick={() => setShowPassword(true)}
                       />

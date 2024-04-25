@@ -38,7 +38,7 @@ const subLinksData = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(window.innerWidth >= 768);
-  const [showHamburger, setShowHamburger] = useState(false);
+  const [showHamburger, setShowHamburger] = useState(window.innerWidth < 768);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -60,33 +60,34 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setShowHamburger(window.innerWidth < 768);
-      setIsOpen(window.innerWidth >= 768);
+      const isMobile = window.innerWidth < 768;
+      setShowHamburger(isMobile);
+      setIsOpen(!isMobile);
     };
 
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [window.innerWidth]);
 
   const handleClick = (e) => {
-    console.log("clicked");
     e.preventDefault();
     dispatch(setScrollToComponentB(true));
   };
 
   return (
-    <div className="flex flex-row md:h-24 flex-wrap items-center w-full">
+    <div className="flex flex-row md:h-20 flex-wrap items-center w-full">
       <div className=" w-11/12 mx-auto items-center justify-between ">
         {showHamburger && (
           <div className=" mt-5 md:mt-0">
             <button onClick={toggleNavbar}>
               {isOpen ? (
-                <IoMdClose size={30} color="white" />
+                <IoMdClose size={30} color="black" />
               ) : (
-                <RxHamburgerMenu size={30} color="white" />
+                <RxHamburgerMenu size={30} color="black" />
               )}
             </button>
           </div>
@@ -99,7 +100,7 @@ const Navbar = () => {
         >
           <div className="flex flex-col md:flex-row w-full justify-between items-start md:items-center gap-5">
             <nav>
-              <ul className="flex md:flex-row flex-col gap-5 text-black text-sm">
+              <ul className="flex md:flex-row flex-col gap-3 lg:gap-5 text-black text-sm">
                 {NavbarLinks?.map((ele, index) => {
                   return (
                     <li key={index} onClick={closeNavbar}>
@@ -150,7 +151,7 @@ const Navbar = () => {
               </ul>
             </nav>
 
-            <div className="flex flex-row my-7 gap-x-4 items-center mt-[2%]">
+            <div className="flex flex-col gap-y-4 md:flex-row md:gap-y-0 my-7 gap-x-1 lg:gap-x-4 items-center">
               {token === null && (
                 <Link to="/login">
                   <button
@@ -171,7 +172,7 @@ const Navbar = () => {
                   </button>
                 </Link>
               )}
-              {token !== null && <ProfileDropDown />}
+              {token !== null && <ProfileDropDown closeNavbar={closeNavbar}/>}
               {token !== null && (
                 <button
                   className="border border-richblack-700 bg-richblack-800  px-[12px] py-[8px] text-richblack-100 rounded-md"

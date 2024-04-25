@@ -46,8 +46,6 @@ select {
   /* For older versions of Chrome and Safari */
   -moz-appearance: none;
   /* For older versions of Firefox */
-  background-color: white;
-  border: 1px solid #ccc;
   padding: 8px 32px 8px 8px;
   /* Adjust padding as needed */
   cursor: pointer;
@@ -509,7 +507,7 @@ th {
   padding: 12px;
   color: rgb(20, 30, 55);
   background: none;
-  width: 200px;
+  width: 97%;
 }
 
 .amountinput:hover {

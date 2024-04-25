@@ -23,7 +23,7 @@ const OrderSummary = () => {
     <div className='flex flex-col'>
 
       {/* first div  */}
-      <div className='relative flex flex-row gap-x-4 h-12 items-center p-5 bg-[#FD97A8]'>
+      <div className='relative flex flex-row gap-x-4 h-12 items-center p-5 headerBGColor'>
         <div className='text-white'>
           3
         </div>

@@ -9,10 +9,10 @@ const ConvertTable = ({ConvertTableEntries,editArray,filterArray}) => {
   return (
      <div>
 
-        <Table className='border w-11/12 mt-7 mx-auto '>
+        <Table className='border w-11/12 mt-7 mx-auto flex flex-col' >
 
             <Thead>
-                <Tr className='flex  rounded-t-md border-b border-[#DDDDDD]  justify-between p-5'>
+                <Tr className='flex items-center rounded-t-md border-b border-[#DDDDDD]  justify-between p-5'>
                     <Th className='text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         Amount
                     </Th>
@@ -25,35 +25,41 @@ const ConvertTable = ({ConvertTableEntries,editArray,filterArray}) => {
                      <Th className=' text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         CurrentRate
                     </Th>
+                    <Th className=' text-left text-lg font-medium uppercase text-richblack-600 border-none'>
+                        Total
+                    </Th>
                     <Th className='text-left text-lg font-medium uppercase text-richblack-600 border-none'>
                         Actions
                     </Th>
                 </Tr>
             </Thead>
 
-            <Tbody>
+            <Tbody className='flex flex-col justify-center'>
                 {
                     ConvertTableEntries?.length===0?(
                         <Tr>
-                            <Td>
+                            <Td className='text-lg font-medium text-richblack-600  border-none text-center'>
                                 No currencies found
                             </Td>
                         </Tr>
                     )
                     :(
                         ConvertTableEntries?.map((entry,index)=>(
-                            <Tr key={index} className='flex  border-b border-b-richblack-25 justify-between p-5'>
+                            <Tr key={index} className='flex items-center rounded-t-md border-b border-[#DDDDDD]  justify-between p-5'>
                                 <Td className='text-lg font-medium text-richblack-600  border-none text-center'>
                                     {entry?.amount}
                                 </Td>
                                 <Td className='text-lg font-medium text-richblack-600  border-none text-center'>
                                     {entry?.from}
                                 </Td>
-                                <Td className='text-lg font-medium text-richblack-600  border-none '>
+                                <Td className='text-lg font-medium text-richblack-600  border-none relative md:right-10'>
                                     {entry?.to}
                                 </Td>
-                                <Td className='text-lg font-medium text-richblack-600  border-none'>
+                                <Td className='text-lg font-medium text-richblack-600  border-none relative md:right-20'>
                                     {entry?.currentRate.toFixed(3)}
+                                </Td>
+                                <Td className='text-lg font-medium text-richblack-600  border-none relative md:right-8'>
+                                    {entry?.amount}
                                 </Td>
                                  <Td className='text-lg font-medium text-richblack-600  border-none flex flex-row gap-5'>
                                     <button onClick={(e)=>editArray(e,entry,index)}>
@@ -68,6 +74,7 @@ const ConvertTable = ({ConvertTableEntries,editArray,filterArray}) => {
                     )
                 }
             </Tbody>
+
         </Table>
         
       </div>

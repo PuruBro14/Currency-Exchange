@@ -11,22 +11,10 @@ export default function CurrencyInput({
   const [countryCurrencyT, setCountryCurrency] = useState([]);
   const [showList, setShowList] = useState(false);
 
-  console.log('currnetState',currentState,currentType);
-
-  const getCurrencyList = (searchString) => {
-    // const filteredArrayCurrency = countryCurrencyList.filter((currency) => {
-    //   return (
-    //     currency.label.toLowerCase().includes(searchString.toLowerCase()) ||
-    //     currency.value.toLowerCase().includes(searchString.toLowerCase())
-    //   );
-    // });
-
-    // setCountryCurrency(filteredArrayCurrency);
-  };
-
   const showCurrencyList = () => {
     setShowList(true);
   };
+
   const setValueFrom = (value, img) => {
     setShowList(false);
     if (currentType) {
@@ -44,24 +32,41 @@ export default function CurrencyInput({
   };
 
   useEffect(() => {
-    if((currentState==="Buy" && currentType ==='from') || (currentState==="Sell" && currentType==="to")){
-      console.log('mango1------------->',currentState,currentType);
+    let filteredArrayCurrency=countryCurrency
+
+        if((currentState==="Buy" && currentType ==='from') || (currentState==="Sell" && currentType==="to")){
+          console.log('landed');
       setCountryCurrency([
   {
     label: "INR - Indian Rupee",
     img: "https://flagsapi.com/IN/flat/64.png", 
     value: "INR",
   }])
-return;
+    }else{
+      setCountryCurrency(countryCurrency)
     }
-    else{
-      console.log('mango',currentState);
-    setCountryCurrencyList(countryCurrency);
-    setCountryCurrency(countryCurrency);
+    if(filteredArrayCurrency?.length>0)
+    if (convertFormValue?.from) {
+      filteredArrayCurrency = filteredArrayCurrency.filter(
+        (currency) =>{
+          console.log('currency-->',currency.label,convertFormValue.from);
+          return currency.label!==convertFormValue.from
+        }
+      );
+    setCountryCurrency(filteredArrayCurrency);
+    }
+    if (convertFormValue?.to) {
+      filteredArrayCurrency = filteredArrayCurrency.filter(
+        (currency) =>{
+          return currency.label!==convertFormValue.from
+        }
+      );
+      setCountryCurrency(filteredArrayCurrency);
     }
 
-  }, [currentState]);
+  }, [convertFormValue.from, convertFormValue.to]);
 
+  console.log('countryCurrencyT',countryCurrencyT);
 
   return (
     <div>
@@ -107,9 +112,6 @@ return;
             className="amountinput"
             placeholder="Select Currency"
             value={convertFormValue?.[currentType]}
-            onChange={(e) => {
-              getCurrencyList(e);
-            }}
             onFocus={showCurrencyList}
             onBlur={hideCurrencyList}
           />

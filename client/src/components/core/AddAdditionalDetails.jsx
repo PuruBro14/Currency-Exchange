@@ -20,7 +20,7 @@ const AddAdditionalDetails = () => {
 
   const submitProfileForm=async(data)=>{
     try{
-      
+      dispatch(updateProfile(token,data))
     }catch(err){
       console.log("Error message - ",err.message);
     }

@@ -1,5 +1,5 @@
 .homemoneytranfer {
-  /* background-image: url("https://media.istockphoto.com/id/1257153929/photo/indian-rupee-sign-with-stock-market-graph-background.jpg?s=2048x2048&w=is&k=20&c=nPhr-XHh9lmZ5CEKil1rqX7JFspsMPfoDS8cwmtecUY="); */
+  /* background-image: url("https://media.istockphoto.com/id/1257153929/photo/indian-rupee-sign-  ith-stock-market-graph-background.jpg?s=2048x2048&w=is&k=20&c=nPhr-XHh9lmZ5CEKil1rqX7JFspsMPfoDS8cwmtecUY="); */
   background-size: cover;
   position: relative;
   height: 100vh;
@@ -504,7 +504,7 @@ th {
   padding: 12px;
   color: rgb(20, 30, 55);
   background: none;
-  width: 200px;
+  width: 97%;
 }
 
 .amountinput:hover {
