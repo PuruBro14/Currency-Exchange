@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 // Define the user schema using the Mongoose Schema constructor
 const userSchema = new mongoose.Schema(
   {
-    // Define the name field with type String, required, and trimmed
     username: {
       type: String,
       required: true,
@@ -17,8 +16,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-
-    // Define the email field with type String, required, and trimmed
     email: {
       type: String,
       required: true,
@@ -53,8 +50,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "address" }],
-    // Add timestamps for when the document is created and last modified
   },
   { timestamps: true }
 );

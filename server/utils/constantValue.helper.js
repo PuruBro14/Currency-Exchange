@@ -8,4 +8,19 @@ const ORDER_STATUS = {
   RETURNED_FAILED: 6,
 };
 
-module.exports = { ORDER_STATUS };
+const ROLES = {
+  ADMIN: 1,
+  SUPER_ADMIN: 2,
+};
+
+function getRoleNames(ROLES) {
+  if (ROLES === 1) {
+    return "admin";
+  } else if (ROLES === 2) {
+    return "super_admin";
+  } else {
+    return "user";
+  }
+}
+
+module.exports = { ORDER_STATUS, ROLES, getRoleNames };

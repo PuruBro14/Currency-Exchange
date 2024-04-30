@@ -57,6 +57,8 @@ exports.signup = async (req, res) => {
       contactNumber: null,
     });
     const user = await User.create({
+      firstName,
+      lastName,
       username,
       email,
       password: hashedPassword,

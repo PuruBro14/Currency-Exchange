@@ -1,7 +1,7 @@
 const express = require("express");
 const addressRouter = express.Router();
 const AddressController = require("../controllers/address/index");
-const SecureAuth = require("../middleware/jwtVerify");
+const { SecureAuth } = require("../middleware/jwtVerify");
 
 addressRouter.post(
   "/createAddress",
@@ -15,6 +15,7 @@ addressRouter.get(
 );
 addressRouter.get(
   "/fetchAddress/:addressId",
+  SecureAuth,
   AddressController.fetchAddressById
 );
 addressRouter.put(
