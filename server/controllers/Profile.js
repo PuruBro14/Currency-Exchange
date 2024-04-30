@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const mailSender=require("../utils/mailSender")
 exports.updateProfile=async(req,res)=>{
     try{
-        const{dateOfBirth="",about="",contactNumber}=req.body;
+        const{dateOfBirth="",contactNumber}=req.body;
 
         const id=req.user.id;
 
@@ -13,7 +13,6 @@ exports.updateProfile=async(req,res)=>{
         const profile=await Profile.findById(userDetails.additionalDetails);
 
         profile.dateOfBirth=dateOfBirth;
-        profile.about=about;
         profile.contactNumber=contactNumber;
 
         await profile.save();
