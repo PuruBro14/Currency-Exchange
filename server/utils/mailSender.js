@@ -18,7 +18,7 @@ const mailSender = async (email, title, body) => {
       throw new Error("transporter is undefined");
     }
     let info = await transporter.sendMail({
-      from: "purusharma1405@gmail.com",
+      from: "anujsinghnainwal@gmail.com",
       to: `${email}`,
       subject: `${title}`,
       html: `${body}`,

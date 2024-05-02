@@ -8,6 +8,7 @@ const ordervalidation = joi.object({
 });
 
 const bookValidation = joi.object().keys({
+  userId: joi.string().required(),
   currencyData: joi.array().required().items(ordervalidation),
 });
 

@@ -1,5 +1,6 @@
 const BookModel = require("../../models/bookOrder.model");
 const { bookValidation } = require("../../utils/validation");
+const mongoose = require("mongoose");
 
 exports.createBookOrders = async (req, res) => {
   // let loginId = req.user.id;
@@ -11,16 +12,16 @@ exports.createBookOrders = async (req, res) => {
     });
   }
   try {
-    let createOrder = await Promise.all(
-      value.currencyData.map(async (data) => {
-        await BookModel.create({
-          amount: data.amount,
-          from: data.from,
-          to: data.to,
-          currentRate: data.currentRate,
-        });
-      })
-    );
+    if (!mongoose.isValidObjectId(value.userId)) {
+      return res.status(400).json({
+        success: false,
+        message: `Please provide valid user id.`,
+      });
+    }
+    let createOrder = await BookModel.create({
+      userId: value.userId,
+      currencyData: value.currencyData,
+    });
 
     return res.status(201).json({
       success: true,
