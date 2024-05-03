@@ -27,5 +27,8 @@ export const NavbarLinks = [
   },{
     title: "Settings",
     path: "/userprofile/my-profile",
+  },{
+    title: "My Orders",
+    path: "/my-orders",
   }
 ];

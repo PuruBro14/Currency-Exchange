@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginCheckout from '../components/Checkout/LoginCheckout'
 import OrderSummary from '../components/Checkout/OrderSummary'
 import PaymentOptions from '../components/Checkout/PaymentOptions'
 import {Link} from "react-router-dom"
 import ManageDeliveryAddress from '../components/core/ManageDeliveryAddress'
+import { fetchDeliveryAddress } from '../services/operations/SettingsApi'
+import {useDispatch,useSelector} from 'react-redux'
+import { setUser } from '../utils/profileSlice'
+
 const Checkout = () => {
+
+    const[deliveryAddress,setDeliveryAddress]=useState([]);
+  const{user}=useSelector((state)=>state.profile)
+  const{token}=useSelector((state)=>state.auth)
+  const dispatch=useDispatch()
+  const[loading,setLoading]=useState(false);
+
    const steps=[
         {
             id:1,
@@ -24,8 +35,21 @@ const Checkout = () => {
         }
     ]
 
+     const getDeliveryAddress = async () => {
+    setLoading(true)
+    const result = await fetchDeliveryAddress(token,dispatch,user,setUser)
+    if (result) {
+      setDeliveryAddress(result)
+    }
+    setLoading(false)
+  }
+
+  useEffect(()=>{
+    getDeliveryAddress();
+  },[])
+
   return (
-    <div className=' bg-[#F1F3F6]'>
+    <div className='bg-richblack-800'>
     <div className='w-11/12 mx-auto max-w-[900px]'>
       <div className='flex flex-col gap-5 py-16 pb-48 '>
         {/* first div  */}

@@ -141,7 +141,7 @@ const Navbar = () => {
                               }`
                             }
                           >
-                            {ele?.title}
+                            {ele?.title==="Settings" && !token ?"":ele.title }
                           </p>
                         </Link>
                       )}

@@ -1,50 +1,65 @@
 import React, { useState } from 'react'
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import {useSelector} from "react-redux";
+import { deleteExistingAddress, fetchDeliveryAddress } from '../../services/operations/SettingsApi';
 
-const ShowUserAddress = () => {
-    const[showEditExistingAddress,setShowEditExistingAddress]=useState(false);
+const ShowUserAddress = ({deliveryAddress,setDeliveryAddress}) => {
+    const{user}=useSelector((state)=>state.profile)
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    const[loading,setLoading]=useState(false);
+    const{token}=useSelector((state)=>state.auth)
+
+    console.log('deliveryAddress',deliveryAddress);
+
+    const deleteAddress = async (addressId) => {
+    setLoading(true)
+    await deleteExistingAddress({ addressId: addressId }, token)
+    const result = await fetchDeliveryAddress(token)
+    if (result) {
+      setDeliveryAddress(result)
+    }
+    setLoading(false)
+  }
+
   return (
-    <div className='flex flex-col text-white border mt-7'>
+    <div>
+    {
+        deliveryAddress?.slice(-3)?.map((currentItem,index)=>{
+            const isHovered = index === hoveredIndex;
+            return (
+                <div className='flex flex-col text-white border mt-7'
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                >
         <div className='flex flex-row justify-between items-center gap-5 p-5 border-b'>
             <div className='flex flex-col gap-5'>
-                <div className='flex flex-row gap-5'>
-                    <p>Puru Sharma</p>
+                <div className='flex flex-row gap-3 items-center'>
+                    <p>{user?.firstName + " " + user?.lastName +","}</p>
                     <p>9589068752</p>
                 </div>
                 <div className='uppercase'>
-                    Hewo 1 sector 90 gurugram,haryana,122011
+                    {currentItem?.address + "," + currentItem?.country}
                 </div>
             <div>
-                122011
+                {currentItem?.zipcode}
             </div>
             </div>
-            <div className='relative cursor-pointer' onMouseEnter={()=>setShowEditExistingAddress(true)} onMouseLeave={()=>setShowEditExistingAddress(false)}>
+            <div className='relative cursor-pointer'>
             <HiOutlineDotsVertical />
-            {showEditExistingAddress && 
+            {isHovered && 
             <div className='absolute flex flex-col bg-white p-2 right-[6px] -top-[20px]'>
                 <p className='text-richblack-800 hover:text-richblue-200'>Edit</p>
-                <p className='text-richblack-800 mt-1'>Delete</p>
+                <p className='text-richblack-800 mt-1' onClick={()=>deleteAddress(currentItem?._id)}>Delete</p>
             </div>
 }
             </div>
         </div>
-
-        <div className='flex flex-row justify-between items-center gap-5 p-5 border-b'>
-            <div className='flex flex-col gap-5'>
-                <div className='flex flex-row gap-5'>
-                    <p>Puru Sharma</p>
-                    <p>9589068752</p>
-                </div>
-                <div className='uppercase'>
-                    Hewo 1 sector 90 gurugram,haryana,122011
-                </div>
-            <div>
-                122011
-            </div>
-            </div>
-            <HiOutlineDotsVertical />
-        </div>
     </div>
+            )
+        })
+    
+}
+</div>
   )
 }
 

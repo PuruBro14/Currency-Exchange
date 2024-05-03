@@ -48,19 +48,19 @@ const   LoginCheckout = () => {
     navigate('/signup')
   }
 
-  console.log('user',user);
+  console.log('isLoggedIn',isLoggedIn,'user',user);
 
   return (
     <div className='flex flex-col'>
 
-      <div className='relative flex flex-row gap-x-4 h-12 items-center p-5 headerBGColor'>
+      <div className='relative flex flex-row gap-x-4 h-12 items-center p-5 bg-gradient-to-b from-[#FF512F] to-[#F09819]'>
         <span className='text-white'>1</span>
         <span className='text-white uppercase'>Login</span>
         <IoIosArrowDown className='text-white text-[25px] absolute right-10 cursor-pointer' onClick={toggleAccordion}/>
       </div>
 
       {showAccordionData && 
-      <div className='flex flex-col gap-y-5 p-8 shadow-md'>
+      <div className='flex flex-col gap-y-5 p-8 shadow-md bg-white text-richblack-800'>
 
         {/* before note  */}
         <div className='flex flex-row justify-between'>
@@ -69,31 +69,31 @@ const   LoginCheckout = () => {
           <div className='flex flex-col gap-y-2'>
 
              <div className='flex flex-row gap-x-2'>
-              <span className='text-richblack-700 text-[18px]'>Name:</span>
-              <span className='text-richblack-700 text-[18px]'>{user?.username}</span>
+              <span className=' text-[18px]'>Name:</span>
+              <span className=' text-[18px]'>{user?.firstName + " " + user?.lastName}</span>
             </div>
 
             <div className='flex flex-row gap-x-2'>
-              <span className='text-richblack-700 text-[18px]'>Email:</span>
-              <span className='text-richblack-700 text-[18px]'>{user?.email}</span>
+              <span className=' text-[18px]'>Email:</span>
+              <span className=' text-[18px]'>{user?.email}</span>
             </div>
 
             {user?.additionalDetails?.contactNumber &&
             <div className='flex flex-row gap-x-2'>
-              <span className='text-richblack-700 text-[18px]'>Phone:</span>
-              <span className='text-richblack-700 text-[18px]'>{user?.additionalDetails?.contactNumber}</span>
+              <span className=' text-[18px]'>Phone:</span>
+              <span className=' text-[18px]'>{user?.phoneNo}</span>
             </div>
 }
 
             <div>
-              <p className='text-blue-800 text-[18px] cursor-pointer' onClick={(e)=>redirectToLogin(e)}>Logout & Sign in to another account</p>
+              <p className='text-[18px] cursor-pointer' onClick={(e)=>redirectToLogin(e)}>Logout & Sign in to another account</p>
             </div>
 
-            <button onClick={handleCheckout} className='bg-[#FD97A8] px-[18px] py-[12px] rounded-full mt-3 text-white'>
+            <button onClick={handleCheckout} className='bg-gradient-to-b from-[#FF512F] to-[#F09819] px-[18px] py-[12px] rounded-full mt-3 text-white'>
               Continue Checkout
             </button>
 
-          </div>
+        </div>
           :
           <div>
             <div>
@@ -106,19 +106,19 @@ const   LoginCheckout = () => {
               <div>
                 <button className='bg-[#FD97A8] px-[30px] py-[15px] rounded-full mt-5 text-white' onClick={loginHandler}>Login</button>
                 </div>
-              <div className='mt-4 text-richblack-700 text-[16px]'>
+              <div className='mt-4  text-[16px]'>
                 By continuing,you agree to Remiwire's Terms of Use and Privacy Policy
               </div>
             </div>
 }
 
           <div className='flex flex-col gap-y-2'>
-            <div className='text-richblack-700 text-xl'>Advantage of secure login</div>
-            <div className='text-richblack-700 text-[18px]'>
+            <div className=' text-xl'>Advantage of secure login</div>
+            <div className=' text-[18px]'>
               Easily Track Orders
             </div>
 
-            <div className='text-richblack-700 text-[18px]'>
+            <div className=' text-[18px]'>
               Get Relevant Alerts
             </div>
           </div>
@@ -128,7 +128,7 @@ const   LoginCheckout = () => {
         {/* after div  */}
 
         <div>
-          <p className='text-richblack-700 text-[18px]'>Note that upon clicking <span className='font-bold'>Logout</span> you will lose all items you booked and will be redirected to Remiwire home page.</p>
+          <p className=' text-[18px]'>Note that upon clicking <span className='font-bold'>Logout</span> you will lose all items you booked and will be redirected to Remiwire home page.</p>
         </div>
 
       </div>

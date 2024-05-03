@@ -9,8 +9,16 @@ const { SIGNUP_API, LOGIN_API } = endpoints;
 const { CREATE_ORDER } = bookOrderEndpoints;
 
 
-export const sendSignUp = (username,firstName,lastName, email, password, navigate) => {
-  console.log(username,firstName);
+export const sendSignUp = (
+  username,
+  firstName,
+  lastName,
+  email,
+  phoneNo,
+  password,
+  navigate
+) => {
+  console.log(username, firstName);
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -21,6 +29,7 @@ export const sendSignUp = (username,firstName,lastName, email, password, navigat
         firstName,
         lastName,
         email,
+        phoneNo,
         password,
       });
 
@@ -32,11 +41,11 @@ export const sendSignUp = (username,firstName,lastName, email, password, navigat
 
       toast.success("Signup successful");
       navigate("/login");
-    toast.dismiss(toastId);
+      toast.dismiss(toastId);
     } catch (err) {
       toast.error("Error while signup");
-    navigate("/signup");
-    toast.dismiss(toastId);
+      navigate("/signup");
+      toast.dismiss(toastId);
     }
     dispatch(setLoading(false));
   };
@@ -113,3 +122,5 @@ export const setConvert=(totalEntries)=>{
     toast.dismiss(toastId)
   }
 }
+
+

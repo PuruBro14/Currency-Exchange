@@ -22,6 +22,7 @@ import MyProfile from "./components/core/MyProfile";
 import ManageProfileAddress from "./components/core/ManageProfileAddress";
 import Error from "./components/Error";
 import AdminHome from "./pages/Admin/AdminHome";
+import MyOrders from "./pages/MyOrders";
 function App() {
   return (
     <div className="overflow-x-hidden">
@@ -63,7 +64,12 @@ function App() {
           <Route
             path="checkout"
             element={
-            <Checkout />}
+
+              // <ProtectedRoute>
+            <Checkout />
+            // </ProtectedRoute>
+          
+          }
           ></Route>
           <Route
             path="settings"
@@ -87,6 +93,8 @@ function App() {
           </Route>
 
           <Route path="/admin/*" element={<AdminHome/>}/>
+
+           <Route path="/my-orders*" element={<MyOrders/>}/>
 
           <Route path="*" element={<Error/>}/>
 

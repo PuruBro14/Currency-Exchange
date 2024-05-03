@@ -90,16 +90,16 @@ const Login = ({ passedFromSignup }) => {
                     />
                     {!showPassword && (
                       <AiFillEye
-                        className="bg-white absolute right-7 top-[45px]"
+                        className="text-richblack-5 absolute right-7 top-[45px] cursor-pointer"
                         size={30}
-                        onClick={() => setShowPassword(false)}
+                        onClick={() => setShowPassword(true)}
                       />
                     )}
                     {showPassword && (
                       <AiFillEyeInvisible
-                        className="bg-white absolute right-7 top-[45px]"
+                        className="text-richblack-5 absolute right-7 top-[45px] cursor-pointer"
                         size={30}
-                        onClick={() => setShowPassword(true)}
+                        onClick={() => setShowPassword(false)}
                       />
                     )}
                   </div>

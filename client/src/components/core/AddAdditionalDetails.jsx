@@ -4,6 +4,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import {useNavigate} from "react-router-dom"
 import '../../App.css'
 import IconBtn from '../common/IconBtn'
+import { updateProfile } from '../../services/operations/SettingsApi'
 const AddAdditionalDetails = () => {
   const{user}=useSelector((state)=>state.profile)
   const{token}=useSelector((state)=>state.auth)
@@ -19,12 +20,15 @@ const AddAdditionalDetails = () => {
   const genders=["Male","Female","Non-Binary","Prefer not to say"]
 
   const submitProfileForm=async(data)=>{
+    console.log('clicked');
     try{
-      dispatch(updateProfile(token,data))
+      dispatch(updateProfile(token,data,navigate))
     }catch(err){
       console.log("Error message - ",err.message);
     }
   }
+
+  console.log('errors',errors);
 
   return (
     <>
@@ -46,6 +50,7 @@ const AddAdditionalDetails = () => {
               placeholder='Enter first name'
               {...register("firstName",{required:true})}
               defaultValue={user?.firstName}
+              required
               />
               {
                 errors.firstName && (
@@ -68,6 +73,7 @@ const AddAdditionalDetails = () => {
               className='form-style'
               {...register("lastName",{required:true})}
               defaultValue={user?.lastName}
+              required
               />
               {
                 errors.lastName && (
@@ -88,6 +94,7 @@ const AddAdditionalDetails = () => {
               <input type="date"
               name="dateOfBirth"
               id="dateOfBirth"
+              required
               className='form-style'
               {...register("dateOfBirth",{
                 required:{
@@ -143,6 +150,7 @@ const AddAdditionalDetails = () => {
               placeholder='Enter Contact Number'
               className='form-style'
               {...register("contactNumber",{required:true})}
+              required
               defaultValue={user?.additionalDetails?.contactNumber}
               />
               {
@@ -155,25 +163,21 @@ const AddAdditionalDetails = () => {
             </div>
 
             <div className='flex flex-col gap-2 lg:w-[48%]'>
-              <label htmlFor='lastName' className='label-style'>
-                Address
+              <label htmlFor='email' className='label-style'>
+                Email
               </label>
               <input 
               type="text"
-              name="address"
-              id="address"
-              placeholder='Enter Address'
-              className='form-style'
-              {...register("address",{required:true})}
-              defaultValue={user?.additionalDetails?.address}
+              name="email"
+              id="email"
+              placeholder='Enter email'
+              className='form-style bg-pure-greys-300'
+              {...register("email")}
+              required
+              defaultValue={user?.email}
+              readOnly
+              disabled
               />
-              {
-                errors.lastName && (
-                  <span className='-mt-1 text-[12px] text-yellow-100'>
-                   {errors?.address?.message}
-                  </span>
-                )
-              }
             </div>
 
           </div>
@@ -183,7 +187,8 @@ const AddAdditionalDetails = () => {
             onClick={()=>{
               navigate("/dashboard/settings")
             }}
-            className='bg-richblack-900 text-white py-2 px-5 rounded-md'
+            className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
+
             >
               Cancel
             </button>

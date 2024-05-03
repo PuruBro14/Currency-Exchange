@@ -14,6 +14,7 @@ const SignupForm = () => {
     userName: "",
     firstName:"",
     lastName:"",
+    phoneNo:"",
     email: "",
     password: "",
   });
@@ -29,14 +30,11 @@ const SignupForm = () => {
 
   const signInHandler = async (e) => {
     e.preventDefault();
-    const{userName,firstName,lastName,email,password}=formData
+    const{userName,firstName,lastName,phoneNo,email,password}=formData
 
     if(!userName || !firstName || !lastName || !email || password){
       setError("All fields are required")
     } 
-
-    console.log(usernName.length);
-
 
     if (!email) {
       setError((prevState) => ({ ...prevState, email: "Email is required" }));
@@ -53,12 +51,13 @@ const SignupForm = () => {
     dispatch(setSignUpData(formData));
 
 
-    dispatch(sendSignUp(userName,firstName,lastName,email,password,navigate));
+    dispatch(sendSignUp(userName,firstName,lastName,email,phoneNo,password,navigate));
 
     setFormData({
       userName: "",
       firstName:"",
       lastName:"",
+      phoneNo:"",
       email: "",
       password: "",
     });
@@ -67,7 +66,7 @@ const SignupForm = () => {
     <div>
         <div className="w-full md:w-8/12 my-6">
             <div className="text-4xl font-semibold text-richblack-300 mt-6 lg:mt-0">
-              Welcome Back
+             Register Here
             </div>
 
             {/* form  */}
@@ -130,6 +129,25 @@ const SignupForm = () => {
                     className="text-richblack-5"
                     onChange={(e) => handleFormData()}
                   >
+                    Phone Number <sup className="text-pink-200">*</sup>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Enter Your phone number"
+                    className="relative mt-3 p-3 rounded-lg bg-richblack-800 text-white"
+                    name="phoneNo"
+                    minLength={10}
+                    value={formData.phoneNo}
+                    onChange={(e) => handleFormData(e)}
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col relative">
+                  <label
+                    className="text-richblack-5"
+                    onChange={(e) => handleFormData()}
+                  >
                     Email address <sup className="text-pink-200">*</sup>
                   </label>
                   <input
@@ -159,16 +177,16 @@ const SignupForm = () => {
                     />
                     {!showPassword && (
                       <AiFillEye
-                        className="bg-white absolute right-7 top-[45px]"
+                        className="text-richblack-5 absolute right-7 top-[45px] cursor-pointer"
                         size={30}
-                        onClick={() => setShowPassword(false)}
+                        onClick={() => setShowPassword(true)}
                       />
                     )}
                     {showPassword && (
                       <AiFillEyeInvisible
-                        className="bg-white absolute right-7 top-[45px]"
+                        className="text-richblack-5 absolute right-7 top-[45px] cursor-pointer"
                         size={30}
-                        onClick={() => setShowPassword(true)}
+                        onClick={() => setShowPassword(false)}
                       />
                     )}
                   </div>
@@ -190,3 +208,4 @@ const SignupForm = () => {
 }
 
 export default SignupForm
+

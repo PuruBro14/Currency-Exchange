@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import IconBtn from "../common/IconBtn"
 import AddAdditionalDetails from "./AddAdditionalDetails"
 import DeleteAccount from "../Settings/DeleteAccount"
+import { changePassword } from "../../services/operations/SettingsApi"
 
 function UpdatePassword() {
   const { token } = useSelector((state) => state.auth)
@@ -20,16 +21,21 @@ function UpdatePassword() {
     formState: { errors },
   } = useForm()
 
-
-
+  const submitPasswordForm=async(data)=>{
+    try{
+      await changePassword(token,data)
+    }catch(err){
+      console.log("error message",err.message);
+    }
+  }
 
   return (
-    <>
+    <div>
         <AddAdditionalDetails/> 
         <h2 className='text-lg font-semibold text-richblack-5 px-12'>
             Update Password
           </h2>
-      <form>
+      <form onSubmit={handleSubmit(submitPasswordForm)}>
         <div className="mx-10 my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
           <h2 className="text-lg font-semibold text-richblack-5">Password</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
@@ -44,6 +50,7 @@ function UpdatePassword() {
                 placeholder="Enter Current Password"
                 className="form-style"
                 {...register("oldPassword", { required: true })}
+                required
               />
               <span
                 onClick={() => setShowOldPassword((prev) => !prev)}
@@ -72,6 +79,7 @@ function UpdatePassword() {
                 placeholder="Enter New Password"
                 className="form-style"
                 {...register("newPassword", { required: true })}
+                required
               />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
@@ -107,7 +115,8 @@ function UpdatePassword() {
       </form>
 
       <DeleteAccount/>
-    </>
+      
+    </div>
   )
 }
 

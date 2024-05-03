@@ -1,12 +1,22 @@
 import { FiTrash2 } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { deleteProfile } from "../../services/operations/SettingsApi"
 
 
 export default function DeleteAccount() {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  async function handleDeleteAccount(){
+    console.log('clicked');
+    try{
+      dispatch(deleteProfile(token,navigate))
+    }catch(err){
+      console.log("error message",err.message);
+    }
+  }
 
   return (
     <>
@@ -28,6 +38,7 @@ export default function DeleteAccount() {
           <button
             type="button"
             className="w-fit cursor-pointer italic text-pink-300"
+            onClick={handleDeleteAccount}
           >
             I want to delete my account.
           </button>

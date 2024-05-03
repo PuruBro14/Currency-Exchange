@@ -32,41 +32,34 @@ export default function CurrencyInput({
   };
 
   useEffect(() => {
-    let filteredArrayCurrency=countryCurrency
+    let filteredArrayCurrency = [...countryCurrency];
 
-        if((currentState==="Buy" && currentType ==='from') || (currentState==="Sell" && currentType==="to")){
-          console.log('landed');
-      setCountryCurrency([
-  {
-    label: "INR - Indian Rupee",
-    img: "https://flagsapi.com/IN/flat/64.png", 
-    value: "INR",
-  }])
-    }else{
-      setCountryCurrency(countryCurrency)
-    }
-    if(filteredArrayCurrency?.length>0)
-    if (convertFormValue?.from) {
+    if (
+      (currentState === "Buy" && currentType === "from") ||
+      (currentState === "Sell" && currentType === "to")
+    ) {
       filteredArrayCurrency = filteredArrayCurrency.filter(
-        (currency) =>{
-          console.log('currency-->',currency.label,convertFormValue.from);
-          return currency.label!==convertFormValue.from
-        }
+        (currency) => currency.label === "INR - Indian Rupee"
       );
+    } else {
+      if (convertFormValue?.from) {
+        filteredArrayCurrency = filteredArrayCurrency.filter(
+          (currency) => currency.label !== convertFormValue.from
+        );
+      }
+      if (convertFormValue && convertFormValue?.to) {
+        filteredArrayCurrency = filteredArrayCurrency.filter(
+          (currency) => currency.label !== convertFormValue.to
+        );
+      }
+    }
+
+
     setCountryCurrency(filteredArrayCurrency);
-    }
-    if (convertFormValue?.to) {
-      filteredArrayCurrency = filteredArrayCurrency.filter(
-        (currency) =>{
-          return currency.label!==convertFormValue.from
-        }
-      );
-      setCountryCurrency(filteredArrayCurrency);
-    }
+  }, [convertFormValue.from, convertFormValue.to, currentState, currentType]);
 
-  }, [convertFormValue.from, convertFormValue.to]);
 
-  console.log('countryCurrencyT',countryCurrencyT);
+  console.log('countryCurrencyT',countryCurrencyList,currentType,currentType=="from",currentState==="Buy");
 
   return (
     <div>

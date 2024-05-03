@@ -10,6 +10,8 @@ const MyProfile = () => {
     const[addProfile,setAddProfile]=useState(null);
     const[viewProfile,setViewProfile]=useState(null);
     const[editProfile,setEditProfile]=useState(null);
+
+    console.log('user',user);
     
   return (
    <>
@@ -62,7 +64,7 @@ const MyProfile = () => {
             <div>
                 <p className='mb-2 text-sm text-richblack-600'>First Name</p>
                 <p className='text-sm font-medium text-richblack-5'>
-                    {user?.username?.split(" ")[0]}
+                    {user?.firstName}
                 </p>
             </div>
 
@@ -87,14 +89,14 @@ const MyProfile = () => {
             <div>
                 <p className='mb-2 text-sm text-richblack-600'>Last Name</p>
                 <p className='text-sm font-medium text-richblack-5'>
-                    {user?.username?.split(" ")[1]}
+                    {user?.lastName}
                 </p>
             </div>
 
             <div>
                 <p className='mb-2 text-sm text-richblack-600'>Phone Number</p>
                 <p className='text-sm font-medium text-richblack-5'>
-                    {user?.additionalDetails?.contactNumber ?? "Add Contact Number"}
+                    {user?.phoneNo ?? "Add Contact Number"}
                 </p>
             </div>
 

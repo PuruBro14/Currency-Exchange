@@ -32,7 +32,7 @@ export default function Contactus() {
   useEffect(() => {
     if (scrollToComponentB) {
       sectionRef.current.scrollIntoView({ behaviour: "smooth" });
-      dispatch(setScrollToComponentB(false));
+      // dispatch(setScrollToComponentB(false));
     }
   });
 

@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const initialState={
     step:1,
-    currency:null,
+    bookCurrency:null,
     paymentLoading:false
 }
 
@@ -13,7 +13,7 @@ const bookCurrencySlice=createSlice({
     setStep:(state,action)=>{
         state.step=action.payload;
     },
-    setCurrency:(state,action)=>{
+    setBookCurrency:(state,action)=>{
         state.currency=action.payload;
     },
     setPaymentLoading:(state,action)=>{
@@ -27,7 +27,7 @@ const bookCurrencySlice=createSlice({
 }
 })
 
-export const { setStep, setCurrency, setPaymentLoading, resetCurrencyState } =
+export const { setStep, setBookCurrency, setPaymentLoading, resetCurrencyState } =
   bookCurrencySlice.actions;
 
 export default bookCurrencySlice.reducer;
