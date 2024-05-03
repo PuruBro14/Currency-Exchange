@@ -32,3 +32,11 @@ delete
 
 yet to fix 
 phone convert
+
+ui changes
+total 
+color change of checkout 
+protected route
+
+total 
+from aur to me country change 

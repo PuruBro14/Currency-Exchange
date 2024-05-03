@@ -43,9 +43,9 @@ const Home = () => {
   return (
     <div className=" w-screen">
       {/* image one  */}
-      <div className="relative min-h-[1400px]">
+      <div className="relative">
         <img src={HeaderBanner} alt="home-banner" className="w-full" />
-        <div className="absolute top-[10%] md:top-[15%] left-[5%]  w-[40%] p-10 text-white bg-[#d40511]">
+        <div className="absolute hidden lg:block md:top-[15%] left-[5%] w-[30%] p-10 text-white bg-[#d40511]">
           <h1 className="text-xl md:text-4xl w-[100%]">
             Trusted Global Currency Converter & Money Transfers
           </h1>
@@ -55,7 +55,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="w-full absolute  top-[20%] md:top-[50%] md:left-[5%] md:w-11/12 md:mx-auto  ">
+        <div className="w-full  md:left-[5%] md:w-11/12 md:mx-auto  ">
           <div className="bg-white shadow-[0_0_20px_0] shadow-[#F0F0F0] object-cover">
             <div className="flex flex-col md:flex-row justify-center">
               {homeServices?.map((ele, index) => {

@@ -15,12 +15,12 @@ const Tab = ({
       style={{
         boxShadow: "inset 0px -1px 0px rgba(255,255,255,0.18)",
       }}
-      className={`flex bg-richblack-600  gap-x-1 rounded-full max-w-max text-white 
+      className={`flex cursor-pointer items-center bg-richblack-600  gap-x-1 rounded-full max-w-max text-white 
     
     `}
     >
       {tabData?.map((tab) => (
-        <button
+        <div
           key={tab?.id}
           onClick={(e) => {
             e.preventDefault();
@@ -28,12 +28,12 @@ const Tab = ({
           }}
           className={`${
             currentState === tab?.tabName
-              ? "p-4 bg-richblack-900 text-richblack-5"
+              ? "p-4 bg-richblack-800 text-richblack-5"
               : "bg-transparent text-richblack-200"
-          }py-0 px-10 rounded-full transition-all duration-200 p-4`}
+          }py-0 px-8 rounded-full transition-all duration-200`}
         >
           {tab?.tabName}
-        </button>
+        </div>
       ))}
     </div>
   );

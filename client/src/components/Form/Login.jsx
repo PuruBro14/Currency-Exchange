@@ -4,40 +4,44 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../services/operations/authAPI";
 
-const Login = ({passedFromSignup}) => {
-  const[showPassword,setShowPassword]=useState(false);
-    const navigate = useNavigate()
-  const dispatch = useDispatch()
+const Login = ({ passedFromSignup }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
+  });
 
-    const { email, password } = formData
+  const { email, password } = formData;
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }))
-  } 
+    }));
+  };
 
-    const handleOnSubmit = (e) => {
-    e.preventDefault()
-    dispatch(setLogin(email, password, navigate))
-    
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setLogin(email, password, navigate));
+
     setFormData({
       email: "",
       password: "",
     });
-  }
+  };
 
   return (
     <div className="bg-richblack-900 pb-52 h-calc w-full">
-      <div className={`${!passedFromSignup?'lg:h-[150px]':''}`}></div>
-      <div className={`${!passedFromSignup?'w-11/12 mx-auto justify-center flex':'mt-8'}`}>
+      <div className={`${!passedFromSignup ? "lg:h-[150px]" : ""}`}></div>
+      <div
+        className={`${
+          !passedFromSignup ? "w-11/12 mx-auto justify-center flex" : "mt-8"
+        }`}
+      >
         <div className="flex flex-col w-[80%] mt-6 lg:mt-0">
-          <div className="w-8/12">
+          <div className="w-full md:w-8/12">
             <div className="text-4xl font-semibold text-richblack-300 mt-6 lg:mt-0">
               Login Here
             </div>
@@ -45,7 +49,6 @@ const Login = ({passedFromSignup}) => {
             {/* form  */}
             <form onSubmit={(e) => handleOnSubmit(e)}>
               <div className="flex flex-col gap-5 mt-7">
-
                 <div className="flex flex-col relative">
                   <label
                     className="text-richblack-5"
@@ -56,7 +59,10 @@ const Login = ({passedFromSignup}) => {
                   <input
                     type="email"
                     placeholder="Enter email address"
-                    className="relative mt-3 p-3 rounded-lg bg-richblack-800 text-white"
+                    style={{
+                      boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                    }}
+                    className="w-full mt-3 p-3 rounded-lg bg-richblack-800 text-white"
                     name="email"
                     value={email}
                     onChange={(e) => handleOnChange(e)}
@@ -72,22 +78,26 @@ const Login = ({passedFromSignup}) => {
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter password"
+                      style={{
+                        boxShadow:
+                          "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                      }}
                       className="mt-3 p-3 rounded-lg bg-richblack-800 text-white"
                       name="password"
                       value={password}
                       onChange={(e) => handleOnChange(e)}
                       required
                     />
-                    {showPassword && (
+                    {!showPassword && (
                       <AiFillEye
-                        className="bg-white absolute right-7 top-[40px]"
+                        className="bg-white absolute right-7 top-[45px]"
                         size={30}
                         onClick={() => setShowPassword(false)}
                       />
                     )}
-                    {!showPassword && (
+                    {showPassword && (
                       <AiFillEyeInvisible
-                        className="bg-white absolute right-7 top-[40px]"
+                        className="bg-white absolute right-7 top-[45px]"
                         size={30}
                         onClick={() => setShowPassword(true)}
                       />
@@ -110,6 +120,6 @@ const Login = ({passedFromSignup}) => {
       </div>
     </div>
   );
-                    }
+};
 
 export default Login;

@@ -36,17 +36,17 @@ const Sidebar = () => {
         </div>
         <div className="mx-auto mt-6 h-[1px] w-10/12 bg-richblack-700"></div>
 
-        <div className="flex flex-col b">
-          <button
-            onClick={() => {
-              setConfirmationModal({
-                text1: "Are you sure?",
-                text2: "you will be logged out of your account.",
-                btn1Text: "Logout",
-                btn2Text: "Cancel",
-                btn1Handler: () => dispatch(logout(navigate)),
-                btn2Handler: () => setConfirmationModal(null),
-              });
+        <div className='flex flex-col b'>
+            <button
+            onClick={()=>{
+                setConfirmationModal({
+                    text1:"Are you sure?",
+                    text2:"you will be logged out of your account.",
+                    btn1Text:"Logout",
+                    btn2Text:"Cancel",
+                    btn1Handler:()=>dispatch(logout(navigate)),
+                    btn2Handler:()=>setConfirmationModal(null)
+                })
             }}
             className="px-8 py-2 text-sm font-medium text-richblack-300"
           >

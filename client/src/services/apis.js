@@ -13,6 +13,18 @@ export const bookOrderEndpoints = {
   DELETE_ORDERS: BASE_URL + "/deleteOrderById",
 };
 
+<<<<<<< HEAD
 export const contactUsEndPoint = {
   CONTACT_US_API: BASE_URL + "/contact-us",
 };
+=======
+export const contactUsEndPoint={
+  CONTACT_US_API:BASE_URL+"/contact-us"
+}
+
+export const settingsEndPoints={
+  UPDATE_PROFILE_API:BASE_URL+"/profile/updateProfile",
+  CHANGE_PASSWORD_API:BASE_URL+"auth/changepassword",
+  DELETE_PROFILE_API:BASE_URL+"profile/deleteProfile"
+}
+>>>>>>> 07d0159d (settings-api-integerated)

@@ -12,7 +12,7 @@ const PaymentOptions = () => {
   return (
     <div className='flex flex-col mt-7'>
       {/* first div  */}
-      <div className='relative flex flex-row gap-x-4 h-12 items-center p-5 bg-[#FD97A8]'>
+      <div className='relative flex flex-row gap-x-4 h-12 items-center p-5 headerBGColor'>
         <span className='text-white'>4</span>
         <span className='text-white uppercase'>Payment Options</span>
         <IoIosArrowDown className='text-white text-[25px] absolute right-10 cursor-pointer' onClick={toggleAccordion}/>
